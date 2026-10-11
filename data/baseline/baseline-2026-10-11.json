@@ -1,0 +1,63 @@
+{
+  "baseline_date": "2026-10-11T15:21:49.711818+00:00",
+  "git_revision": "21197c10b24434331ee0aaf0cfd7476d72b3e444",
+  "sha256": {
+    "ai_core_config": "6d476d7a971afb47cf089dd1eaff082d6ea132a116aa8d6b602b0bf43c9665ff",
+    "vscode_clm": "43b23134607e74a3a27ff8c58aad3cc2a73f2c19d13de038b780b37f55e1e5da",
+    "imports_clm": "6b6d157ebcc46ec3d5ff89c1d7051459b90153881df3856c265375ea2f4fdeae"
+  },
+  "catalog_counts": {
+    "filtered_models.json": {
+      "stats": {
+        "total_raw": 559,
+        "valid": 298,
+        "invalid": 0,
+        "excluded_by_modality": 191,
+        "excluded_no_tools": 69,
+        "excluded_no_pricing": 1,
+        "cheap": 101,
+        "medium": 38,
+        "premium": 159
+      },
+      "tiers": {
+        "cheap": 101,
+        "medium": 38,
+        "premium": 159
+      }
+    },
+    "catalog.json": {
+      "models": 298
+    },
+    "recommendations.json": {
+      "categories": 8,
+      "top_n": 10,
+      "stats": {
+        "catalog_models": 298,
+        "in_config": 15,
+        "in_clm": 15
+      }
+    },
+    "asr_catalog.json": {
+      "models": 22
+    },
+    "routerai_models_raw.json": 559,
+    "config_models.json": 298,
+    "asr_models.json": {
+      "models": 22
+    }
+  },
+  "run_all_2026-10-11T15:22Z": {
+    "exit_code": 1,
+    "failed_step": "recommend",
+    "error": "эталон deepseek/deepseek-v4-flash-0423 не найден в каталоге",
+    "fetch_ok": true,
+    "filter_ok": true,
+    "report_ok": true
+  },
+  "reference_resolution": {
+    "requested": "deepseek/deepseek-v4-flash-0423",
+    "effective": "deepseek/deepseek-v4-flash-0731",
+    "status": "missing",
+    "note": "filter_models пишет reference_model: null (0423 не найден); recommendations.json не перегенерирован из-за падения recommend"
+  }
+}

@@ -1,0 +1,5014 @@
+{
+  "missing_in_catalog": [],
+  "new_in_catalog": [
+    {
+      "id": "mistralai/mistral-nemo",
+      "name": "Mistral: Mistral Nemo",
+      "provider": "mistralai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Модель с 12 миллиардами параметров и длиной контекста в 128 тысяч токенов, созданная Mistral в сотрудничестве с NVIDIA.\n\nМодель является многоязычной и поддерживает английский, французский, немецкий, испанский, итальянский, португальский, китайский, японский, корейский, арабский и хинди.\n\nОна поддер",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 2.0309,
+        "completion": 2.649,
+        "input_cache_read": 1.3245
+      },
+      "prompt_rub": 2.0309,
+      "completion_rub": 2.649,
+      "prompt_label": "2.03 ₽",
+      "completion_label": "2.65 ₽",
+      "cost_per_turn_estimate_rub": 0.022958,
+      "cost_label": "0.0230 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1721347200
+    },
+    {
+      "id": "meta-llama/llama-3.1-8b-instruct",
+      "name": "Meta: Llama 3.1 8B Instruct",
+      "provider": "meta-llama",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Последняя версия модели от Meta (Llama 3.1) была выпущена в различных размерах и вариантах. Эта версия с инструкционной настройкой на 8 миллиардов параметров отличается высокой скоростью и эффективностью.\n\nОна продемонстрировала высокие результаты по сравнению с ведущими закрытыми моделями в оценках",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 2.2075,
+        "completion": 4.415,
+        "input_cache_read": null
+      },
+      "prompt_rub": 2.2075,
+      "completion_rub": 4.415,
+      "prompt_label": "2.21 ₽",
+      "completion_label": "4.42 ₽",
+      "cost_per_turn_estimate_rub": 0.02649,
+      "cost_label": "0.0265 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1721692800
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "name": "OpenAI: gpt-oss-120b",
+      "provider": "openai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "gpt-oss-120b — это языковая модель с открытыми весами от OpenAI, состоящая из 117 миллиардов параметров и использующая архитектуру Mixture-of-Experts (MoE). Она предназначена для задач, требующих высокого уровня рассуждений, агентности и универсального применения. В каждом прямом проходе активируетс",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 3.3113,
+        "completion": 16.5564,
+        "input_cache_read": 3.3113
+      },
+      "prompt_rub": 3.3113,
+      "completion_rub": 16.5564,
+      "prompt_label": "3.31 ₽",
+      "completion_label": "16.56 ₽",
+      "cost_per_turn_estimate_rub": 0.049669,
+      "cost_label": "0.0497 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1754414231
+    },
+    {
+      "id": "openai/gpt-oss-120b:exacto",
+      "name": "OpenAI: gpt-oss-120b (exacto)",
+      "provider": "openai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "gpt-oss-120b — это языковая модель Mixture-of-Experts (MoE) с открытыми весами и 117 миллиардами параметров от OpenAI, предназначенная для использования в задачах, требующих высокого уровня рассуждений, агентности и общего назначения. Она активирует 5,1 миллиарда параметров за один прямой проход и о",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 3.3113,
+        "completion": 16.5564,
+        "input_cache_read": 3.3113
+      },
+      "prompt_rub": 3.3113,
+      "completion_rub": 16.5564,
+      "prompt_label": "3.31 ₽",
+      "completion_label": "16.56 ₽",
+      "cost_per_turn_estimate_rub": 0.049669,
+      "cost_label": "0.0497 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1754414231
+    },
+    {
+      "id": "amazon/nova-micro-v1",
+      "name": "Amazon: Nova Micro 1.0",
+      "provider": "amazon",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Amazon Nova Micro 1.0 — это текстовая модель, обеспечивающая наименьшую задержку ответов в семействе моделей Amazon Nova при очень низкой стоимости. С длиной контекста в 128 тысяч токенов и оптимизированная для скорости и стоимости, Amazon Nova Micro превосходно справляется с такими задачами, как су",
+      "has_reasoning": false,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 3.8632,
+        "completion": 15.4527,
+        "input_cache_read": null
+      },
+      "prompt_rub": 3.8632,
+      "completion_rub": 15.4527,
+      "prompt_label": "3.86 ₽",
+      "completion_label": "15.45 ₽",
+      "cost_per_turn_estimate_rub": 0.054084,
+      "cost_label": "0.0541 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1733437237
+    },
+    {
+      "id": "google/gemma-4-26b-a4b-it",
+      "name": "Google: Gemma 4 26B A4B",
+      "provider": "google",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Gemma 4 26B A4B IT — это модель Mixture-of-Experts (MoE) от Google DeepMind, настроенная на выполнение инструкций. Несмотря на общий объем в 25,2 миллиарда параметров, во время вывода активируется только 3,8 миллиарда параметров на каждый токен, что обеспечивает качество, близкое к 31 миллиарду, при",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 5.3312,
+        "completion": 23.179,
+        "input_cache_read": 2.2406
+      },
+      "prompt_rub": 5.3312,
+      "completion_rub": 23.179,
+      "prompt_label": "5.33 ₽",
+      "completion_label": "23.18 ₽",
+      "cost_per_turn_estimate_rub": 0.076491,
+      "cost_label": "0.0765 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1775227989
+    },
+    {
+      "id": "google/gemma-3-12b-it",
+      "name": "Google: Gemma 3 12B",
+      "provider": "google",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Gemma 3 вводит мультимодальность, поддерживая ввод в формате \"зрение-язык\" и текстовые выводы. Она обрабатывает контекстные окна до 128 тысяч токенов, понимает более 140 языков и предлагает улучшенные возможности в области математики, рассуждений и общения, включая структурированные выводы и вызов ф",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 5.5188,
+        "completion": 16.5564,
+        "input_cache_read": null
+      },
+      "prompt_rub": 5.5188,
+      "completion_rub": 16.5564,
+      "prompt_label": "5.52 ₽",
+      "completion_label": "16.56 ₽",
+      "cost_per_turn_estimate_rub": 0.071745,
+      "cost_label": "0.0717 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1741902625
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-30b-a3b",
+      "name": "NVIDIA: Nemotron 3 Nano 30B A3B",
+      "provider": "nvidia",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "NVIDIA Nemotron 3 Nano 30B A3B — это небольшой языковой MoE-модель с наивысшей вычислительной эффективностью и точностью, предназначенная для разработчиков, создающих специализированные агентные AI-системы.\n\nМодель полностью открыта с открытыми весами, наборами данных и рецептами, что позволяет разр",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 5.5188,
+        "completion": 22.0752,
+        "input_cache_read": null
+      },
+      "prompt_rub": 5.5188,
+      "completion_rub": 22.0752,
+      "prompt_label": "5.52 ₽",
+      "completion_label": "22.08 ₽",
+      "cost_per_turn_estimate_rub": 0.077263,
+      "cost_label": "0.0773 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1765731275
+    },
+    {
+      "id": "upstage/solar-mini4",
+      "name": "Upstage: Solar Mini 4",
+      "provider": "upstage",
+      "context_length": 524288,
+      "context_label": "524.3K",
+      "description_short": "Solar Mini 4 — это компактная и экономичная языковая модель от Upstage, представляющая собой смесь экспертов с 35 миллиардами параметров, из которых 3 миллиарда активных, и контекстным окном на 524 тысячи символов. Она разработана для агентских сценариев использования, где важны скорость отклика и с",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 5.5188,
+        "completion": 22.0752,
+        "input_cache_read": 0.5519
+      },
+      "prompt_rub": 5.5188,
+      "completion_rub": 22.0752,
+      "prompt_label": "5.52 ₽",
+      "completion_label": "22.08 ₽",
+      "cost_per_turn_estimate_rub": 0.077263,
+      "cost_label": "0.0773 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1790160358
+    },
+    {
+      "id": "openai/gpt-5-nano",
+      "name": "OpenAI: GPT-5 Nano",
+      "provider": "openai",
+      "context_length": 400000,
+      "context_label": "400.0K",
+      "description_short": "GPT-5-Nano — это самая маленькая и быстрая версия в системе GPT-5, оптимизированная для инструментов разработчиков, быстрых взаимодействий и сред с ультранизкой задержкой. Хотя её глубина рассуждений ограничена по сравнению с более крупными аналогами, она сохраняет ключевые функции следования инстру",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 5.5188,
+        "completion": 44.1505,
+        "input_cache_read": 0.5519
+      },
+      "prompt_rub": 5.5188,
+      "completion_rub": 44.1505,
+      "prompt_label": "5.52 ₽",
+      "completion_label": "44.15 ₽",
+      "cost_per_turn_estimate_rub": 0.099339,
+      "cost_label": "0.0993 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1754587402
+    },
+    {
+      "id": "qwen/qwen3.6-35b-a3b",
+      "name": "Qwen: Qwen3.6 35B A3B",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3.6-35B-A3B — это мультимодальная модель с открытым весом от Alibaba Cloud, содержащая 35 миллиардов общих параметров и 3 миллиарда активных параметров на токен. Она использует гибридную разреженную архитектуру смеси экспертов, объединяющую линейное внимание Gated DeltaNet с обычными слоями с уп",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 5.5188,
+        "completion": 77.2634,
+        "input_cache_read": 2.7594
+      },
+      "prompt_rub": 5.5188,
+      "completion_rub": 77.2634,
+      "prompt_label": "5.52 ₽",
+      "completion_label": "77.26 ₽",
+      "cost_per_turn_estimate_rub": 0.132451,
+      "cost_label": "0.1325 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1777260255
+    },
+    {
+      "id": "poolside/laguna-xs-2.1",
+      "name": "Poolside: Laguna XS 2.1",
+      "provider": "poolside",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Laguna XS 2.1 — это последняя модель кодирующего агента в категории 33B-A3B от [Poolside](https://poolside.ai/) и шаг вперед по сравнению с их моделью Laguna XS.2 (выпущенной в апреле 2026 года). Она сочетает в себе возможности вызова инструментов и рассуждения с компактными размерами, предлагая кон",
+      "has_reasoning": true,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 6.6226,
+        "completion": 13.2451,
+        "input_cache_read": 3.3113
+      },
+      "prompt_rub": 6.6226,
+      "completion_rub": 13.2451,
+      "prompt_label": "6.62 ₽",
+      "completion_label": "13.25 ₽",
+      "cost_per_turn_estimate_rub": 0.079471,
+      "cost_label": "0.0795 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1783002429
+    },
+    {
+      "id": "amazon/nova-lite-v1",
+      "name": "Amazon: Nova Lite 1.0",
+      "provider": "amazon",
+      "context_length": 300000,
+      "context_label": "300.0K",
+      "description_short": "Amazon Nova Lite 1.0 — это очень недорогая мультимодальная модель от Amazon, ориентированная на быструю обработку изображений, видео и текстовых данных для генерации текстового вывода. Amazon Nova Lite может с высокой точностью справляться с задачами взаимодействия с клиентами в реальном времени, ан",
+      "has_reasoning": false,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 6.6226,
+        "completion": 26.4903,
+        "input_cache_read": null
+      },
+      "prompt_rub": 6.6226,
+      "completion_rub": 26.4903,
+      "prompt_label": "6.62 ₽",
+      "completion_label": "26.49 ₽",
+      "cost_per_turn_estimate_rub": 0.092716,
+      "cost_label": "0.0927 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1733437363
+    },
+    {
+      "id": "z-ai/glm-4.7-flash",
+      "name": "Z.ai: GLM 4.7 Flash",
+      "provider": "z-ai",
+      "context_length": 200000,
+      "context_label": "200.0K",
+      "description_short": "Как модель класса 30B SOTA, GLM-4.7-Flash предлагает новый вариант, который балансирует между производительностью и эффективностью. Она дополнительно оптимизирована для агентного кодирования, укрепляя возможности кодирования, планирования задач на длительный срок и сотрудничества с инструментами, и ",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 6.6226,
+        "completion": 44.1505,
+        "input_cache_read": 1.1038
+      },
+      "prompt_rub": 6.6226,
+      "completion_rub": 44.1505,
+      "prompt_label": "6.62 ₽",
+      "completion_label": "44.15 ₽",
+      "cost_per_turn_estimate_rub": 0.110376,
+      "cost_label": "0.1104 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1768833913
+    },
+    {
+      "id": "qwen/qwen3.5-flash-02-23",
+      "name": "Qwen: Qwen3.5-Flash",
+      "provider": "qwen",
+      "context_length": 1000000,
+      "context_label": "1.0M",
+      "description_short": "Нативные модели Qwen3.5 vision-language Flash построены на гибридной архитектуре, которая интегрирует линейный механизм внимания с разреженной моделью смеси экспертов, достигая более высокой эффективности вывода. По сравнению с серией 3, эти модели обеспечивают значительный прорыв в производительнос",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 7.1745,
+        "completion": 28.6978,
+        "input_cache_read": null
+      },
+      "prompt_rub": 7.1745,
+      "completion_rub": 28.6978,
+      "prompt_label": "7.17 ₽",
+      "completion_label": "28.70 ₽",
+      "cost_per_turn_estimate_rub": 0.100442,
+      "cost_label": "0.1004 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1772053776
+    },
+    {
+      "id": "qwen/qwen3-coder-30b-a3b-instruct",
+      "name": "Qwen: Qwen3 Coder 30B A3B Instruct",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-Coder-30B-A3B-Instruct — это модель Mixture-of-Experts (MoE) с 30,5 миллиардами параметров и 128 экспертами (8 активных на каждый проход), разработанная для продвинутой генерации кода, понимания на уровне репозиториев и использования инструментов агентами. Построенная на архитектуре Qwen3, она",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 7.7263,
+        "completion": 30.9053,
+        "input_cache_read": null
+      },
+      "prompt_rub": 7.7263,
+      "completion_rub": 30.9053,
+      "prompt_label": "7.73 ₽",
+      "completion_label": "30.91 ₽",
+      "cost_per_turn_estimate_rub": 0.108169,
+      "cost_label": "0.1082 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1753972379
+    },
+    {
+      "id": "mistralai/mistral-small-3.2-24b-instruct",
+      "name": "Mistral: Mistral Small 3.2 24B",
+      "provider": "mistralai",
+      "context_length": 256000,
+      "context_label": "256.0K",
+      "description_short": "Mistral-Small-3.2-24B-Instruct-2506 — это обновленная модель с 24 миллиардами параметров от Mistral, оптимизированная для выполнения инструкций, уменьшения повторений и улучшенного вызова функций. По сравнению с версией 3.1, версия 3.2 значительно улучшает точность на WildBench и Arena Hard, сокраща",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 8.2782,
+        "completion": 22.0752,
+        "input_cache_read": null
+      },
+      "prompt_rub": 8.2782,
+      "completion_rub": 22.0752,
+      "prompt_label": "8.28 ₽",
+      "completion_label": "22.08 ₽",
+      "cost_per_turn_estimate_rub": 0.104857,
+      "cost_label": "0.1049 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1750443016
+    },
+    {
+      "id": "nex-agi/nex-n2.5-pro",
+      "name": "Nex AGI: Nex-N2.5-Pro",
+      "provider": "nex-agi",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Nex-N2.5 — это агентная модель, созданная для превращения целей в рабочие, проверенные результаты. Ее основная сила заключается в агентном кодировании в рамках визуальной обратной связи: она может исследовать кодовые базы, осуществлять изменения в нескольких файлах, выполнять команды, запускать прил",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 8.2782,
+        "completion": 27.5941,
+        "input_cache_read": 1.6556
+      },
+      "prompt_rub": 8.2782,
+      "completion_rub": 27.5941,
+      "prompt_label": "8.28 ₽",
+      "completion_label": "27.59 ₽",
+      "cost_per_turn_estimate_rub": 0.110376,
+      "cost_label": "0.1104 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1788890050
+    },
+    {
+      "id": "bytedance-seed/seed-1.6-flash",
+      "name": "ByteDance Seed: Seed 1.6 Flash",
+      "provider": "bytedance-seed",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Seed 1.6 Flash — это ультрабыстрая мультимодальная модель глубокого мышления от ByteDance Seed, поддерживающая как текстовое, так и визуальное понимание. Она обладает контекстным окном на 256k и может генерировать выводы до 16k токенов.",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 8.2782,
+        "completion": 33.1129,
+        "input_cache_read": null
+      },
+      "prompt_rub": 8.2782,
+      "completion_rub": 33.1129,
+      "prompt_label": "8.28 ₽",
+      "completion_label": "33.11 ₽",
+      "cost_per_turn_estimate_rub": 0.115895,
+      "cost_label": "0.1159 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1766505011
+    },
+    {
+      "id": "openai/gpt-oss-safeguard-20b",
+      "name": "OpenAI: gpt-oss-safeguard-20b",
+      "provider": "openai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "gpt-oss-safeguard-20b — это модель рассуждений по безопасности от OpenAI, построенная на основе gpt-oss-20b. Эта модель с открытыми весами и 21 миллиардом параметров, использующая архитектуру Mixture-of-Experts (MoE), обеспечивает более низкую задержку для задач безопасности, таких как классификация",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 8.2782,
+        "completion": 33.1129,
+        "input_cache_read": 4.1391
+      },
+      "prompt_rub": 8.2782,
+      "completion_rub": 33.1129,
+      "prompt_label": "8.28 ₽",
+      "completion_label": "33.11 ₽",
+      "cost_per_turn_estimate_rub": 0.115895,
+      "cost_label": "0.1159 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1761752836
+    },
+    {
+      "id": "prism-ml/ternary-bonsai-2-27b",
+      "name": "PrismML: Ternary Bonsai 2 27B",
+      "provider": "prism-ml",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Bonsai 2 27B — это модель рассуждений с 27 миллиардами параметров от PrismML, созданная на основе Qwen3.8-27B. Она поддерживает кодирование, математику, вызов инструментов и понимание изображений с контекстным окном в 262 тысячи токенов. Тройное сжатие уменьшает вес языковой модели до примерно 8,5 Г",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 8.2782,
+        "completion": 55.1881,
+        "input_cache_read": 4.1391
+      },
+      "prompt_rub": 8.2782,
+      "completion_rub": 55.1881,
+      "prompt_label": "8.28 ₽",
+      "completion_label": "55.19 ₽",
+      "cost_per_turn_estimate_rub": 0.13797,
+      "cost_label": "0.1380 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1789754046
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "name": "Z.ai: GLM 5.3 Flash",
+      "provider": "z-ai",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "GLM-5.3-Flash — это нативная мультимодальная модель от Z.ai. Она подходит для эффективного кодирования и задач агентов с долгосрочным горизонтом. Ее гибридная архитектура с разреженным и линейным вниманием сохраняет точное поведение в длинном контексте, одновременно снижая вычислительную нагрузку.",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 8.3776,
+        "completion": 27.9252,
+        "input_cache_read": 1.6755
+      },
+      "prompt_rub": 8.3776,
+      "completion_rub": 27.9252,
+      "prompt_label": "8.38 ₽",
+      "completion_label": "27.93 ₽",
+      "cost_per_turn_estimate_rub": 0.111701,
+      "cost_label": "0.1117 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1787752741
+    },
+    {
+      "id": "qwen/qwen3.5-9b",
+      "name": "Qwen: Qwen3.5-9B",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3.5-9B — это мультимодальная базовая модель из семейства Qwen3.5, разработанная для обеспечения мощных возможностей в области рассуждений, программирования и визуального понимания в эффективной архитектуре с 9 миллиардами параметров. Она использует унифицированный дизайн для работы с визуальной ",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 8.8301,
+        "completion": 14.3489,
+        "input_cache_read": 4.415
+      },
+      "prompt_rub": 8.8301,
+      "completion_rub": 14.3489,
+      "prompt_label": "8.83 ₽",
+      "completion_label": "14.35 ₽",
+      "cost_per_turn_estimate_rub": 0.10265,
+      "cost_label": "0.1027 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1773152396
+    },
+    {
+      "id": "google/gemma-3-27b-it",
+      "name": "Google: Gemma 3 27B",
+      "provider": "google",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Gemma 3 вводит мультимодальность, поддерживая ввод в формате \"зрение-язык\" и текстовые выводы. Она обрабатывает контекстные окна до 128 тысяч токенов, понимает более 140 языков и предлагает улучшенные возможности в математике, рассуждениях и чатах, включая структурированные выводы и вызов функций. G",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 8.8301,
+        "completion": 17.6602,
+        "input_cache_read": null
+      },
+      "prompt_rub": 8.8301,
+      "completion_rub": 17.6602,
+      "prompt_label": "8.83 ₽",
+      "completion_label": "17.66 ₽",
+      "cost_per_turn_estimate_rub": 0.105961,
+      "cost_label": "0.1060 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1741756359
+    },
+    {
+      "id": "qwen/qwen3-32b",
+      "name": "Qwen: Qwen3 32B",
+      "provider": "qwen",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Qwen3-32B — это плотная причинно-следственная языковая модель с 32,8 миллиардами параметров из серии Qwen3, оптимизированная как для сложных рассуждений, так и для эффективного диалога. Она поддерживает бесшовное переключение между режимом \"мышления\" для задач, таких как математика, программирование",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 8.8301,
+        "completion": 30.9053,
+        "input_cache_read": null
+      },
+      "prompt_rub": 8.8301,
+      "completion_rub": 30.9053,
+      "prompt_label": "8.83 ₽",
+      "completion_label": "30.91 ₽",
+      "cost_per_turn_estimate_rub": 0.119206,
+      "cost_label": "0.1192 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1745875945
+    },
+    {
+      "id": "qwen/qwen3.5-35b-a3b",
+      "name": "Qwen: Qwen3.5-35B-A3B",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Серия Qwen3.5 35B-A3B представляет собой модель обработки визуально-языковой информации с гибридной архитектурой, которая интегрирует механизмы линейного внимания и разреженную модель смеси экспертов, что обеспечивает более высокую эффективность вывода. Ее общая производительность сопоставима с Qwen",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 8.8301,
+        "completion": 82.7822,
+        "input_cache_read": 4.415
+      },
+      "prompt_rub": 8.8301,
+      "completion_rub": 82.7822,
+      "prompt_label": "8.83 ₽",
+      "completion_label": "82.78 ₽",
+      "cost_per_turn_estimate_rub": 0.171083,
+      "cost_label": "0.1711 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1772053822
+    },
+    {
+      "id": "nvidia/nemotron-3-super-120b-a12b",
+      "name": "NVIDIA: Nemotron 3 Super",
+      "provider": "nvidia",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "NVIDIA Nemotron 3 Super — это открытая гибридная модель MoE с 120 миллиардами параметров, активирующая всего 12 миллиардов параметров для максимальной вычислительной эффективности и точности в сложных многоагентных приложениях. Построенная на гибридной архитектуре Mamba-Transformer Mixture-of-Expert",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 9.382,
+        "completion": 44.1505,
+        "input_cache_read": null
+      },
+      "prompt_rub": 9.382,
+      "completion_rub": 44.1505,
+      "prompt_label": "9.38 ₽",
+      "completion_label": "44.15 ₽",
+      "cost_per_turn_estimate_rub": 0.13797,
+      "cost_label": "0.1380 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1773245239
+    },
+    {
+      "id": "qwen/qwen3-235b-a22b-2507",
+      "name": "Qwen: Qwen3 235B A22B Instruct 2507",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-235B-A22B-Instruct-2507 — это многоязычная языковая модель с настройкой на выполнение инструкций, основанная на архитектуре Qwen3-235B, с 22 миллиардами активных параметров на каждый проход вперед. Она оптимизирована для генерации текста общего назначения, включая следование инструкциям, логич",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 9.6579,
+        "completion": 38.6317,
+        "input_cache_read": 1.9316
+      },
+      "prompt_rub": 9.6579,
+      "completion_rub": 38.6317,
+      "prompt_label": "9.66 ₽",
+      "completion_label": "38.63 ₽",
+      "cost_per_turn_estimate_rub": 0.135211,
+      "cost_label": "0.1352 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1753119555
+    },
+    {
+      "id": "poolside/laguna-s-2.1",
+      "name": "Poolside: Laguna S 2.1",
+      "provider": "poolside",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "Laguna S 2.1 — это новейшая модель кодирующего агента от [Poolside](/models/<https://poolside.ai/>). Laguna S 2.1 — это модель с общим количеством параметров 118 миллиардов и 8 миллиардами активных параметров, набирающая 70,2% на Terminal-Bench 2.1 и 40,4% на DeepSWE, что делает её одной из самых мо",
+      "has_reasoning": true,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 9.9339,
+        "completion": 19.8677,
+        "input_cache_read": 0.9934
+      },
+      "prompt_rub": 9.9339,
+      "completion_rub": 19.8677,
+      "prompt_label": "9.93 ₽",
+      "completion_label": "19.87 ₽",
+      "cost_per_turn_estimate_rub": 0.119206,
+      "cost_label": "0.1192 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1784652683
+    },
+    {
+      "id": "qwen/qwen3-30b-a3b-instruct-2507",
+      "name": "Qwen: Qwen3 30B A3B Instruct 2507",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-30B-A3B-Instruct-2507 — это языковая модель с 30,5 миллиардами параметров, основанная на смеси экспертов от Qwen, с 3,3 миллиардами активных параметров на каждое предсказание. Она работает в режиме без мышления и предназначена для высококачественного выполнения инструкций, многоязычного понима",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 9.9339,
+        "completion": 33.1129,
+        "input_cache_read": null
+      },
+      "prompt_rub": 9.9339,
+      "completion_rub": 33.1129,
+      "prompt_label": "9.93 ₽",
+      "completion_label": "33.11 ₽",
+      "cost_per_turn_estimate_rub": 0.132451,
+      "cost_label": "0.1325 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1753806965
+    },
+    {
+      "id": "google/gemma-4-31b-it",
+      "name": "Google: Gemma 4 31B",
+      "provider": "google",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Gemma 4 31B Instruct — это плотная мультимодальная модель от Google DeepMind с 30,7 миллиардами параметров, поддерживающая текстовый и визуальный ввод с текстовым выводом. Обладает контекстным окном на 256 тысяч токенов, настраиваемым режимом мышления/рассуждения, возможностью нативного вызова функц",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 9.9339,
+        "completion": 37.5279,
+        "input_cache_read": 5.5188
+      },
+      "prompt_rub": 9.9339,
+      "completion_rub": 37.5279,
+      "prompt_label": "9.93 ₽",
+      "completion_label": "37.53 ₽",
+      "cost_per_turn_estimate_rub": 0.136867,
+      "cost_label": "0.1369 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1775148486
+    },
+    {
+      "id": "upstage/solar-pro4",
+      "name": "Upstage: Solar Pro 4",
+      "provider": "upstage",
+      "context_length": 524288,
+      "context_label": "524.3K",
+      "description_short": "Solar Pro 4 — это крупная языковая модель от Upstage. Она подходит для агентских рабочих процессов, повышения производительности в офисе, работы с документами и программирования.",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 9.9339,
+        "completion": 39.7354,
+        "input_cache_read": 1.9868
+      },
+      "prompt_rub": 9.9339,
+      "completion_rub": 39.7354,
+      "prompt_label": "9.93 ₽",
+      "completion_label": "39.74 ₽",
+      "cost_per_turn_estimate_rub": 0.139074,
+      "cost_label": "0.1391 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1786371636
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek: DeepSeek V4 Flash 0423",
+      "provider": "deepseek",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "DeepSeek V4 Flash — это оптимизированная по эффективности модель Mixture-of-Experts от DeepSeek с общим количеством параметров 284 миллиардов и 13 миллиардов активированных параметров, поддерживающая контекстное окно на 1 миллион токенов. Она разработана для быстрого вывода и высокопроизводительных ",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 10.4846,
+        "completion": 20.9693,
+        "input_cache_read": 2.0969
+      },
+      "prompt_rub": 10.4846,
+      "completion_rub": 20.9693,
+      "prompt_label": "10.48 ₽",
+      "completion_label": "20.97 ₽",
+      "cost_per_turn_estimate_rub": 0.125816,
+      "cost_label": "0.1258 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1777000666
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "name": "DeepSeek: DeepSeek V4.1 Flash",
+      "provider": "deepseek",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "DeepSeek V4.1 Flash — это разреженная модель смеси экспертов от DeepSeek, представляющая экономичный уровень семейства V4.1. DeepSeek сообщает, что она превосходит V4 Pro по производительности, скорости и времени выполнения задач, поэтому она находится выше предыдущего флагмана, а не ниже.\n\nОна подх",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 10.9272,
+        "completion": 21.8545,
+        "input_cache_read": 2.1854
+      },
+      "prompt_rub": 10.9272,
+      "completion_rub": 21.8545,
+      "prompt_label": "10.93 ₽",
+      "completion_label": "21.85 ₽",
+      "cost_per_turn_estimate_rub": 0.131127,
+      "cost_label": "0.1311 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1789021285
+    },
+    {
+      "id": "~deepseek/deepseek-v4-flash-latest",
+      "name": "DeepSeek: DeepSeek V4.1 Flash (latest)",
+      "provider": "~deepseek",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "DeepSeek V4.1 Flash — это разреженная модель смеси экспертов от DeepSeek, представляющая экономичный уровень семейства V4.1. DeepSeek сообщает, что она превосходит V4 Pro по производительности, скорости и времени выполнения задач, поэтому она находится выше предыдущего флагмана, а не ниже.\n\nОна подх",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 10.9272,
+        "completion": 21.8545,
+        "input_cache_read": 2.1854
+      },
+      "prompt_rub": 10.9272,
+      "completion_rub": 21.8545,
+      "prompt_label": "10.93 ₽",
+      "completion_label": "21.85 ₽",
+      "cost_per_turn_estimate_rub": 0.131127,
+      "cost_label": "0.1311 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1789021285
+    },
+    {
+      "id": "mistralai/ministral-3b-2512",
+      "name": "Mistral: Ministral 3 3B 2512",
+      "provider": "mistralai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Самая маленькая модель в семействе Ministral 3, Ministral 3 3B, представляет собой мощную, эффективную небольшую языковую модель с возможностями обработки изображений.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 11.0376,
+        "input_cache_read": 1.1038
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 11.0376,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "11.04 ₽",
+      "cost_per_turn_estimate_rub": 0.121414,
+      "cost_label": "0.1214 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1764681560
+    },
+    {
+      "id": "reka/reka-edge",
+      "name": "Reka Edge",
+      "provider": "reka",
+      "context_length": 16384,
+      "context_label": "16.4K",
+      "description_short": "Reka Edge — это чрезвычайно эффективная мультимодальная модель зрения и языка с 7 миллиардами параметров, которая принимает на вход изображения/видео и текст, а на выходе генерирует текст. Эта модель оптимизирована специально для обеспечения передовой производительности в понимании изображений, анал",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 11.0376,
+        "input_cache_read": null
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 11.0376,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "11.04 ₽",
+      "cost_per_turn_estimate_rub": 0.121414,
+      "cost_label": "0.1214 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1774026965
+    },
+    {
+      "id": "rekaai/reka-edge",
+      "name": "Reka Edge",
+      "provider": "rekaai",
+      "context_length": 16384,
+      "context_label": "16.4K",
+      "description_short": "Reka Edge — это чрезвычайно эффективная мультимодальная модель зрения и языка с 7 миллиардами параметров, которая принимает на вход изображения/видео и текст, а на выходе генерирует текст. Эта модель специально оптимизирована для обеспечения передовой производительности в понимании изображений, анал",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 11.0376,
+        "input_cache_read": null
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 11.0376,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "11.04 ₽",
+      "cost_per_turn_estimate_rub": 0.121414,
+      "cost_label": "0.1214 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1774026965
+    },
+    {
+      "id": "ibm-granite/granite-4.2-8b",
+      "name": "IBM: Granite 4.2 8B",
+      "provider": "ibm-granite",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Granite 4.2 8B — это модель плотного рассуждения от IBM. Она подходит для математики, генерации кода, многоязычного диалога и агентных рабочих процессов, требующих многоэтапного рассуждения. Модель поддерживает полные, низкоусилие и бездумные режимы.\n\nМодель поддерживает 12 языков: английский, немец",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 16.5564,
+        "input_cache_read": 5.5188
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 16.5564,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "16.56 ₽",
+      "cost_per_turn_estimate_rub": 0.126933,
+      "cost_label": "0.1269 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1788206780
+    },
+    {
+      "id": "meta/muse-spark-1.2-contributor",
+      "name": "Meta: Muse Spark 1.2 Contributor",
+      "provider": "meta",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "Muse Spark 1.2 contributor tier — это модель рассуждений от Meta, предназначенная для разработчиков, которые хотят начать разработку с еще более низкими затратами. Она значительно дешевле, чем Muse Spark 1.2. Ваши запросы и результаты могут использоваться для улучшения продуктов Meta, что делает ее ",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 22.0752,
+        "input_cache_read": 0.2208
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 22.0752,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "22.08 ₽",
+      "cost_per_turn_estimate_rub": 0.132451,
+      "cost_label": "0.1325 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1787336476
+    },
+    {
+      "id": "meta/muse-spark-1.3-contributor",
+      "name": "Meta: Muse Spark 1.3 Contributor",
+      "provider": "meta",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "Muse Spark 1.3 Contributor — это экономичный уровень участия в многомодальной модели рассуждений Meta для экспериментов, обучения и начальных стадий агентных, многоагентных и кодировочных рабочих процессов. Он предназначен для отслеживания информации в рамках длительных задач, обработки противоречив",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 22.0752,
+        "input_cache_read": 0.2208
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 22.0752,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "22.08 ₽",
+      "cost_per_turn_estimate_rub": 0.132451,
+      "cost_label": "0.1325 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1788381519
+    },
+    {
+      "id": "qwen/qwen-2.5-7b-instruct",
+      "name": "Qwen: Qwen2.5 7B Instruct",
+      "provider": "qwen",
+      "context_length": 32768,
+      "context_label": "32.8K",
+      "description_short": "Qwen2.5 7B — это последняя серия больших языковых моделей Qwen. Qwen2.5 предлагает следующие улучшения по сравнению с Qwen2:\n\n- Значительно больше знаний и значительно улучшенные возможности в программировании и математике благодаря нашим специализированным экспертным моделям в этих областях.\n\n- Сущ",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 22.0752,
+        "input_cache_read": null
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 22.0752,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "22.08 ₽",
+      "cost_per_turn_estimate_rub": 0.132451,
+      "cost_label": "0.1325 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1729036800
+    },
+    {
+      "id": "qwen/qwen3-14b",
+      "name": "Qwen: Qwen3 14B",
+      "provider": "qwen",
+      "context_length": 40960,
+      "context_label": "41.0K",
+      "description_short": "Qwen3-14B — это плотная причинно-следственная языковая модель с 14,8 миллиардами параметров из серии Qwen3, разработанная для сложных рассуждений и эффективного диалога. Она поддерживает бесшовное переключение между режимом \"мышления\" для задач, таких как математика, программирование и логический вы",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 24.2828,
+        "input_cache_read": null
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 24.2828,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "24.28 ₽",
+      "cost_per_turn_estimate_rub": 0.134659,
+      "cost_label": "0.1347 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1745876478
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-flash",
+      "name": "Xiaomi: MiMo-V2.6-Flash",
+      "provider": "xiaomi",
+      "context_length": 1050000,
+      "context_label": "1.1M",
+      "description_short": "MiMo-V2.6-Flash — это модель с открытым исходным кодом, разработанная Xiaomi. Построенная на архитектуре Mixture-of-Experts с общим числом параметров 309 миллиардов и 15 миллиардов активируемых на каждый токен, она использует гибридный механизм внимания для повышения вычислительной эффективности. Мо",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+audio+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 30.9053,
+        "input_cache_read": 5.5188
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 30.9053,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "30.91 ₽",
+      "cost_per_turn_estimate_rub": 0.141282,
+      "cost_label": "0.1413 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1790021264
+    },
+    {
+      "id": "meta-llama/llama-4-scout",
+      "name": "Meta: Llama 4 Scout",
+      "provider": "meta-llama",
+      "context_length": 1310720,
+      "context_label": "1.3M",
+      "description_short": "Llama 4 Scout 17B Instruct (16E) — это языковая модель с механизмом выбора экспертов (MoE), разработанная Meta, активирующая 17 миллиардов параметров из общего числа 109 миллиардов. Она поддерживает нативный мультимодальный ввод (текст и изображение) и многоязычный вывод (текст и код) на 12 поддержи",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 33.1129,
+        "input_cache_read": null
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 33.1129,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "33.11 ₽",
+      "cost_per_turn_estimate_rub": 0.143489,
+      "cost_label": "0.1435 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1743881519
+    },
+    {
+      "id": "mistralai/voxtral-small-24b-2507",
+      "name": "Mistral: Voxtral Small 24B 2507",
+      "provider": "mistralai",
+      "context_length": 32768,
+      "context_label": "32.8K",
+      "description_short": "Voxtral Small — это усовершенствованная версия Mistral Small 3, которая включает в себя передовые возможности аудиоввода, сохраняя при этом первоклассную производительность текста. Она превосходно справляется с транскрипцией речи, переводом и пониманием аудио. Стоимость ввода аудио составляет 100 до",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+file+audio->text",
+      "input_modalities": [
+        "text",
+        "audio",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 33.1129,
+        "input_cache_read": 1.1038
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 33.1129,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "33.11 ₽",
+      "cost_per_turn_estimate_rub": 0.143489,
+      "cost_label": "0.1435 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1761835144
+    },
+    {
+      "id": "stepfun/step-3.5-flash",
+      "name": "StepFun: Step 3.5 Flash",
+      "provider": "stepfun",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Step 3.5 Flash — это самая продвинутая модель с открытым исходным кодом от StepFun. Построенная на архитектуре разреженной смеси экспертов (MoE), она избирательно активирует только 11 миллиардов из своих 196 миллиардов параметров на каждый токен. Это модель рассуждений, которая невероятно эффективна",
+      "has_reasoning": true,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 33.1129,
+        "input_cache_read": null
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 33.1129,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "33.11 ₽",
+      "cost_per_turn_estimate_rub": 0.143489,
+      "cost_label": "0.1435 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1769728337
+    },
+    {
+      "id": "meta-llama/llama-3.3-70b-instruct",
+      "name": "Meta: Llama 3.3 70B Instruct",
+      "provider": "meta-llama",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Многоязычная крупная языковая модель Meta Llama 3.3 (LLM) представляет собой предварительно обученную и настроенную на выполнение инструкций генеративную модель с параметрами 70 миллиардов (ввод текста/вывод текста). Модель Llama 3.3, настроенная на выполнение инструкций, оптимизирована для многоязы",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 35.3204,
+        "input_cache_read": null
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 35.3204,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "35.32 ₽",
+      "cost_per_turn_estimate_rub": 0.145697,
+      "cost_label": "0.1457 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1733506137
+    },
+    {
+      "id": "bytedance-seed/seed-2.0-mini",
+      "name": "ByteDance Seed: Seed-2.0-Mini",
+      "provider": "bytedance-seed",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Seed-2.0-mini нацелен на сценарии, чувствительные к задержкам, с высокой степенью параллелизма и чувствительностью к затратам, делая акцент на быстром отклике и гибком развертывании инференса. Он обеспечивает производительность, сопоставимую с ByteDance-Seed-1.6, поддерживает контекст объемом 256k, ",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 44.1505,
+        "input_cache_read": null
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 44.1505,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "44.15 ₽",
+      "cost_per_turn_estimate_rub": 0.154527,
+      "cost_label": "0.1545 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1772131107
+    },
+    {
+      "id": "google/gemini-2.5-flash-lite",
+      "name": "Google: Gemini 2.5 Flash Lite",
+      "provider": "google",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "Gemini 2.5 Flash-Lite — это облегчённая модель рассуждений в семействе Gemini 2.5, оптимизированная для сверхнизкой задержки и экономической эффективности. Она обеспечивает улучшенную пропускную способность, более быстрое генерирование токенов и лучшую производительность по общим тестам по сравнению",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file+audio+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file",
+        "audio",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 44.1505,
+        "input_cache_read": 1.1038
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 44.1505,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "44.15 ₽",
+      "cost_per_turn_estimate_rub": 0.154527,
+      "cost_label": "0.1545 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1753200276
+    },
+    {
+      "id": "openai/gpt-4.1-nano",
+      "name": "OpenAI: GPT-4.1 Nano",
+      "provider": "openai",
+      "context_length": 1047576,
+      "context_label": "1.0M",
+      "description_short": "Для задач, требующих низкой задержки, GPT-4.1 nano является самой быстрой и дешевой моделью в серии GPT-4.1. Она обеспечивает исключительную производительность при небольшом размере с контекстным окном в 1 миллион токенов и набирает 80,1% на MMLU, 50,3% на GPQA и 9,8% на Aider polyglot coding – даже",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 44.1505,
+        "input_cache_read": 2.7594
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 44.1505,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "44.15 ₽",
+      "cost_per_turn_estimate_rub": 0.154527,
+      "cost_label": "0.1545 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1744651369
+    },
+    {
+      "id": "anthropic/claude-haiku-5.5",
+      "name": "Anthropic: Claude Haiku 5.5",
+      "provider": "anthropic",
+      "context_length": 1000000,
+      "context_label": "1.0M",
+      "description_short": "Claude Haiku 5.5 — это небольшая, быстрая модель от Anthropic для работы с большим объемом данных и чувствительных к стоимости задач, таких как суммаризация, субагенты и использование браузера. Она является преемником Claude Haiku 4.5 и обладает улучшенными возможностями в области кодирования, испол",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 55.1881,
+        "input_cache_read": 1.1038
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 55.1881,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "55.19 ₽",
+      "cost_per_turn_estimate_rub": 0.165564,
+      "cost_label": "0.1656 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1791397883
+    },
+    {
+      "id": "openai/gpt-6-luna",
+      "name": "OpenAI: GPT-6 Luna",
+      "provider": "openai",
+      "context_length": 1050000,
+      "context_label": "1.1M",
+      "description_short": "GPT-6 Luna — это быстрая и экономичная модель в серии GPT-6 от OpenAI, расположенная ниже GPT-6 Sol. Она подходит для задач с высоким объемом и чувствительностью к задержкам, таких как чат, классификация и легкие агентные задачи, а при более высоких усилиях в области рассуждений может выполнять слож",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 55.1881,
+        "input_cache_read": 1.1038
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 55.1881,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "55.19 ₽",
+      "cost_per_turn_estimate_rub": 0.165564,
+      "cost_label": "0.1656 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1790100786
+    },
+    {
+      "id": "openai/gpt-6-luna-pro",
+      "name": "OpenAI: GPT-6 Luna Pro",
+      "provider": "openai",
+      "context_length": 1050000,
+      "context_label": "1.1M",
+      "description_short": "GPT-6 Luna Pro — это та же базовая модель, что и GPT-6 Luna, с установленным параметром `reasoning.mode` на `pro` для получения более качественных ответов на сложные задачи.",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 55.1881,
+        "input_cache_read": 1.1038
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 55.1881,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "55.19 ₽",
+      "cost_per_turn_estimate_rub": 0.165564,
+      "cost_label": "0.1656 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1790100791
+    },
+    {
+      "id": "~anthropic/claude-haiku-latest",
+      "name": "Anthropic: Claude Haiku 5.5 (latest)",
+      "provider": "~anthropic",
+      "context_length": 1000000,
+      "context_label": "1.0M",
+      "description_short": "Claude Haiku 5.5 — это небольшая, быстрая модель от Anthropic для работы с большим объемом данных и чувствительных к стоимости задач, таких как суммаризация, субагенты и использование браузера. Она является преемником Claude Haiku 4.5 и обладает улучшенными возможностями в области кодирования, испол",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 11.0376,
+        "completion": 55.1881,
+        "input_cache_read": 1.1038
+      },
+      "prompt_rub": 11.0376,
+      "completion_rub": 55.1881,
+      "prompt_label": "11.04 ₽",
+      "completion_label": "55.19 ₽",
+      "cost_per_turn_estimate_rub": 0.165564,
+      "cost_label": "0.1656 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1791397883
+    },
+    {
+      "id": "xiaomi/mimo-v2.5",
+      "name": "Xiaomi: MiMo-V2.5",
+      "provider": "xiaomi",
+      "context_length": 1050000,
+      "context_label": "1.1M",
+      "description_short": "MiMo-V2.5 — это родная омнимодальная модель от Xiaomi. Она обеспечивает профессиональный уровень агентной производительности примерно за половину стоимости вывода, превосходя MiMo-V2-Omni в мультимодальном восприятии при выполнении задач по пониманию изображений и видео. Ее контекстное окно на 1M по",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+audio+video->text",
+      "input_modalities": [
+        "text",
+        "audio",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 13.1348,
+        "completion": 26.2695,
+        "input_cache_read": 0.2815
+      },
+      "prompt_rub": 13.1348,
+      "completion_rub": 26.2695,
+      "prompt_label": "13.13 ₽",
+      "completion_label": "26.27 ₽",
+      "cost_per_turn_estimate_rub": 0.157617,
+      "cost_label": "0.1576 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1776874269
+    },
+    {
+      "id": "qwen/qwen3-30b-a3b",
+      "name": "Qwen: Qwen3 30B A3B",
+      "provider": "qwen",
+      "context_length": 40960,
+      "context_label": "41.0K",
+      "description_short": "Qwen3, последнее поколение в серии крупных языковых моделей Qwen, включает как плотные, так и архитектуры с набором экспертов (MoE), чтобы преуспевать в рассуждениях, многоязыковой поддержке и выполнении сложных задач агентами. Его уникальная способность беспрепятственно переключаться между режимом ",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 13.2451,
+        "completion": 55.1881,
+        "input_cache_read": null
+      },
+      "prompt_rub": 13.2451,
+      "completion_rub": 55.1881,
+      "prompt_label": "13.25 ₽",
+      "completion_label": "55.19 ₽",
+      "cost_per_turn_estimate_rub": 0.18764,
+      "cost_label": "0.1876 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1745878604
+    },
+    {
+      "id": "qwen/qwen3-coder-next",
+      "name": "Qwen: Qwen3 Coder Next",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-Coder-Next — это каузальная языковая модель с открытым весом, оптимизированная для кодирующих агентов и локальных рабочих процессов разработки. Она использует разреженный дизайн MoE с общим количеством параметров 80 миллиардов и только 3 миллиарда активируются на каждый токен, обеспечивая прои",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 13.2451,
+        "completion": 88.301,
+        "input_cache_read": 7.7263
+      },
+      "prompt_rub": 13.2451,
+      "completion_rub": 88.301,
+      "prompt_label": "13.25 ₽",
+      "completion_label": "88.30 ₽",
+      "cost_per_turn_estimate_rub": 0.220752,
+      "cost_label": "0.2208 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1770164101
+    },
+    {
+      "id": "z-ai/glm-4.5-air",
+      "name": "Z.ai: GLM 4.5 Air",
+      "provider": "z-ai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "GLM-4.5-Air — это облегченный вариант нашей последней флагманской модели, также специально созданный для приложений, ориентированных на агентов. Как и GLM-4.5, он использует архитектуру Mixture-of-Experts (MoE), но с более компактным размером параметров. GLM-4.5-Air также поддерживает гибридные режи",
+      "has_reasoning": true,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 14.3489,
+        "completion": 93.8198,
+        "input_cache_read": 2.7594
+      },
+      "prompt_rub": 14.3489,
+      "completion_rub": 93.8198,
+      "prompt_label": "14.35 ₽",
+      "completion_label": "93.82 ₽",
+      "cost_per_turn_estimate_rub": 0.237309,
+      "cost_label": "0.2373 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1753471258
+    },
+    {
+      "id": "tencent/hy3",
+      "name": "Tencent: Hy3",
+      "provider": "tencent",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Hy3 — это модель Mixture-of-Experts с 295 миллиардами параметров от Tencent (21 миллиард активных, 192 эксперта с маршрутизацией top-8), созданная для рассуждений, агентных рабочих процессов и реального производственного использования. Она поддерживает настраиваемое усилие рассуждения: режим без раз",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 14.5697,
+        "completion": 58.2787,
+        "input_cache_read": 3.6424
+      },
+      "prompt_rub": 14.5697,
+      "completion_rub": 58.2787,
+      "prompt_label": "14.57 ₽",
+      "completion_label": "58.28 ₽",
+      "cost_per_turn_estimate_rub": 0.203975,
+      "cost_label": "0.2040 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1783344048
+    },
+    {
+      "id": "mistralai/ministral-8b-2512",
+      "name": "Mistral: Ministral 3 8B 2512",
+      "provider": "mistralai",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Сбалансированная модель в семействе Ministral 3, Ministral 3 8B — это мощная, эффективная небольшая языковая модель с возможностями обработки изображений.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 16.5564,
+        "input_cache_read": 1.6556
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 16.5564,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "16.56 ₽",
+      "cost_per_turn_estimate_rub": 0.182121,
+      "cost_label": "0.1821 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1764681654
+    },
+    {
+      "id": "qwen/qwen3.8-flash",
+      "name": "Qwen: Qwen3.8 Flash",
+      "provider": "qwen",
+      "context_length": 1000000,
+      "context_label": "1.0M",
+      "description_short": "Qwen3.8 Flash — это многомодальная модель рассуждений от Alibaba. Она подходит для помощи в кодировании, агентных рабочих процессов, визуального понимания, анализа документов и кодовой базы, взаимодействия с рабочим столом, анализа графиков и анализа длинных видео.",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 51.8768,
+        "input_cache_read": 1.766
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 51.8768,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "51.88 ₽",
+      "cost_per_turn_estimate_rub": 0.217441,
+      "cost_label": "0.2174 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1787773060
+    },
+    {
+      "id": "qwen/qwen3.8-omni-flash",
+      "name": "Qwen: Qwen3.8 Omni Flash",
+      "provider": "qwen",
+      "context_length": 1000000,
+      "context_label": "1.0M",
+      "description_short": "Qwen3.8 Omni Flash — это омни-модальная модель рассуждений от Alibaba, первая модель Qwen, построенная вокруг агентных возможностей с нативным пониманием аудио и видео. Она подходит для анализа и суммирования аудио-видео, рабочих процессов редактирования и производства видео, аудио-видео диалогов, п",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+audio+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 51.8768,
+        "input_cache_read": 1.766
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 51.8768,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "51.88 ₽",
+      "cost_per_turn_estimate_rub": 0.217441,
+      "cost_label": "0.2174 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1789959954
+    },
+    {
+      "id": "cohere/command-r-08-2024",
+      "name": "Cohere: Command R (08-2024)",
+      "provider": "cohere",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "command-r-08-2024 — это обновление модели [Command R](/models/models/cohere/command-r) с улучшенной производительностью для многоязычной генерации с дополнением извлечением (RAG) и использования инструментов. В более широком смысле, она лучше справляется с математикой, кодом и рассуждениями и являет",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 66.2257,
+        "input_cache_read": null
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 66.2257,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "66.23 ₽",
+      "cost_per_turn_estimate_rub": 0.23179,
+      "cost_label": "0.2318 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1724976000
+    },
+    {
+      "id": "mistralai/mistral-small-2603",
+      "name": "Mistral: Mistral Small 4",
+      "provider": "mistralai",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Mistral Small 4 — это следующий крупный выпуск в семействе Mistral Small, объединяющий возможности нескольких флагманских моделей Mistral в единую систему. Он сочетает в себе мощное логическое мышление от Magistral, мультимодальное понимание от Pixtral и агентные возможности кодирования от Devstral,",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 66.2257,
+        "input_cache_read": 1.6556
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 66.2257,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "66.23 ₽",
+      "cost_per_turn_estimate_rub": 0.23179,
+      "cost_label": "0.2318 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1773695685
+    },
+    {
+      "id": "openai/gpt-4o-mini",
+      "name": "OpenAI: GPT-4o-mini",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "GPT-4o mini — это новейшая модель OpenAI после [GPT-4 Omni](/models/openai/gpt-4o), поддерживающая как текстовые, так и графические входные данные с текстовыми выходами.\n\nБудучи самой продвинутой малой моделью, она в несколько раз более доступна по цене, чем другие недавние передовые модели, и более",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 66.2257,
+        "input_cache_read": 8.2782
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 66.2257,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "66.23 ₽",
+      "cost_per_turn_estimate_rub": 0.23179,
+      "cost_label": "0.2318 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1721260800
+    },
+    {
+      "id": "openai/gpt-4o-mini-2024-07-18",
+      "name": "OpenAI: GPT-4o-mini (2024-07-18)",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "GPT-4o mini — это новейшая модель OpenAI после [GPT-4 Omni](/models/models/openai/gpt-4o), поддерживающая как текстовые, так и графические входные данные с текстовыми выходами.\n\nБудучи самой продвинутой малой моделью, она в несколько раз более доступна по цене, чем другие недавние передовые модели, ",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 66.2257,
+        "input_cache_read": 8.2782
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 66.2257,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "66.23 ₽",
+      "cost_per_turn_estimate_rub": 0.23179,
+      "cost_label": "0.2318 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1721260800
+    },
+    {
+      "id": "qwen/qwen3-vl-30b-a3b-instruct",
+      "name": "Qwen: Qwen3 VL 30B A3B Instruct",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-VL-30B-A3B-Instruct — это мультимодальная модель, объединяющая мощную генерацию текста с визуальным пониманием изображений и видео. Вариант Instruct оптимизирован для выполнения инструкций в общих мультимодальных задачах. Она превосходно справляется с восприятием реальных и синтетических катег",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 66.2257,
+        "input_cache_read": null
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 66.2257,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "66.23 ₽",
+      "cost_per_turn_estimate_rub": 0.23179,
+      "cost_label": "0.2318 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1759794476
+    },
+    {
+      "id": "upstage/solar-pro-3",
+      "name": "Upstage: Solar Pro 3",
+      "provider": "upstage",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Solar Pro 3 — это мощная языковая модель Mixture-of-Experts (MoE) от Upstage. Имея 102 миллиарда общих параметров и 12 миллиардов активных параметров на один проход, она обеспечивает исключительную производительность при сохранении вычислительной эффективности. Оптимизирована для корейского языка с ",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 16.5564,
+        "completion": 66.2257,
+        "input_cache_read": 1.6556
+      },
+      "prompt_rub": 16.5564,
+      "completion_rub": 66.2257,
+      "prompt_label": "16.56 ₽",
+      "completion_label": "66.23 ₽",
+      "cost_per_turn_estimate_rub": 0.23179,
+      "cost_label": "0.2318 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1769481200
+    },
+    {
+      "id": "tencent/hy3-preview",
+      "name": "Tencent: Hy3 preview",
+      "provider": "tencent",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Hy3 preview — это высокоэффективная модель Mixture-of-Experts от Tencent, предназначенная для агентных рабочих процессов и использования в производстве. Она поддерживает настраиваемые уровни рассуждений в режимах отключено, низкий и высокий, что позволяет балансировать между скоростью и глубиной в з",
+      "has_reasoning": true,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 19.8677,
+        "completion": 66.2257,
+        "input_cache_read": 6.6226
+      },
+      "prompt_rub": 19.8677,
+      "completion_rub": 66.2257,
+      "prompt_label": "19.87 ₽",
+      "completion_label": "66.23 ₽",
+      "cost_per_turn_estimate_rub": 0.264903,
+      "cost_label": "0.2649 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1776878150
+    },
+    {
+      "id": "meta-llama/llama-4-maverick",
+      "name": "Meta: Llama 4 Maverick",
+      "provider": "meta-llama",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "Llama 4 Maverick 17B Instruct (128E) — это высокоемкая мультимодальная языковая модель от Meta, построенная на архитектуре mixture-of-experts (MoE) с 128 экспертами и 17 миллиардами активных параметров на каждый прямой проход (всего 400 миллиардов). Она поддерживает ввод текста и изображений на неск",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 20.6955,
+        "completion": 72.0205,
+        "input_cache_read": 5.5188
+      },
+      "prompt_rub": 20.6955,
+      "completion_rub": 72.0205,
+      "prompt_label": "20.70 ₽",
+      "completion_label": "72.02 ₽",
+      "cost_per_turn_estimate_rub": 0.278976,
+      "cost_label": "0.2790 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1743881822
+    },
+    {
+      "id": "mistralai/ministral-14b-2512",
+      "name": "Mistral: Ministral 3 14B 2512",
+      "provider": "mistralai",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Самая крупная модель в семействе Ministral 3, Ministral 3 14B, предлагает передовые возможности и производительность, сопоставимую с ее более крупным аналогом Mistral Small 3.2 24B. Это мощная и эффективная языковая модель с возможностями обработки визуальной информации.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 22.0752,
+        "completion": 22.0752,
+        "input_cache_read": 2.2075
+      },
+      "prompt_rub": 22.0752,
+      "completion_rub": 22.0752,
+      "prompt_label": "22.08 ₽",
+      "completion_label": "22.08 ₽",
+      "cost_per_turn_estimate_rub": 0.242828,
+      "cost_label": "0.2428 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1764681735
+    },
+    {
+      "id": "mistralai/mistral-saba",
+      "name": "Mistral: Saba",
+      "provider": "mistralai",
+      "context_length": 32768,
+      "context_label": "32.8K",
+      "description_short": "Mistral Saba — это языковая модель с 24 миллиардами параметров, специально разработанная для Ближнего Востока и Южной Азии, обеспечивающая точные и контекстуально релевантные ответы при сохранении эффективной производительности. Обученная на тщательно отобранных региональных наборах данных, она подд",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+file->text",
+      "input_modalities": [
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 22.0752,
+        "completion": 66.2257,
+        "input_cache_read": 2.2075
+      },
+      "prompt_rub": 22.0752,
+      "completion_rub": 66.2257,
+      "prompt_label": "22.08 ₽",
+      "completion_label": "66.23 ₽",
+      "cost_per_turn_estimate_rub": 0.286978,
+      "cost_label": "0.2870 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1739803239
+    },
+    {
+      "id": "qwen/qwen3-vl-235b-a22b-instruct",
+      "name": "Qwen: Qwen3 VL 235B A22B Instruct",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-VL-235B-A22B Instruct — это многомодальная модель с открытыми весами, которая объединяет мощную генерацию текста с визуальным пониманием изображений и видео. Модель Instruct нацелена на общее использование в области зрения и языка (VQA, разбор документов, извлечение данных из диаграмм/таблиц, ",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 22.0752,
+        "completion": 97.1311,
+        "input_cache_read": 12.1414
+      },
+      "prompt_rub": 22.0752,
+      "completion_rub": 97.1311,
+      "prompt_label": "22.08 ₽",
+      "completion_label": "97.13 ₽",
+      "cost_per_turn_estimate_rub": 0.317884,
+      "cost_label": "0.3179 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1758668687
+    },
+    {
+      "id": "deepseek/deepseek-v3.2",
+      "name": "DeepSeek: DeepSeek V3.2",
+      "provider": "deepseek",
+      "context_length": 163840,
+      "context_label": "163.8K",
+      "description_short": "DeepSeek-V3.2 — это крупная языковая модель, разработанная для гармонизации высокой вычислительной эффективности с мощными возможностями в области рассуждений и использования инструментов. Она вводит DeepSeek Sparse Attention (DSA), тонко настроенный механизм разреженного внимания, который снижает з",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 23.0466,
+        "completion": 34.1725,
+        "input_cache_read": 2.3841
+      },
+      "prompt_rub": 23.0466,
+      "completion_rub": 34.1725,
+      "prompt_label": "23.05 ₽",
+      "completion_label": "34.17 ₽",
+      "cost_per_turn_estimate_rub": 0.264638,
+      "cost_label": "0.2646 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1764594642
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "name": "MiniMax: MiniMax M2.7",
+      "provider": "minimax",
+      "context_length": 204800,
+      "context_label": "204.8K",
+      "description_short": "MiniMax-M2.7 — это модель нового поколения, разработанная для автономной, продуктивной работы в реальных условиях и непрерывного совершенствования. Созданная для активного участия в собственном развитии, M2.7 интегрирует передовые агентные возможности через многопользовательское сотрудничество, что ",
+      "has_reasoning": true,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 23.179,
+        "completion": 92.716,
+        "input_cache_read": 4.6358
+      },
+      "prompt_rub": 23.179,
+      "completion_rub": 92.716,
+      "prompt_label": "23.18 ₽",
+      "completion_label": "92.72 ₽",
+      "cost_per_turn_estimate_rub": 0.324506,
+      "cost_label": "0.3245 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1773836697
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-vision-exp",
+      "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
+      "provider": "deepseek",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "DeepSeek V4 Flash Vision Exp — это экспериментальная версия DeepSeek с поддержкой визуального восприятия, добавляющая понимание изображений при сохранении возможностей базовой модели в области работы с текстом, включая агентов, рассуждения и знания о мире. Это разреженная модель с использованием сме",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 23.7971,
+        "completion": 71.3914,
+        "input_cache_read": 0.7572
+      },
+      "prompt_rub": 23.7971,
+      "completion_rub": 71.3914,
+      "prompt_label": "23.80 ₽",
+      "completion_label": "71.39 ₽",
+      "cost_per_turn_estimate_rub": 0.309363,
+      "cost_label": "0.3094 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1787311563
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek: DeepSeek V4 Pro 0423",
+      "provider": "deepseek",
+      "context_length": 1048576,
+      "context_label": "1.0M",
+      "description_short": "DeepSeek V4 Pro — это крупномасштабная модель Mixture-of-Experts от DeepSeek с общим количеством параметров 1,6 триллиона и 49 миллиардами активированных параметров, поддерживающая контекстное окно в 1 миллион токенов. Она разработана для продвинутого рассуждения, кодирования и работы агентов с длин",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 26.3762,
+        "completion": 52.7523,
+        "input_cache_read": 2.185
+      },
+      "prompt_rub": 26.3762,
+      "completion_rub": 52.7523,
+      "prompt_label": "26.38 ₽",
+      "completion_label": "52.75 ₽",
+      "cost_per_turn_estimate_rub": 0.316514,
+      "cost_label": "0.3165 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1777000679
+    },
+    {
+      "id": "inception/mercury-2",
+      "name": "Inception: Mercury 2",
+      "provider": "inception",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Mercury 2 — это чрезвычайно быстрое LLM для рассуждений и первое LLM с диффузией рассуждений (dLLM). Вместо последовательной генерации токенов, Mercury 2 производит и уточняет несколько токенов параллельно, достигая более 1000 токенов в секунду на стандартных GPU. Mercury 2 работает в 5 раз быстрее,",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 27.5941,
+        "completion": 82.7822,
+        "input_cache_read": 2.7594
+      },
+      "prompt_rub": 27.5941,
+      "completion_rub": 82.7822,
+      "prompt_label": "27.59 ₽",
+      "completion_label": "82.78 ₽",
+      "cost_per_turn_estimate_rub": 0.358723,
+      "cost_label": "0.3587 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1772636275
+    },
+    {
+      "id": "qwen/qwen3-vl-8b-instruct",
+      "name": "Qwen: Qwen3 VL 8B Instruct",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-VL-8B-Instruct — это мультимодальная модель из серии Qwen3-VL, созданная для высокоточного понимания и рассуждений по тексту, изображениям и видео. Она обладает улучшенной мультимодальной фьюзией с использованием Interleaved-MRoPE для временного рассуждения на длинных отрезках, DeepStack для т",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 27.5941,
+        "completion": 82.7822,
+        "input_cache_read": 13.2451
+      },
+      "prompt_rub": 27.5941,
+      "completion_rub": 82.7822,
+      "prompt_label": "27.59 ₽",
+      "completion_label": "82.78 ₽",
+      "cost_per_turn_estimate_rub": 0.358723,
+      "cost_label": "0.3587 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1760463308
+    },
+    {
+      "id": "arcee-ai/trinity-large-thinking",
+      "name": "Arcee AI: Trinity Large Thinking",
+      "provider": "arcee-ai",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Trinity Large Thinking — это мощная модель рассуждений с открытым исходным кодом от команды Arcee AI. Она демонстрирует высокую производительность в PinchBench, агентных нагрузках и задачах на рассуждение. Она бесплатна в open claw в течение первых пяти дней. Видео запуска: https://youtu.be/Gc82AXLa",
+      "has_reasoning": true,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 27.5941,
+        "completion": 88.301,
+        "input_cache_read": 6.6226
+      },
+      "prompt_rub": 27.5941,
+      "completion_rub": 88.301,
+      "prompt_label": "27.59 ₽",
+      "completion_label": "88.30 ₽",
+      "cost_per_turn_estimate_rub": 0.364242,
+      "cost_label": "0.3642 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1775058318
+    },
+    {
+      "id": "qwen/qwen-plus",
+      "name": "Qwen: Qwen-Plus",
+      "provider": "qwen",
+      "context_length": 1000000,
+      "context_label": "1.0M",
+      "description_short": "Qwen-Plus, основанная на базовой модели Qwen2.5, представляет собой модель с контекстом 131K, которая сочетает в себе сбалансированную производительность, скорость и стоимость.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 28.6978,
+        "completion": 86.0935,
+        "input_cache_read": 5.7396
+      },
+      "prompt_rub": 28.6978,
+      "completion_rub": 86.0935,
+      "prompt_label": "28.70 ₽",
+      "completion_label": "86.09 ₽",
+      "cost_per_turn_estimate_rub": 0.373072,
+      "cost_label": "0.3731 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1738409840
+    },
+    {
+      "id": "deepseek/deepseek-v3.2-exp",
+      "name": "DeepSeek: DeepSeek V3.2 Exp",
+      "provider": "deepseek",
+      "context_length": 163840,
+      "context_label": "163.8K",
+      "description_short": "DeepSeek-V3.2-Exp — это экспериментальная крупная языковая модель, выпущенная компанией DeepSeek как промежуточный шаг между V3.1 и будущими архитектурами. Она вводит механизм DeepSeek Sparse Attention (DSA), тонко настроенный разреженный механизм внимания, разработанный для повышения эффективности ",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 29.8016,
+        "completion": 45.2543,
+        "input_cache_read": null
+      },
+      "prompt_rub": 29.8016,
+      "completion_rub": 45.2543,
+      "prompt_label": "29.80 ₽",
+      "completion_label": "45.25 ₽",
+      "cost_per_turn_estimate_rub": 0.34327,
+      "cost_label": "0.3433 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1759150481
+    },
+    {
+      "id": "mistralai/codestral-2508",
+      "name": "Mistral: Codestral 2508",
+      "provider": "mistralai",
+      "context_length": 256000,
+      "context_label": "256.0K",
+      "description_short": "Современная языковая модель Mistral для кодирования была выпущена в конце июля 2025 года. Codestral специализируется на задачах с низкой задержкой и высокой частотой, таких как заполнение промежутков (FIM), исправление кода и генерация тестов.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+file->text",
+      "input_modalities": [
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 33.1129,
+        "completion": 99.3386,
+        "input_cache_read": 3.3113
+      },
+      "prompt_rub": 33.1129,
+      "completion_rub": 99.3386,
+      "prompt_label": "33.11 ₽",
+      "completion_label": "99.34 ₽",
+      "cost_per_turn_estimate_rub": 0.430467,
+      "cost_label": "0.4305 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1754079630
+    },
+    {
+      "id": "z-ai/glm-4.6v",
+      "name": "Z.ai: GLM 4.6V",
+      "provider": "z-ai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "GLM-4.6V — это крупная мультимодальная модель, разработанная для высокоточного визуального понимания и долгосрочного контекстного рассуждения по изображениям, документам и смешанным медиа. Она поддерживает до 128 тысяч токенов, обрабатывает сложные макеты страниц и диаграммы непосредственно в качест",
+      "has_reasoning": true,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text+image+video->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 33.1129,
+        "completion": 99.3386,
+        "input_cache_read": 5.5188
+      },
+      "prompt_rub": 33.1129,
+      "completion_rub": 99.3386,
+      "prompt_label": "33.11 ₽",
+      "completion_label": "99.34 ₽",
+      "cost_per_turn_estimate_rub": 0.430467,
+      "cost_label": "0.4305 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1765207462
+    },
+    {
+      "id": "xiaomi/mimo-v2.5-pro",
+      "name": "Xiaomi: MiMo-V2.5-Pro",
+      "provider": "xiaomi",
+      "context_length": 1050000,
+      "context_label": "1.1M",
+      "description_short": "MiMo-V2.5-Pro — это флагманская модель Xiaomi, обеспечивающая высокую производительность в общих агентных возможностях, сложной программной инженерии и задачах с долгосрочным горизонтом, с лидирующими позициями в таких бенчмарках, как ClawEval, GDPVal и SWE-bench Pro.",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 33.6096,
+        "completion": 67.2191,
+        "input_cache_read": 0.3091
+      },
+      "prompt_rub": 33.6096,
+      "completion_rub": 67.2191,
+      "prompt_label": "33.61 ₽",
+      "completion_label": "67.22 ₽",
+      "cost_per_turn_estimate_rub": 0.403315,
+      "cost_label": "0.4033 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1776874273
+    },
+    {
+      "id": "deepseek/deepseek-chat",
+      "name": "DeepSeek: DeepSeek V3",
+      "provider": "deepseek",
+      "context_length": 163840,
+      "context_label": "163.8K",
+      "description_short": "DeepSeek-V3 — это последняя модель от команды DeepSeek, основанная на инструкциях и кодировании предыдущих версий. Предварительно обученная на почти 15 триллионах токенов, модель, согласно отчетам, превосходит другие модели с открытым исходным кодом и соперничает с ведущими моделями с закрытым исход",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 35.3204,
+        "completion": 98.2349,
+        "input_cache_read": null
+      },
+      "prompt_rub": 35.3204,
+      "completion_rub": 98.2349,
+      "prompt_label": "35.32 ₽",
+      "completion_label": "98.23 ₽",
+      "cost_per_turn_estimate_rub": 0.451439,
+      "cost_label": "0.4514 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1735241320
+    },
+    {
+      "id": "mistralai/mistral-small-3.1-24b-instruct",
+      "name": "Mistral: Mistral Small 3.1 24B",
+      "provider": "mistralai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Mistral Small 3.1 24B Instruct — это обновленный вариант Mistral Small 3 (2501), содержащий 24 миллиарда параметров с продвинутыми мультимодальными возможностями. Он обеспечивает передовые результаты в задачах текстового рассуждения и анализа изображений, включая программирование, математическое рас",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 38.7421,
+        "completion": 61.2588,
+        "input_cache_read": null
+      },
+      "prompt_rub": 38.7421,
+      "completion_rub": 61.2588,
+      "prompt_label": "38.74 ₽",
+      "completion_label": "61.26 ₽",
+      "cost_per_turn_estimate_rub": 0.448679,
+      "cost_label": "0.4487 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1742238937
+    },
+    {
+      "id": "qwen/qwen-2.5-72b-instruct",
+      "name": "Qwen2.5 72B Instruct",
+      "provider": "qwen",
+      "context_length": 32768,
+      "context_label": "32.8K",
+      "description_short": "Qwen2.5 72B — это последняя серия крупных языковых моделей Qwen. Qwen2.5 предлагает следующие улучшения по сравнению с Qwen2:\n\n- Значительно больше знаний и существенно улучшенные возможности в области программирования и математики благодаря нашим специализированным экспертным моделям в этих областя",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 39.7354,
+        "completion": 44.1505,
+        "input_cache_read": null
+      },
+      "prompt_rub": 39.7354,
+      "completion_rub": 44.1505,
+      "prompt_label": "39.74 ₽",
+      "completion_label": "44.15 ₽",
+      "cost_per_turn_estimate_rub": 0.441505,
+      "cost_label": "0.4415 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1726704000
+    },
+    {
+      "id": "meta-llama/llama-3.1-70b-instruct",
+      "name": "Meta: Llama 3.1 70B Instruct",
+      "provider": "meta-llama",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Последняя версия модели от Meta (Llama 3.1) была выпущена в различных размерах и вариантах. Эта версия с 70 миллиардами параметров, настроенная для инструкций, оптимизирована для использования в диалогах высокого качества.\n\nОна продемонстрировала высокую производительность по сравнению с ведущими за",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 44.1505,
+        "completion": 44.1505,
+        "input_cache_read": null
+      },
+      "prompt_rub": 44.1505,
+      "completion_rub": 44.1505,
+      "prompt_label": "44.15 ₽",
+      "completion_label": "44.15 ₽",
+      "cost_per_turn_estimate_rub": 0.485655,
+      "cost_label": "0.4857 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1721692800
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-pro",
+      "name": "Xiaomi: MiMo-V2.6-Pro",
+      "provider": "xiaomi",
+      "context_length": 1050000,
+      "context_label": "1.1M",
+      "description_short": "MiMo-V2.6-Pro — это флагманская базовая модель, разработанная Xiaomi. Созданная с масштабом более 1 триллиона параметров, она предназначена для повышения предела возможностей для самых требовательных рабочих нагрузок. Модель обладает контекстным окном на 1 миллион токенов и встроенными мультимодальн",
+      "has_reasoning": true,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+audio+video->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "audio"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 47.4618,
+        "completion": 96.0273,
+        "input_cache_read": 0.3974
+      },
+      "prompt_rub": 47.4618,
+      "completion_rub": 96.0273,
+      "prompt_label": "47.46 ₽",
+      "completion_label": "96.03 ₽",
+      "cost_per_turn_estimate_rub": 0.570645,
+      "cost_label": "0.5706 ₽",
+      "tier": "cheap",
+      "tier_label": "Рабочие лошадки агентов",
+      "created": 1790021259
+    },
+    {
+      "id": "qwen/qwen3-next-80b-a3b-instruct",
+      "name": "Qwen: Qwen3 Next 80B A3B Instruct",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-Next-80B-A3B-Instruct — это модель чата, настроенная на выполнение инструкций в серии Qwen3-Next, оптимизированная для быстрого и стабильного ответа без следов \"размышлений\". Она нацелена на выполнение сложных задач в областях рассуждений, генерации кода, вопросов и ответов на основе знаний, а",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 9.9339,
+        "completion": 121.4139,
+        "input_cache_read": null
+      },
+      "prompt_rub": 9.9339,
+      "completion_rub": 121.4139,
+      "prompt_label": "9.93 ₽",
+      "completion_label": "121.41 ₽",
+      "cost_per_turn_estimate_rub": 0.220752,
+      "cost_label": "0.2208 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1757612213
+    },
+    {
+      "id": "qwen/qwen3-coder-flash",
+      "name": "Qwen: Qwen3 Coder Flash",
+      "provider": "qwen",
+      "context_length": 1000000,
+      "context_label": "1.0M",
+      "description_short": "Qwen3 Coder Flash — это быстрая и экономичная версия проприетарной модели Qwen3 Coder Plus от Alibaba. Это мощная модель кодирования, специализирующаяся на автономном программировании через вызов инструментов и взаимодействие с окружением, сочетая навыки кодирования с универсальными способностями об",
+      "has_reasoning": false,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 21.5234,
+        "completion": 107.6168,
+        "input_cache_read": 4.3047
+      },
+      "prompt_rub": 21.5234,
+      "completion_rub": 107.6168,
+      "prompt_label": "21.52 ₽",
+      "completion_label": "107.62 ₽",
+      "cost_per_turn_estimate_rub": 0.322851,
+      "cost_label": "0.3229 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1758115536
+    },
+    {
+      "id": "deepseek/deepseek-chat-v3-0324",
+      "name": "DeepSeek: DeepSeek V3 0324",
+      "provider": "deepseek",
+      "context_length": 163840,
+      "context_label": "163.8K",
+      "description_short": "DeepSeek V3, модель с 685 миллиардами параметров и смесью экспертов, является последней итерацией флагманской семейства чат-моделей от команды DeepSeek.\n\nОна является преемником модели [DeepSeek V3](/models/deepseek/deepseek-chat-v3) и демонстрирует отличные результаты в выполнении различных задач.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 27.5941,
+        "completion": 110.3762,
+        "input_cache_read": null
+      },
+      "prompt_rub": 27.5941,
+      "completion_rub": 110.3762,
+      "prompt_label": "27.59 ₽",
+      "completion_label": "110.38 ₽",
+      "cost_per_turn_estimate_rub": 0.386317,
+      "cost_label": "0.3863 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1742824755
+    },
+    {
+      "id": "qwen/qwen3-coder",
+      "name": "Qwen: Qwen3 Coder 480B A35B",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-Coder-480B-A35B-Instruct — это модель генерации кода типа Mixture-of-Experts (MoE), разработанная командой Qwen. Она оптимизирована для агентных задач программирования, таких как вызов функций, использование инструментов и рассуждение в длинных контекстах по репозиториям. Модель включает 480 м",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 33.1129,
+        "completion": 110.3762,
+        "input_cache_read": 11.0376
+      },
+      "prompt_rub": 33.1129,
+      "completion_rub": 110.3762,
+      "prompt_label": "33.11 ₽",
+      "completion_label": "110.38 ₽",
+      "cost_per_turn_estimate_rub": 0.441505,
+      "cost_label": "0.4415 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1753230546
+    },
+    {
+      "id": "qwen/qwen3-coder:exacto",
+      "name": "Qwen: Qwen3 Coder 480B A35B (exacto)",
+      "provider": "qwen",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Qwen3-Coder-480B-A35B-Instruct — это модель генерации кода типа Mixture-of-Experts (MoE), разработанная командой Qwen. Она оптимизирована для агентных задач программирования, таких как вызов функций, использование инструментов и рассуждение в длинном контексте по репозиториям. Модель имеет 480 милли",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 33.1129,
+        "completion": 110.3762,
+        "input_cache_read": 11.0376
+      },
+      "prompt_rub": 33.1129,
+      "completion_rub": 110.3762,
+      "prompt_label": "33.11 ₽",
+      "completion_label": "110.38 ₽",
+      "cost_per_turn_estimate_rub": 0.441505,
+      "cost_label": "0.4415 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1753230546
+    },
+    {
+      "id": "openai/gpt-4.1-mini",
+      "name": "OpenAI: GPT-4.1 Mini",
+      "provider": "openai",
+      "context_length": 1047576,
+      "context_label": "1.0M",
+      "description_short": "GPT-4.1 Mini — это модель среднего размера, обеспечивающая производительность, сопоставимую с GPT-4o, при существенно меньшей задержке и стоимости. Она сохраняет контекстное окно в 1 миллион токенов и набирает 45,1% в сложных инструкционных оценках, 35,8% в MultiChallenge и 84,1% в IFEval. Mini такж",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 44.1505,
+        "completion": 176.602,
+        "input_cache_read": 11.0376
+      },
+      "prompt_rub": 44.1505,
+      "completion_rub": 176.602,
+      "prompt_label": "44.15 ₽",
+      "completion_label": "176.60 ₽",
+      "cost_per_turn_estimate_rub": 0.618107,
+      "cost_label": "0.6181 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1744651381
+    },
+    {
+      "id": "mistralai/devstral-2512",
+      "name": "Mistral: Devstral 2 2512",
+      "provider": "mistralai",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Devstral 2 — это современная модель с открытым исходным кодом от Mistral AI, специализирующаяся на агентном кодировании. Это плотная трансформерная модель с 123 миллиардами параметров, поддерживающая контекстное окно размером 256 тысяч.\n\nDevstral 2 поддерживает исследование кодовых баз и организацию",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+file->text",
+      "input_modalities": [
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 44.1505,
+        "completion": 220.7525,
+        "input_cache_read": 4.415
+      },
+      "prompt_rub": 44.1505,
+      "completion_rub": 220.7525,
+      "prompt_label": "44.15 ₽",
+      "completion_label": "220.75 ₽",
+      "cost_per_turn_estimate_rub": 0.662257,
+      "cost_label": "0.6623 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1765285419
+    },
+    {
+      "id": "mistralai/mistral-medium-3",
+      "name": "Mistral: Mistral Medium 3",
+      "provider": "mistralai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Mistral Medium 3 — это высокопроизводительная языковая модель корпоративного уровня, разработанная для предоставления передовых возможностей при значительно сниженной операционной стоимости. Она сочетает передовые возможности в области рассуждений и мультимодальной производительности с 8-кратным сни",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 44.1505,
+        "completion": 220.7525,
+        "input_cache_read": 4.415
+      },
+      "prompt_rub": 44.1505,
+      "completion_rub": 220.7525,
+      "prompt_label": "44.15 ₽",
+      "completion_label": "220.75 ₽",
+      "cost_per_turn_estimate_rub": 0.662257,
+      "cost_label": "0.6623 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1746627341
+    },
+    {
+      "id": "mistralai/mistral-medium-3.1",
+      "name": "Mistral: Mistral Medium 3.1",
+      "provider": "mistralai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Mistral Medium 3.1 — это обновленная версия Mistral Medium 3, высокопроизводительной языковой модели корпоративного уровня, разработанной для предоставления передовых возможностей при значительно сниженных операционных затратах. Она сочетает в себе передовые возможности логического мышления и мульти",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 44.1505,
+        "completion": 220.7525,
+        "input_cache_read": 4.415
+      },
+      "prompt_rub": 44.1505,
+      "completion_rub": 220.7525,
+      "prompt_label": "44.15 ₽",
+      "completion_label": "220.75 ₽",
+      "cost_per_turn_estimate_rub": 0.662257,
+      "cost_label": "0.6623 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1755095639
+    },
+    {
+      "id": "mistralai/mistral-large-2512",
+      "name": "Mistral: Mistral Large 3 2512",
+      "provider": "mistralai",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Mistral Large 3 2512 — это самая мощная модель Mistral на сегодняшний день, оснащенная архитектурой с разреженной смесью экспертов с 41 миллиардами активных параметров (всего 675 миллиардов) и выпущенная под лицензией Apache 2.0.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 55.1881,
+        "completion": 165.5644,
+        "input_cache_read": 5.5188
+      },
+      "prompt_rub": 55.1881,
+      "completion_rub": 165.5644,
+      "prompt_label": "55.19 ₽",
+      "completion_label": "165.56 ₽",
+      "cost_per_turn_estimate_rub": 0.717446,
+      "cost_label": "0.7174 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1764624472
+    },
+    {
+      "id": "openai/gpt-3.5-turbo",
+      "name": "OpenAI: GPT-3.5 Turbo",
+      "provider": "openai",
+      "context_length": 16385,
+      "context_label": "16.4K",
+      "description_short": "GPT-3.5 Turbo — самая быстрая модель OpenAI. Она может понимать и генерировать естественный язык или код и оптимизирована для задач чата и традиционных задач завершения.\n\nДанные для обучения до сентября 2021 года.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 55.1881,
+        "completion": 165.5644,
+        "input_cache_read": null
+      },
+      "prompt_rub": 55.1881,
+      "completion_rub": 165.5644,
+      "prompt_label": "55.19 ₽",
+      "completion_label": "165.56 ₽",
+      "cost_per_turn_estimate_rub": 0.717446,
+      "cost_label": "0.7174 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1685232000
+    },
+    {
+      "id": "moonshotai/kimi-k2",
+      "name": "MoonshotAI: Kimi K2 0711",
+      "provider": "moonshotai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Kimi K2 Instruct — это крупномасштабная языковая модель с архитектурой Mixture-of-Experts (MoE), разработанная компанией Moonshot AI, с общим числом параметров в 1 триллион и 32 миллиарда активных параметров на каждый проход. Она оптимизирована для агентных возможностей, включая продвинутое использо",
+      "has_reasoning": false,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 62.9145,
+        "completion": 253.8654,
+        "input_cache_read": null
+      },
+      "prompt_rub": 62.9145,
+      "completion_rub": 253.8654,
+      "prompt_label": "62.91 ₽",
+      "completion_label": "253.87 ₽",
+      "cost_per_turn_estimate_rub": 0.88301,
+      "cost_label": "0.8830 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1752263252
+    },
+    {
+      "id": "openai/gpt-audio-mini",
+      "name": "OpenAI: GPT Audio Mini",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Экономичная версия GPT Audio. Новый снимок включает обновленный декодер для более естественного звучания голосов и поддерживает лучшую согласованность голоса.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+audio->text+audio",
+      "input_modalities": [
+        "text",
+        "audio"
+      ],
+      "output_modalities": [
+        "text",
+        "audio"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 66.2257,
+        "completion": 264.903,
+        "input_cache_read": null
+      },
+      "prompt_rub": 66.2257,
+      "completion_rub": 264.903,
+      "prompt_label": "66.23 ₽",
+      "completion_label": "264.90 ₽",
+      "cost_per_turn_estimate_rub": 0.92716,
+      "cost_label": "0.9272 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1768859419
+    },
+    {
+      "id": "moonshotai/kimi-k2-0905",
+      "name": "MoonshotAI: Kimi K2 0905",
+      "provider": "moonshotai",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Kimi K2 0905 — это сентябрьское обновление [Kimi K2 0711](/models/moonshotai/kimi-k2). Это крупномасштабная языковая модель типа Mixture-of-Experts (MoE), разработанная Moonshot AI, с общим числом параметров в 1 триллион и 32 миллиардами активных параметров на каждый прямой проход. Она поддерживает ",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 66.2257,
+        "completion": 275.9406,
+        "input_cache_read": null
+      },
+      "prompt_rub": 66.2257,
+      "completion_rub": 275.9406,
+      "prompt_label": "66.23 ₽",
+      "completion_label": "275.94 ₽",
+      "cost_per_turn_estimate_rub": 0.938198,
+      "cost_label": "0.9382 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1757021147
+    },
+    {
+      "id": "moonshotai/kimi-k2-0905:exacto",
+      "name": "MoonshotAI: Kimi K2 0905 (exacto)",
+      "provider": "moonshotai",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "Kimi K2 0905 — это обновление за сентябрь [Kimi K2 0711](/models/moonshotai/kimi-k2). Это крупномасштабная языковая модель Mixture-of-Experts (MoE), разработанная Moonshot AI, с общим числом параметров в 1 триллион и 32 миллиардами активных параметров на каждый проход. Она поддерживает инференс с дл",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 66.2257,
+        "completion": 275.9406,
+        "input_cache_read": null
+      },
+      "prompt_rub": 66.2257,
+      "completion_rub": 275.9406,
+      "prompt_label": "66.23 ₽",
+      "completion_label": "275.94 ₽",
+      "cost_per_turn_estimate_rub": 0.938198,
+      "cost_label": "0.9382 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1757021147
+    },
+    {
+      "id": "sber/gigachat-3-pro",
+      "name": "Sber: GigaChat 3 Pro",
+      "provider": "sber",
+      "context_length": 262144,
+      "context_label": "262.1K",
+      "description_short": "GigaChat 3 Pro — флагманская проприетарная модель Сбера поколения GigaChat 3 с контекстом 262K токенов, вызовом функций и структурированным выводом. Работает в российских дата-центрах через.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 87.6372,
+        "completion": 211.6704,
+        "input_cache_read": null
+      },
+      "prompt_rub": 87.6372,
+      "completion_rub": 211.6704,
+      "prompt_label": "87.64 ₽",
+      "completion_label": "211.67 ₽",
+      "cost_per_turn_estimate_rub": 1.088043,
+      "cost_label": "1.09 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1791504001
+    },
+    {
+      "id": "amazon/nova-pro-v1",
+      "name": "Amazon: Nova Pro 1.0",
+      "provider": "amazon",
+      "context_length": 300000,
+      "context_label": "300.0K",
+      "description_short": "Amazon Nova Pro 1.0 — это мощная мультимодальная модель от Amazon, ориентированная на обеспечение сочетания точности, скорости и стоимости для широкого спектра задач. По состоянию на декабрь 2024 года она достигает передовых результатов на ключевых бенчмарках, включая визуальные вопросы и ответы (Te",
+      "has_reasoning": false,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 88.301,
+        "completion": 353.204,
+        "input_cache_read": null
+      },
+      "prompt_rub": 88.301,
+      "completion_rub": 353.204,
+      "prompt_label": "88.30 ₽",
+      "completion_label": "353.20 ₽",
+      "cost_per_turn_estimate_rub": 1.236214,
+      "cost_label": "1.24 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1733436303
+    },
+    {
+      "id": "openai/gpt-3.5-turbo-0613",
+      "name": "OpenAI: GPT-3.5 Turbo (older v0613)",
+      "provider": "openai",
+      "context_length": 4095,
+      "context_label": "4.1K",
+      "description_short": "GPT-3.5 Turbo — это самая быстрая модель OpenAI. Она может понимать и генерировать естественный язык или код и оптимизирована для чатов и традиционных задач завершения.\n\nДанные для обучения до сентября 2021 года.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 110.3762,
+        "completion": 220.7525,
+        "input_cache_read": null
+      },
+      "prompt_rub": 110.3762,
+      "completion_rub": 220.7525,
+      "prompt_label": "110.38 ₽",
+      "completion_label": "220.75 ₽",
+      "cost_per_turn_estimate_rub": 1.324515,
+      "cost_label": "1.32 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1706140800
+    },
+    {
+      "id": "relace/relace-search",
+      "name": "Relace: Relace Search",
+      "provider": "relace",
+      "context_length": 256000,
+      "context_label": "256.0K",
+      "description_short": "Модель relace-search использует 4-12 инструментов `view_file` и `grep` параллельно для изучения кодовой базы и предоставления пользователю релевантных файлов по запросу.\n\nВ отличие от RAG, relace-search выполняет агентное многошаговое рассуждение, чтобы выдавать высокоточные результаты в 4 раза быст",
+      "has_reasoning": false,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 110.3762,
+        "completion": 331.1287,
+        "input_cache_read": null
+      },
+      "prompt_rub": 110.3762,
+      "completion_rub": 331.1287,
+      "prompt_label": "110.38 ₽",
+      "completion_label": "331.13 ₽",
+      "cost_per_turn_estimate_rub": 1.434891,
+      "cost_label": "1.43 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1765213560
+    },
+    {
+      "id": "openai/gpt-5.2-chat",
+      "name": "OpenAI: GPT-5.2 Chat",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "GPT-5.2 Chat (также известный как Instant) — это быстрый и легковесный представитель семейства 5.2, оптимизированный для чатов с низкой задержкой при сохранении высокой общей интеллектуальности. Он использует адаптивное рассуждение для избирательного \"обдумывания\" более сложных запросов, улучшая точ",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 193.1584,
+        "completion": 1545.2674,
+        "input_cache_read": 19.3158
+      },
+      "prompt_rub": 193.1584,
+      "completion_rub": 1545.2674,
+      "prompt_label": "193.16 ₽",
+      "completion_label": "1,545.27 ₽",
+      "cost_per_turn_estimate_rub": 3.476852,
+      "cost_label": "3.48 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1765389783
+    },
+    {
+      "id": "mistralai/mistral-large",
+      "name": "Mistral Large",
+      "provider": "mistralai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Это флагманская модель Mistral AI, Mistral Large 2 (версия `mistral-large-2407`). Это проприетарная модель с доступными весами, которая превосходно справляется с рассуждениями, кодом, JSON, чатами и многим другим. Прочитайте объявление о запуске [здесь](https://mistral.ai/news/mistral-large-2407/).\n",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+file->text",
+      "input_modalities": [
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 220.7525,
+        "completion": 662.2574,
+        "input_cache_read": 22.0752
+      },
+      "prompt_rub": 220.7525,
+      "completion_rub": 662.2574,
+      "prompt_label": "220.75 ₽",
+      "completion_label": "662.26 ₽",
+      "cost_per_turn_estimate_rub": 2.869782,
+      "cost_label": "2.87 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1708905600
+    },
+    {
+      "id": "mistralai/mistral-large-2407",
+      "name": "Mistral Large 2407",
+      "provider": "mistralai",
+      "context_length": 131072,
+      "context_label": "131.1K",
+      "description_short": "Это флагманская модель Mistral AI, Mistral Large 2 (версия mistral-large-2407). Это проприетарная модель с доступными весами, которая превосходно справляется с задачами рассуждения, кодирования, обработки JSON, общения и многим другим. Прочитайте объявление о запуске [здесь](https://mistral.ai/news/",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+file->text",
+      "input_modalities": [
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 220.7525,
+        "completion": 662.2574,
+        "input_cache_read": 22.0752
+      },
+      "prompt_rub": 220.7525,
+      "completion_rub": 662.2574,
+      "prompt_label": "220.75 ₽",
+      "completion_label": "662.26 ₽",
+      "cost_per_turn_estimate_rub": 2.869782,
+      "cost_label": "2.87 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1731978415
+    },
+    {
+      "id": "mistralai/mixtral-8x22b-instruct",
+      "name": "Mistral: Mixtral 8x22B Instruct",
+      "provider": "mistralai",
+      "context_length": 65536,
+      "context_label": "65.5K",
+      "description_short": "Официальная обученная версия Mistral [Mixtral 8x22B](/models/models/mistralai/mixtral-8x22b). Она использует 39 миллиардов активных параметров из 141 миллиарда, предлагая непревзойденную экономическую эффективность для своего размера. Ее сильные стороны включают:\n- сильные навыки в математике, прогр",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+file->text",
+      "input_modalities": [
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 220.7525,
+        "completion": 662.2574,
+        "input_cache_read": 22.0752
+      },
+      "prompt_rub": 220.7525,
+      "completion_rub": 662.2574,
+      "prompt_label": "220.75 ₽",
+      "completion_label": "662.26 ₽",
+      "cost_per_turn_estimate_rub": 2.869782,
+      "cost_label": "2.87 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1713312000
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "name": "OpenAI: GPT-4.1",
+      "provider": "openai",
+      "context_length": 1047576,
+      "context_label": "1.0M",
+      "description_short": "GPT-4.1 — это флагманская большая языковая модель, оптимизированная для выполнения сложных инструкций, реальной разработки программного обеспечения и рассуждений в длинном контексте. Она поддерживает контекстное окно на 1 миллион токенов и превосходит GPT-4o и GPT-4.5 в кодировании (54,6% SWE-bench ",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "image",
+        "text",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 220.7525,
+        "completion": 883.0099,
+        "input_cache_read": 55.1881
+      },
+      "prompt_rub": 220.7525,
+      "completion_rub": 883.0099,
+      "prompt_label": "220.75 ₽",
+      "completion_label": "883.01 ₽",
+      "cost_per_turn_estimate_rub": 3.090535,
+      "cost_label": "3.09 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1744651385
+    },
+    {
+      "id": "cohere/command-r-plus-08-2024",
+      "name": "Cohere: Command R+ (08-2024)",
+      "provider": "cohere",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "command-r-plus-08-2024 — это обновление модели [Command R+](/models/models/cohere/command-r-plus) с примерно на 50% более высокой пропускной способностью и на 25% меньшей задержкой по сравнению с предыдущей версией Command R+, при этом аппаратные требования остаются прежними.\n\nПрочитать пост о запус",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 275.9406,
+        "completion": 1103.7624,
+        "input_cache_read": null
+      },
+      "prompt_rub": 275.9406,
+      "completion_rub": 1103.7624,
+      "prompt_label": "275.94 ₽",
+      "completion_label": "1,103.76 ₽",
+      "cost_per_turn_estimate_rub": 3.863168,
+      "cost_label": "3.86 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1724976000
+    },
+    {
+      "id": "openai/gpt-4o",
+      "name": "OpenAI: GPT-4o",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "GPT-4o («o» означает «omni») — это новейшая модель ИИ от OpenAI, поддерживающая как текстовые, так и визуальные входные данные с текстовыми выходами. Она сохраняет уровень интеллекта [GPT-4 Turbo](/models/models/openai/gpt-4-turbo), будучи вдвое быстрее и на 50% более экономичной. GPT-4o также предл",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 275.9406,
+        "completion": 1103.7624,
+        "input_cache_read": 137.9703
+      },
+      "prompt_rub": 275.9406,
+      "completion_rub": 1103.7624,
+      "prompt_label": "275.94 ₽",
+      "completion_label": "1,103.76 ₽",
+      "cost_per_turn_estimate_rub": 3.863168,
+      "cost_label": "3.86 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1715558400
+    },
+    {
+      "id": "openai/gpt-4o-2024-08-06",
+      "name": "OpenAI: GPT-4o (2024-08-06)",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Версия GPT-4o от 2024-08-06 предлагает улучшенную производительность в структурированных выводах с возможностью предоставления JSON-схемы в формате ответа.\n\nGPT-4o (\"o\" означает \"omni\") — это последняя модель ИИ от OpenAI, поддерживающая как текстовые, так и визуальные входные данные с текстовыми вы",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 275.9406,
+        "completion": 1103.7624,
+        "input_cache_read": 137.9703
+      },
+      "prompt_rub": 275.9406,
+      "completion_rub": 1103.7624,
+      "prompt_label": "275.94 ₽",
+      "completion_label": "1,103.76 ₽",
+      "cost_per_turn_estimate_rub": 3.863168,
+      "cost_label": "3.86 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1722902400
+    },
+    {
+      "id": "openai/gpt-4o-2024-11-20",
+      "name": "OpenAI: GPT-4o (2024-11-20)",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Версия GPT-4o от 20 ноября 2024 года предлагает улучшенные возможности для творческого письма с более естественным, увлекательным и адаптированным стилем, что повышает актуальность и удобочитаемость. Она также лучше работает с загруженными файлами, предоставляя более глубокие инсайты и более тщатель",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 275.9406,
+        "completion": 1103.7624,
+        "input_cache_read": 137.9703
+      },
+      "prompt_rub": 275.9406,
+      "completion_rub": 1103.7624,
+      "prompt_label": "275.94 ₽",
+      "completion_label": "1,103.76 ₽",
+      "cost_per_turn_estimate_rub": 3.863168,
+      "cost_label": "3.86 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1732127594
+    },
+    {
+      "id": "openai/gpt-4o:extended",
+      "name": "OpenAI: GPT-4o (extended)",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "GPT-4o («o» означает «omni») — это последняя модель ИИ от OpenAI, поддерживающая как текстовые, так и визуальные входные данные с текстовыми выходами. Она сохраняет уровень интеллекта [GPT-4 Turbo], будучи вдвое быстрее и на 50% более экономичной. GPT-4o также предлагает улучшенную производительност",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 275.9406,
+        "completion": 1103.7624,
+        "input_cache_read": 137.9703
+      },
+      "prompt_rub": 275.9406,
+      "completion_rub": 1103.7624,
+      "prompt_label": "275.94 ₽",
+      "completion_label": "1,103.76 ₽",
+      "cost_per_turn_estimate_rub": 3.863168,
+      "cost_label": "3.86 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1715558400
+    },
+    {
+      "id": "openai/gpt-audio",
+      "name": "OpenAI: GPT Audio",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Модель gpt-audio является первой общедоступной аудиомоделью от OpenAI. Новый снимок включает улучшенный декодер для более естественного звучания голосов и поддерживает лучшую согласованность голоса.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+audio->text+audio",
+      "input_modalities": [
+        "text",
+        "audio"
+      ],
+      "output_modalities": [
+        "text",
+        "audio"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 275.9406,
+        "completion": 1103.7624,
+        "input_cache_read": null
+      },
+      "prompt_rub": 275.9406,
+      "completion_rub": 1103.7624,
+      "prompt_label": "275.94 ₽",
+      "completion_label": "1,103.76 ₽",
+      "cost_per_turn_estimate_rub": 3.863168,
+      "cost_label": "3.86 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1768862569
+    },
+    {
+      "id": "amazon/nova-premier-v1",
+      "name": "Amazon: Nova Premier 1.0",
+      "provider": "amazon",
+      "context_length": 1000000,
+      "context_label": "1.0M",
+      "description_short": "Amazon Nova Premier является самой мощной из мультимодальных моделей Amazon для выполнения сложных задач рассуждения и используется в качестве лучшего учителя для дистилляции пользовательских моделей.",
+      "has_reasoning": false,
+      "supports_structured_outputs": false,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 275.9406,
+        "completion": 1379.703,
+        "input_cache_read": 68.9852
+      },
+      "prompt_rub": 275.9406,
+      "completion_rub": 1379.703,
+      "prompt_label": "275.94 ₽",
+      "completion_label": "1,379.70 ₽",
+      "cost_per_turn_estimate_rub": 4.139109,
+      "cost_label": "4.14 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1761950332
+    },
+    {
+      "id": "openai/gpt-3.5-turbo-16k",
+      "name": "OpenAI: GPT-3.5 Turbo 16k",
+      "provider": "openai",
+      "context_length": 16385,
+      "context_label": "16.4K",
+      "description_short": "Эта модель предлагает в четыре раза большую длину контекста по сравнению с gpt-3.5-turbo, что позволяет поддерживать примерно 20 страниц текста в одном запросе, но по более высокой стоимости. Данные для обучения: до сентября 2021 года.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 331.1287,
+        "completion": 441.505,
+        "input_cache_read": null
+      },
+      "prompt_rub": 331.1287,
+      "completion_rub": 441.505,
+      "prompt_label": "331.13 ₽",
+      "completion_label": "441.50 ₽",
+      "cost_per_turn_estimate_rub": 3.752792,
+      "cost_label": "3.75 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1693180800
+    },
+    {
+      "id": "openai/gpt-4o-2024-05-13",
+      "name": "OpenAI: GPT-4o (2024-05-13)",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "GPT-4o («o» означает «omni») — это последняя модель ИИ от OpenAI, поддерживающая как текстовые, так и визуальные входные данные с текстовыми выходами. Она сохраняет уровень интеллекта [GPT-4 Turbo](/models/models/openai/gpt-4-turbo), при этом работая в два раза быстрее и на 50% более экономично. GPT",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 551.8812,
+        "completion": 1655.6436,
+        "input_cache_read": null
+      },
+      "prompt_rub": 551.8812,
+      "completion_rub": 1655.6436,
+      "prompt_label": "551.88 ₽",
+      "completion_label": "1,655.64 ₽",
+      "cost_per_turn_estimate_rub": 7.174456,
+      "cost_label": "7.17 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1715558400
+    },
+    {
+      "id": "openai/gpt-chat-latest",
+      "name": "OpenAI: GPT Chat Latest",
+      "provider": "openai",
+      "context_length": 400000,
+      "context_label": "400.0K",
+      "description_short": "GPT Chat Latest указывает на стабильный псевдоним API от OpenAI — chat-latest, который всегда разрешается в новейшую модель Instant, используемую в ChatGPT. По мере того как в будущем OpenAI будет выпускать обновления моделей Instant, они автоматически будут направляться через этот идентификатор. ht",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image+file->text",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 551.8812,
+        "completion": 3311.2872,
+        "input_cache_read": 55.1881
+      },
+      "prompt_rub": 551.8812,
+      "completion_rub": 3311.2872,
+      "prompt_label": "551.88 ₽",
+      "completion_label": "3,311.29 ₽",
+      "cost_per_turn_estimate_rub": 8.830099,
+      "cost_label": "8.83 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1778000212
+    },
+    {
+      "id": "openai/gpt-4-turbo",
+      "name": "OpenAI: GPT-4 Turbo",
+      "provider": "openai",
+      "context_length": 128000,
+      "context_label": "128.0K",
+      "description_short": "Последняя модель GPT-4 Turbo с возможностями зрения. Запросы на зрение теперь могут использовать режим JSON и вызов функций.\n\nДанные для обучения: до декабря 2023 года.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text+image->text",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": true,
+      "pricing_rub_per_1m": {
+        "prompt": 1103.7624,
+        "completion": 3311.2872,
+        "input_cache_read": null
+      },
+      "prompt_rub": 1103.7624,
+      "completion_rub": 3311.2872,
+      "prompt_label": "1,103.76 ₽",
+      "completion_label": "3,311.29 ₽",
+      "cost_per_turn_estimate_rub": 14.348911,
+      "cost_label": "14.35 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1712620800
+    },
+    {
+      "id": "openai/gpt-4",
+      "name": "OpenAI: GPT-4",
+      "provider": "openai",
+      "context_length": 8191,
+      "context_label": "8.2K",
+      "description_short": "Флагманская модель OpenAI, GPT-4, представляет собой крупномасштабную мультимодальную языковую модель, способную решать сложные задачи с большей точностью, чем предыдущие модели, благодаря более широким общим знаниям и продвинутым возможностям рассуждения. Данные для обучения: до сентября 2021 года.",
+      "has_reasoning": false,
+      "supports_structured_outputs": true,
+      "supports_tools": true,
+      "modality": "text->text",
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "supports_vision": false,
+      "pricing_rub_per_1m": {
+        "prompt": 3311.2872,
+        "completion": 6622.5744,
+        "input_cache_read": null
+      },
+      "prompt_rub": 3311.2872,
+      "completion_rub": 6622.5744,
+      "prompt_label": "3,311.29 ₽",
+      "completion_label": "6,622.57 ₽",
+      "cost_per_turn_estimate_rub": 39.735446,
+      "cost_label": "39.74 ₽",
+      "tier": "medium",
+      "tier_label": "Остальные модели без reasoning с ценой >= 100 руб/1M",
+      "created": 1685232000
+    }
+  ],
+  "differences": [
+    {
+      "id": "deepseek/deepseek-v4-flash-0731",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 7.2848,
+            "completion": 21.8545,
+            "input_cache_read": 1.8212
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3.7-flash",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 3.3113,
+            "completion": 14.3489,
+            "input_cache_read": 0.6623
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash-vl",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 2.4338,
+            "completion": 7.1391,
+            "input_cache_read": 0.4868
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "nvidia/nemotron-3.5-lightning",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 2.7594,
+            "completion": 13.2451,
+            "input_cache_read": 1.3797
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 2.3179,
+            "completion": 6.9537,
+            "input_cache_read": 0.4636
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "inception/mercury-2.5",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 4.415,
+            "completion": 16.5564,
+            "input_cache_read": 0.4415
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 1.9868,
+            "completion": 9.9339,
+            "input_cache_read": 0.9934
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash-fin",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 4.6358,
+            "completion": 13.5984,
+            "input_cache_read": 0.9272
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash-sante",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 4.6358,
+            "completion": 13.5984,
+            "input_cache_read": 0.9272
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "~z-ai/glm-flash-latest",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 8.3776,
+            "completion": 27.9252,
+            "input_cache_read": 1.6755
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "~openai/gpt-mini-latest",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 82.7822,
+            "completion": 496.6931,
+            "input_cache_read": 8.2782
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "~x-ai/grok-latest",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 220.7525,
+            "completion": 662.2574,
+            "input_cache_read": 55.1881
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "~z-ai/glm-latest",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 66.2257,
+            "completion": 242.8277,
+            "input_cache_read": 22.0752
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "unbiased/pareto",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 275.9406,
+            "completion": 827.8218,
+            "input_cache_read": 27.5941
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    },
+    {
+      "id": "unbiased/pareto-26.10-preview",
+      "diffs": [
+        {
+          "field": "pricing_rub_per_1m",
+          "config": null,
+          "catalog": {
+            "prompt": 88.301,
+            "completion": 353.204,
+            "input_cache_read": 3.3113
+          },
+          "note": "в конфиге ai-core цены не хранятся — только в каталоге"
+        }
+      ]
+    }
+  ],
+  "recommendations": {
+    "default_agent": {
+      "label": "Основной агент",
+      "top": [
+        {
+          "id": "inclusionai/ling-3.0-flash-vl",
+          "score": 93.3,
+          "cost_per_turn_estimate_rub": 0.031477,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "score": 92.8,
+          "cost_per_turn_estimate_rub": 0.030133,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning",
+          "score": 91.2,
+          "cost_per_turn_estimate_rub": 0.040839,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "qwen/qwen3.7-flash",
+          "score": 91.0,
+          "cost_per_turn_estimate_rub": 0.047462,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "deepseek/deepseek-v4-flash-0731",
+          "score": 90.0,
+          "cost_per_turn_estimate_rub": 0.094703,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        }
+      ]
+    },
+    "planner": {
+      "label": "Планирование (multi-model planning)",
+      "top": [
+        {
+          "id": "deepseek/deepseek-v4-flash-0731",
+          "score": 93.0,
+          "cost_per_turn_estimate_rub": 0.094703,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "qwen/qwen3.7-flash",
+          "score": 90.5,
+          "cost_per_turn_estimate_rub": 0.047462,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash-vl",
+          "score": 90.1,
+          "cost_per_turn_estimate_rub": 0.031477,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning",
+          "score": 88.5,
+          "cost_per_turn_estimate_rub": 0.040839,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "score": 88.1,
+          "cost_per_turn_estimate_rub": 0.030133,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        }
+      ]
+    },
+    "reviewer": {
+      "label": "Ревью кода / ответов",
+      "top": [
+        {
+          "id": "deepseek/deepseek-v4-flash-0731",
+          "score": 91.5,
+          "cost_per_turn_estimate_rub": 0.094703,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "z-ai/glm-5.3-flash",
+          "score": 86.1,
+          "cost_per_turn_estimate_rub": 0.111701,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": false,
+          "in_clm": false,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "~z-ai/glm-flash-latest",
+          "score": 86.1,
+          "cost_per_turn_estimate_rub": 0.111701,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "deepseek/deepseek-v4.1-flash",
+          "score": 85.8,
+          "cost_per_turn_estimate_rub": 0.131127,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": false,
+          "in_clm": false,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "~deepseek/deepseek-v4-flash-latest",
+          "score": 85.8,
+          "cost_per_turn_estimate_rub": 0.131127,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": false,
+          "in_clm": false,
+          "novelty_bonus": 8.0
+        }
+      ]
+    },
+    "synthesis": {
+      "label": "Синтез планов",
+      "top": [
+        {
+          "id": "inclusionai/ling-3.0-flash-vl",
+          "score": 93.0,
+          "cost_per_turn_estimate_rub": 0.031477,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "score": 92.0,
+          "cost_per_turn_estimate_rub": 0.030133,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "qwen/qwen3.7-flash",
+          "score": 91.5,
+          "cost_per_turn_estimate_rub": 0.047462,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "deepseek/deepseek-v4-flash-0731",
+          "score": 91.5,
+          "cost_per_turn_estimate_rub": 0.094703,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning",
+          "score": 91.0,
+          "cost_per_turn_estimate_rub": 0.040839,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        }
+      ]
+    },
+    "browser_automation": {
+      "label": "Автоматизация браузера",
+      "top": [
+        {
+          "id": "inclusionai/ling-3.0-flash-vl",
+          "score": 94.6,
+          "cost_per_turn_estimate_rub": 0.031477,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "score": 94.3,
+          "cost_per_turn_estimate_rub": 0.030133,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning",
+          "score": 92.3,
+          "cost_per_turn_estimate_rub": 0.040839,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "qwen/qwen3.7-flash",
+          "score": 91.7,
+          "cost_per_turn_estimate_rub": 0.047462,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "openai/gpt-oss-20b",
+          "score": 90.6,
+          "cost_per_turn_estimate_rub": 0.029802,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 3.7
+        }
+      ]
+    },
+    "coding": {
+      "label": "Генерация / рефакторинг кода",
+      "top": [
+        {
+          "id": "deepseek/deepseek-v4-flash-0731",
+          "score": 93.0,
+          "cost_per_turn_estimate_rub": 0.094703,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "qwen/qwen3.7-flash",
+          "score": 89.0,
+          "cost_per_turn_estimate_rub": 0.047462,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash-vl",
+          "score": 87.5,
+          "cost_per_turn_estimate_rub": 0.031477,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "z-ai/glm-5.3-flash",
+          "score": 87.0,
+          "cost_per_turn_estimate_rub": 0.111701,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": false,
+          "in_clm": false,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "~z-ai/glm-flash-latest",
+          "score": 87.0,
+          "cost_per_turn_estimate_rub": 0.111701,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        }
+      ]
+    },
+    "long_context": {
+      "label": "Большой контекст",
+      "top": [
+        {
+          "id": "deepseek/deepseek-v4-flash-0731",
+          "score": 82.5,
+          "cost_per_turn_estimate_rub": 0.094703,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "qwen/qwen3.7-flash",
+          "score": 78.0,
+          "cost_per_turn_estimate_rub": 0.047462,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "z-ai/glm-5.3-flash",
+          "score": 76.9,
+          "cost_per_turn_estimate_rub": 0.111701,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": false,
+          "in_clm": false,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "~z-ai/glm-flash-latest",
+          "score": 76.9,
+          "cost_per_turn_estimate_rub": 0.111701,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "deepseek/deepseek-v4.1-flash",
+          "score": 76.3,
+          "cost_per_turn_estimate_rub": 0.131127,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": false,
+          "in_clm": false,
+          "novelty_bonus": 8.0
+        }
+      ]
+    },
+    "cheap_workhorse": {
+      "label": "Универсальная дешёвая лошадка",
+      "top": [
+        {
+          "id": "inclusionai/ling-3.0-flash-vl",
+          "score": 96.9,
+          "cost_per_turn_estimate_rub": 0.031477,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "score": 96.6,
+          "cost_per_turn_estimate_rub": 0.030133,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning",
+          "score": 94.4,
+          "cost_per_turn_estimate_rub": 0.040839,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "qwen/qwen3.7-flash",
+          "score": 93.7,
+          "cost_per_turn_estimate_rub": 0.047462,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 8.0
+        },
+        {
+          "id": "openai/gpt-oss-20b",
+          "score": 92.9,
+          "cost_per_turn_estimate_rub": 0.029802,
+          "tier": "cheap",
+          "has_reasoning": true,
+          "in_config": true,
+          "in_clm": true,
+          "novelty_bonus": 3.7
+        }
+      ]
+    }
+  },
+  "clm_ids": [
+    "deepseek/deepseek-v4-flash-0731",
+    "inception/mercury-2.5",
+    "inclusionai/ling-3.0-flash",
+    "inclusionai/ling-3.0-flash-fin",
+    "inclusionai/ling-3.0-flash-sante",
+    "inclusionai/ling-3.0-flash-vl",
+    "nvidia/nemotron-3.5-lightning",
+    "openai/gpt-oss-20b",
+    "qwen/qwen3.7-flash",
+    "unbiased/pareto",
+    "unbiased/pareto-26.10-preview",
+    "~openai/gpt-mini-latest",
+    "~x-ai/grok-latest",
+    "~z-ai/glm-flash-latest",
+    "~z-ai/glm-latest"
+  ],
+  "stats": {
+    "config_models": 15,
+    "catalog_models": 298,
+    "matched": 15,
+    "missing": 0,
+    "new": 127,
+    "clm_models": 15
+  },
+  "config_path": "/home/dev/projects/ai-core/config/config.json",
+  "catalog_path": "/home/dev/projects/routerai-models/data/catalog.json"
+}
