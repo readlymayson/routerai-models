@@ -79,8 +79,14 @@
     "currency": "RUB"
   },
   "reference_model": {
-    "id": "deepseek/deepseek-v4-flash-0423",
-    "label": "Эталон: дешёвая рабочая лошадка"
+    "id": null,
+    "approved_ids": [],
+    "watchlist": [
+      "deepseek/deepseek-v4-flash-0731",
+      "deepseek/deepseek-v4-flash"
+    ],
+    "fallback": "cheapest_cheap_tools_not_watchlisted",
+    "label": "Эталон: временный авто-выбор до прохождения гейта надёжности"
   },
   "scoring": {
     "base_score": 50,
@@ -89,14 +95,18 @@
     "max_novelty_bonus": 8,
     "novelty_window_days": 90,
     "novelty_decay_days": 730,
+    "novelty_ceiling_ratio": 0.2,
     "obsolete_patterns": [
       "gpt-3.5",
       "gpt-4o",
       "gpt-4-turbo",
       "claude-3-",
-      "llama-3.1-8b",
-      "llama-3.1-70b",
-      "qwen-2.5-"
+      "meta-llama/llama-3.1-8b-instruct",
+      "meta-llama/llama-3.1-70b-instruct",
+      "qwen-2.5-",
+      "deepseek-chat-v3.1",
+      "deepseek-v3.1-terminus",
+      "deepseek-v3.2"
     ],
     "obsolete_penalty": 8
   },

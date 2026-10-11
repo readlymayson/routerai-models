@@ -40,6 +40,15 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 
 from ai_core_paths import ai_core_config_path  # noqa: E402
 
+from reliability import (  # noqa: E402
+    is_model_approved,
+    resolve_reference,
+)
+
+# Ключевые слова (id и/или name) для категорийного бонуса кодерам.
+# Используется ТОЛЬКО в категории coding (см. CATEGORY_DEFS.coding.coding_bonus).
+CODING_KEYWORDS = ("coder", "coding", "codex", "code")
+
 # Категории: определение + параметры приоритета (порядок важен для топ-N)
 CATEGORY_DEFS: dict[str, dict[str, Any]] = {
     "default_agent": {
@@ -175,16 +184,17 @@ def score_model(
     scoring: dict[str, Any],
     cat_def: dict[str, Any],
     reference: dict[str, Any],
+    cfg: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     """Считает score fit-to-purpose для одной модели в одной категории.
 
     score = 50 (база)
             + cost_bonus        (0..30, чем дешевле эталона — тем больше)
             + quality_bonus     (0..15, контекст, reasoning, tools)
-            + novelty_bonus     (0..8,  свежесть модели по дате created)
-            + coding_bonus      (0..12, только для категории coding)
-            + reference_bonus   (эталон получает +5)
-            - obsolete_penalty  (модели "старых" семейств)
+            + novelty_bonus     (0..min(8, 20% базы), свежесть по created)
+            + coding_bonus      (0..12, категорийный критерий для coding)
+            + reference_bonus   (только если эталон утверждён, +5)
+            - obsolete_penalty  (старые семейства, кроме approved)
     """
     base = float(scoring.get("base_score", 50))
     max_cost = float(scoring.get("max_cost_bonus", 30))
@@ -224,17 +234,35 @@ def score_model(
     # Новизна модели (свежесть по дате created)
     novelty_bonus, novelty_label = novelty_score(m.get("created"), scoring)
 
+    # Потолок новизны: бонус не может превышать ceiling_ratio от базы
+    # (по умолчанию 20%). Предотвращает перевес свежести над стоимостью.
+    ceiling_ratio = float(scoring.get("novelty_ceiling_ratio", 0.2))
+    novelty_ceiling = base * ceiling_ratio
+    if novelty_bonus > novelty_ceiling:
+        novelty_bonus = novelty_ceiling
+
     score = base + cost_bonus + quality_bonus + novelty_bonus
 
-    # Бонус кодеров для категории coding
+    # Бонус кодеров для категории coding: категорийный критерий —
+    # id ИЛИ name содержит ключевые слова (coder/coding/codex/code).
+    # Задокументировано в CODING_KEYWORDS; агентные модели ("agent")
+    # сюда не входят — это универсальные ассистенты, не кодеры.
     coding_bonus = 0.0
-    if cat_def.get("coding_bonus") and "coder" in m.get("id", "").lower():
-        coding_bonus = float(cat_def["coding_bonus"])
-        score += coding_bonus
+    if cat_def.get("coding_bonus"):
+        haystack = " ".join(
+            str(x).lower() for x in (m.get("id"), m.get("name")) if x
+        )
+        if any(kw in haystack for kw in CODING_KEYWORDS):
+            coding_bonus = float(cat_def["coding_bonus"])
+            score += coding_bonus
 
-    # Эталон — небольшой бонус
+    # Эталон — небольшой бонус, но ТОЛЬКО если эталон утверждён
+    # (прошёл гейт надёжности reference_model.approved_ids).
+    # Временный авто-эталон бонуса не получает, чтобы не искажать рейтинг.
     reference_bonus = 0.0
-    if reference and m.get("id") == reference.get("id"):
+    if reference and m.get("id") == reference.get("id") and is_model_approved(
+        m.get("id"), cfg
+    ):
         reference_bonus = 5.0
         score += reference_bonus
 
@@ -242,10 +270,13 @@ def score_model(
     if cat_def.get("prefer_reasoning") and not m.get("has_reasoning"):
         score -= 6.0
 
-    # Штраф за "старые" семейства (см. filter_config.json -> scoring.obsolete_penalty)
+    # Штраф за "старые" семейства (см. filter_config.json -> scoring.obsolete_penalty).
+    # Поколения-снапшоты (например deepseek-v3.1/v3.2) штрафуются, если модель
+    # НЕ прошла гейт надёжности (approved_ids) — утверждённые не штрафуются.
     penalty = 0.0
+    model_id = m.get("id", "")
     for pattern in scoring.get("obsolete_patterns", []):
-        if pattern in m.get("id", ""):
+        if pattern in model_id and not is_model_approved(model_id, cfg):
             penalty = float(scoring.get("obsolete_penalty", 0))
             break
     score -= penalty
@@ -296,7 +327,8 @@ def build_reasons(
         reasons.append("vision (изображения на входе)")
     if m.get("has_reasoning"):
         reasons.append("reasoning")
-    if "coder" in m.get("id", "").lower():
+    if any(kw in " ".join(str(x).lower() for x in (m.get("id"), m.get("name")) if x)
+           for kw in CODING_KEYWORDS):
         reasons.append("кодер")
     if novelty_bonus > 0:
         reasons.append(novelty_label)
@@ -312,6 +344,7 @@ def build_categories(
     reference: dict[str, Any],
     known_in_config: set[str],
     known_in_clm: set[str],
+    cfg: Optional[dict[str, Any]] = None,
     top_n: int = 10,
 ) -> dict[str, Any]:
     """Считает скоринг по всем категориям и собирает топ-N по каждой."""
@@ -327,7 +360,7 @@ def build_categories(
                 continue
             if (m.get("context_length") or 0) < min_ctx:
                 continue
-            s = score_model(m, scoring, cat_def, reference)
+            s = score_model(m, scoring, cat_def, reference, cfg)
             scored.append({
                 "id": m["id"],
                 "tier": m.get("tier"),
@@ -411,21 +444,28 @@ def main(argv: Optional[list[str]] = None) -> int:
         pass
 
     scoring = fcfg.get("scoring", {})
-    reference_id = fcfg.get("reference_model", {}).get("id")
+    # Эталон: гейт надёжности — если reference_model.id не утверждён
+    # (approved_ids), выбираем самую дешёвую cheap+tools вне watchlist.
+    resolution = resolve_reference(fcfg, catalog)
+    reference_id = resolution["id"]
     by_id = {m["id"]: m for m in catalog}
-    reference = by_id.get(reference_id)
+    reference = by_id.get(reference_id) if reference_id else None
     if not reference:
-        sys.stderr.write(f"Ошибка: эталон {reference_id} не найден в каталоге\n")
+        sys.stderr.write(
+            f"Ошибка: эталон не выбран (status={resolution['status']}). "
+            "Каталог пуст или все cheap-модели с tools в watchlist.\n"
+        )
         return 1
 
     categories = build_categories(
-        catalog, scoring, reference, known_in_config, known_in_clm, args.top_n
+        catalog, scoring, reference, known_in_config, known_in_clm, fcfg, args.top_n
     )
 
     out = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "reference_model": reference_id,
         "reference_cost_rub": reference.get("cost_per_turn_estimate_rub"),
+        "reference_resolution": resolution,
         "categories": categories,
         "top_n": args.top_n,
         "stats": {
@@ -446,7 +486,8 @@ def main(argv: Optional[list[str]] = None) -> int:
     print("=" * 72)
     print("РЕКОМЕНДАЦИИ по моделям routerai.ru (fit-to-purpose)")
     print("=" * 72)
-    print(f"Эталон: {reference_id} (cost={reference.get('cost_per_turn_estimate_rub'):.4f}₽/turn)")
+    print(f"Эталон: {reference_id} (cost={reference.get('cost_per_turn_estimate_rub'):.4f}₽/turn, "
+          f"статус={resolution['status']})")
     print(f"Каталог: {len(catalog)} моделей, в конфиге ai-core: {len(known_in_config)}, в clm: {len(known_in_clm)}")
     print()
     for cat_id, cat in categories.items():

@@ -46,6 +46,12 @@ from ai_core_paths import (  # noqa: E402
     stale_after_hours,
 )
 
+from reliability import (  # noqa: E402
+    effective_reference_id,
+    is_model_approved,
+    is_watchlisted,
+)
+
 __dry_run = True  # глобальный флаг для print_diff (устанавливается в main)
 
 # Порядок тиров для сортировки «по умолчанию» (без рекомендаций)
@@ -209,17 +215,22 @@ def select_top_models(
     sync_cfg: dict[str, Any],
     recommendations: Optional[dict[str, Any]],
     ref_id: str,
+    ref_cfg: Optional[dict[str, Any]] = None,
 ) -> list[dict[str, Any]]:
     """Выбирает топ-N моделей из каталога для конфигов.
 
     Логика:
-      1. Всегда включается эталон (reference_model.id) — рабочая лошадка.
+      1. Всегда включается эталон (эффективный reference_model.id) — рабочая лошадка.
       2. Для остальных считается гибридный score: агрегат рекомендаций по
          категориям с весами (см. DEFAULT_SELECTION_WEIGHTS / sync.selection.weights).
          Если рекомендаций нет — фолбэк на (tier, cost) как раньше.
       3. Квоты по тирам (sync.selection.quotas): cheap / medium / premium,
          чтобы во всех ценовых категориях были лучшие модели.
-      4. Итоговый список сортируется по релевантности: сначала эталон + топ-cheap
+      4. DefaultAgentGate: кандидат на роль default-агента (эталон или модель,
+         лучше всех подходящая для default_agent) НЕ может выйти в топ на роль
+         default, если он в watchlist и не прошёл гейт надёжности (approved_ids) —
+         такой кандидат помечается и на его место добирается следующая модель.
+      5. Итоговый список сортируется по релевантности: сначала эталон + топ-cheap
          (рабочие лошадки), затем топ-premium (качественные), medium в конце;
          внутри группы — гибридный score по убыванию.
 
@@ -229,6 +240,7 @@ def select_top_models(
     total = int(selection.get("total", 0))
     quotas = selection.get("quotas") or {}
     weights = {**DEFAULT_SELECTION_WEIGHTS, **(selection.get("weights") or {})}
+    ref_cfg = ref_cfg or {}
 
     if total <= 0:
         # Отбор отключён — берём всё как раньше (по тиру и цене)
@@ -247,6 +259,15 @@ def select_top_models(
     if ref:
         result.append(ref)
         seen.add(ref["id"])
+
+    # DefaultAgentGate: модели в watchlist, не прошедшие гейт, не могут
+    # попасть в топ на роль default-агента (эталон в отборе остаётся —
+    # это рабочая лошадка, но не для роли default).
+    gate_blocked: set[str] = {
+        m["id"]
+        for m in catalog
+        if is_watchlisted(m.get("id"), ref_cfg) and not is_model_approved(m.get("id"), ref_cfg)
+    }
 
     # Рекомендации могут отсутствовать — тогда чистая цена/тир
     def fallback_score(m: dict[str, Any]) -> float:
@@ -284,7 +305,24 @@ def select_top_models(
         if remaining > 0:
             quotas["cheap"] = quotas.get("cheap", 0) + remaining
 
-    # Заполняем квоты (эталон уже занимает место в своём тире)
+    # Заполняем квоты (эталон уже занимает место в своём тире).
+    # DefaultAgentGate: модели на роль default_agent (эталон в watchlist /
+    # не approved, либо топ-кандидат категории default_agent) пропускаем.
+    def gated(m: dict[str, Any]) -> bool:
+        """Модель заблокирована для роли default-агента (ожидает подтверждения)."""
+        if m["id"] not in gate_blocked:
+            return False
+        # Гейт касается только роли default-агента: для других ролей
+        # (planner/reviewer/...) watchlist-модель не блокируется.
+        if recommendations:
+            default_top = {
+                x.get("id")
+                for x in recommendations.get("categories", {}).get("default_agent", {}).get("top", [])
+            }
+            return m["id"] in default_top
+        # Без рекомендаций считаем default-ролью самого эталона (watchlist)
+        return m["id"] == ref_id
+
     for tier in TIER_ORDER:
         quota = int(quotas.get(tier, 0))
         if quota <= 0:
@@ -296,6 +334,8 @@ def select_top_models(
         for m in candidates_by_tier[tier]:
             if m["id"] in seen:
                 continue
+            if gated(m):
+                continue  # ждёт подтверждения надёжности — не для default
             result.append(m)
             seen.add(m["id"])
             filled[tier] += 1
@@ -534,6 +574,7 @@ def update_ai_core_config(
     sync_cfg: dict[str, Any],
     ref_id: str,
     recommendations: Optional[dict[str, Any]] = None,
+    ref_cfg: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     """Обновляет models + ссылки в конфиге. Возвращает лог изменений."""
     log: dict[str, Any] = {"models": [], "refs": []}
@@ -543,7 +584,7 @@ def update_ai_core_config(
 
     base_url = routerai.get("base_url") or sync_cfg.get("clm_url", "https://routerai.ru/api/v1")
 
-    selected = select_top_models(catalog, sync_cfg, recommendations, ref_id)
+    selected = select_top_models(catalog, sync_cfg, recommendations, ref_id, ref_cfg)
 
     old_ids = [m.get("id") for m in routerai.get("models", [])]
     new_ids = [m["id"] for m in selected]
@@ -582,10 +623,19 @@ def build_clm_provider(
     catalog: list[dict[str, Any]],
     sync_cfg: dict[str, Any],
     recommendations: Optional[dict[str, Any]] = None,
-    ref_id: str = "deepseek/deepseek-v4-flash-0731",
+    ref_id: Optional[str] = None,
+    ref_cfg: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     """Формирует провайдера VS Code chatLanguageModels из каталога."""
-    selected = select_top_models(catalog, sync_cfg, recommendations, ref_id)
+    if not ref_id:
+        # Эффективный эталон: approved или авто-выбор (самый дешёвый
+        # cheap+tools вне watchlist). На случай вызова без конфига —
+        # безопасный фолбэк без хардкода снапшота.
+        resolved_id, _status = effective_reference_id(
+            {"reference_model": ref_cfg or {}}, catalog
+        )
+        ref_id = resolved_id or ""
+    selected = select_top_models(catalog, sync_cfg, recommendations, ref_id, ref_cfg)
     base_url = sync_cfg.get("clm_url", "https://routerai.ru/api/v1")
     return {
         "name": sync_cfg.get("clm_provider_name", "routerai"),
@@ -678,7 +728,16 @@ def main(argv: Optional[list[str]] = None) -> int:
         sys.stderr.write(f"Ошибка: не найден каталог {catalog_path}. Сначала запустите build_report.py\n")
         return 1
 
-    ref_id = fcfg.get("reference_model", {}).get("id", "deepseek/deepseek-v4-flash-0731")
+    ref_cfg = fcfg.get("reference_model") or {}
+    # Эффективный эталон: если reference_model.id не утверждён (approved_ids),
+    # авто-выбор — самая дешёвая cheap-модель с tools вне watchlist.
+    ref_id, _ref_status = effective_reference_id(fcfg, catalog)
+    if not ref_id:
+        sys.stderr.write(
+            f"Ошибка: эталон не выбран (status={_ref_status}). "
+            "Каталог пуст или все cheap-модели с tools в watchlist.\n"
+        )
+        return 1
 
     # Рекомендации для гибридного score (могут отсутствовать — фолбэк на цену)
     recommendations: Optional[dict[str, Any]] = None
@@ -708,7 +767,7 @@ def main(argv: Optional[list[str]] = None) -> int:
               "была бы отменена (дифф ниже показан для справки)")
 
     # 1. Импорт clm (всегда пишется при --apply)
-    clm_provider = build_clm_provider(catalog, sync_cfg, recommendations, ref_id)
+    clm_provider = build_clm_provider(catalog, sync_cfg, recommendations, ref_id, ref_cfg)
     clm_import_path = PROJECT_ROOT / paths["clm_import"]
     if args.apply:
         clm_import_path.parent.mkdir(parents=True, exist_ok=True)
@@ -733,7 +792,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             return 1
         cfg_before = load_json(cfg_path)
         cfg_after = json.loads(json.dumps(cfg_before))  # глубокое копирование
-        config_log = update_ai_core_config(cfg_after, catalog, sync_cfg, ref_id, recommendations)
+        config_log = update_ai_core_config(cfg_after, catalog, sync_cfg, ref_id, recommendations, ref_cfg)
 
         # 2a. ASR-секция (audio -> transcription): personal/bulk модели + список
         asr_cat_path = asr_catalog_path()

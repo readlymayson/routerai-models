@@ -169,10 +169,11 @@ def rub_per_1m(price_per_token: float) -> float:
 def assign_tier(model: dict[str, Any], cfg: dict[str, Any]) -> str:
     """Присваивает модели непересекающийся тир: cheap | medium | premium.
 
-    Порядок проверки гарантирует непересечение:
-      1. cheap  — оба порога ниже максимума
-      2. premium — есть reasoning И хотя бы один порог >= минимума
-      3. medium — всё остальное
+    Порог и требование reasoning читаются из конфига (tiers.*):
+      - cheap:    оба порога < max_prompt/max_completion;
+      - premium:  требуется reasoning (tiers.premium.require_reasoning)
+                  и хотя бы один порог >= min_prompt/min_completion;
+      - medium:   всё остальное.
     """
     tiers_cfg = cfg.get("tiers", {})
     pricing = model.get("pricing") or {}
@@ -187,8 +188,10 @@ def assign_tier(model: dict[str, Any], cfg: dict[str, Any]) -> str:
         return "cheap"
 
     premium_cfg = tiers_cfg.get("premium", {})
+    require_reasoning = bool(premium_cfg.get("require_reasoning", True))
+    has_reason = has_reasoning(model)
     if (
-        has_reasoning(model)
+        (not require_reasoning or has_reason)
         and (
             prompt_rub >= premium_cfg.get("min_prompt_rub_per_1m", 100.0)
             or completion_rub >= premium_cfg.get("min_completion_rub_per_1m", 100.0)
@@ -238,13 +241,13 @@ def filter_and_categorize(
               "stats": {"valid": int, "cheap": int, "medium": int, "premium": int,
                         "invalid": int, "excluded_by_modality": int, ...},
               "reference_model": {...} | None,
+              "tier_boundaries": {"cheap": {...}, "premium": {...}, "medium": {...}},
               "tiers": {"cheap": [...], "medium": [...], "premium": [...]}
             }
     """
     tiers_cfg = cfg.get("tiers", {})
     reference_id = (cfg.get("reference_model") or {}).get("id")
     min_valid = int(cfg.get("validation", {}).get("min_valid_models", 50))
-
     valid: list[dict[str, Any]] = []
     stats = {
         "total_raw": len(models),
@@ -344,10 +347,18 @@ def filter_and_categorize(
     stats["medium"] = len(tiers["medium"])
     stats["premium"] = len(tiers["premium"])
 
+    # Границы тиров из конфига (для прозрачности и тестов)
+    tier_boundaries: dict[str, dict[str, Any]] = {}
+    for t in TIER_ORDER:
+        entry = dict(tiers_cfg.get(t, {}))
+        entry.pop("description", None)
+        tier_boundaries[t] = entry
+
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "stats": stats,
         "reference_model": reference,
+        "tier_boundaries": tier_boundaries,
         "tiers": tiers,
     }
 
@@ -574,6 +585,15 @@ def main(argv: Optional[list[str]] = None) -> int:
         p = ref["pricing_rub_per_1m"]
         print(f"[filter] Эталон {ref['id']}: prompt={p['prompt']} ₽/1M, "
               f"completion={p['completion']} ₽/1M, turn≈{ref['cost_per_turn_estimate_rub']} ₽")
+    tb = result.get("tier_boundaries") or {}
+    if tb:
+        cheap = tb.get("cheap", {})
+        prem = tb.get("premium", {})
+        print(f"[filter] Границы тиров: cheap < {cheap.get('max_prompt_rub_per_1m', 100)} "
+              f"и < {cheap.get('max_completion_rub_per_1m', 100)} ₽/1M; "
+              f"premium ≥ {prem.get('min_prompt_rub_per_1m', 100)}/"
+              f"{prem.get('min_completion_rub_per_1m', 100)} ₽/1M "
+              f"(require_reasoning={prem.get('require_reasoning', True)})")
     print(f"[filter] Сохранено: {out_path}")
 
     print(f"[filter] ASR-моделей: {asr_result['stats']['asr']} (без цены за минуту: {asr_result['stats']['no_pricing']})")
