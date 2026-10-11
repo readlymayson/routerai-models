@@ -272,11 +272,11 @@ UI с датированной версией того же семейства
 | `tiers.cheap.max_*` | Пороги cheap, ₽/1M | 100 / 100 |
 | `tiers.premium.min_*` | Пороги premium, ₽/1M | 100 / 100 |
 | `token_limits.default_context_length` | Контекст по умолчанию (если в каталоге нет) | 128000 |
-| `token_limits.max_input_tokens` | Потолки входа по тирам (cheap/medium/premium) | 250K/150K/100K |
+| `token_limits.max_input_tokens` | Потолки входа по тирам (cheap/medium/premium) | 100K/80K/64K |
 | `token_limits.max_output_tokens` | Потолки выхода по тирам (cheap/medium/premium) | 16K/8K/8K |
 | `call_params.prompt_tokens` | Prompt типового вызова | 10000 |
 | `call_params.completion_tokens` | Completion типового вызова | 1000 |
-| `reference_model.id` | Эталонная модель (бейдж ⭐ в отчёте) | `deepseek/deepseek-v4-flash-0731` |
+| `reference_model.id` | Эталонная модель (бейдж ⭐ в отчёте) | `deepseek/deepseek-v4-flash` (временно авто-выбор, см. Ф3) |
 | `scoring.*` | Параметры скоринга рекомендаций (бонусы, новизна, штрафы) | см. файл |
 | `sync.selection.total` | Сколько моделей попадает в конфиги | 15 |
 | `sync.selection.quotas` | Квоты по тирам (cheap/medium/premium) | 10/2/3 |

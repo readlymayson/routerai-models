@@ -42,12 +42,18 @@ def load_json(path: Path) -> Any:
         return json.load(f)
 
 
-def load_config() -> dict[str, Any]:
-    return load_json(PROJECT_ROOT / "filter_config.json")
+def load_config(cfg_path: Optional[Path] = None) -> dict[str, Any]:
+    return load_json(cfg_path or (PROJECT_ROOT / "filter_config.json"))
 
 
 def load_raw_models(raw_path: Path) -> list[dict[str, Any]]:
-    """Возвращает список сырых моделей из файла выгрузки."""
+    """Возвращает список сырых моделей из файла выгрузки.
+
+    Raises:
+        FileNotFoundError: файл отсутствует.
+        json.JSONDecodeError: файл повреждён (битый JSON).
+        ValueError: нет списка в поле 'data'.
+    """
     payload = load_json(raw_path)
     if isinstance(payload, dict):
         items = payload.get("data", [])
@@ -56,6 +62,22 @@ def load_raw_models(raw_path: Path) -> list[dict[str, Any]]:
     if not isinstance(items, list):
         raise ValueError(f"Файл {raw_path} не содержит списка моделей")
     return items
+
+
+def pricing_units_of(model: dict[str, Any]) -> Optional[str]:
+    """Единицы тарификации модели: pricing_units.prompt (если есть)."""
+    return (model.get("pricing_units") or {}).get("prompt") or None
+
+
+def pricing_unit_warning(model: dict[str, Any]) -> bool:
+    """True, если цена модели задана НЕ в рублях за токен.
+
+    Чат-ветка оперирует только ₽/токен; записи с другими единицами
+    (например, за секунду или за изображение) не отбрасываются, но
+    помечаются — их цена не смешивается с токенными.
+    """
+    units = pricing_units_of(model)
+    return units is not None and units != "token"
 
 
 # --------------------------------------------------------------------------- #
@@ -206,6 +228,9 @@ def filter_and_categorize(
 ) -> dict[str, Any]:
     """Валидирует модели, присваивает тиры и считает стоимость вызова.
 
+    Модели с единицами тарификации != token помечаются
+    pricing_unit_warning=True и не смешиваются с ценой ₽/токен.
+
     Returns:
         Словарь:
             {
@@ -218,6 +243,7 @@ def filter_and_categorize(
     """
     tiers_cfg = cfg.get("tiers", {})
     reference_id = (cfg.get("reference_model") or {}).get("id")
+    min_valid = int(cfg.get("validation", {}).get("min_valid_models", 50))
 
     valid: list[dict[str, Any]] = []
     stats = {
@@ -227,10 +253,18 @@ def filter_and_categorize(
         "excluded_by_modality": 0,
         "excluded_no_tools": 0,
         "excluded_no_pricing": 0,
+        "non_token_pricing": 0,
     }
     tiers: dict[str, list[dict[str, Any]]] = {t: [] for t in TIER_ORDER}
 
     modality_mode = cfg.get("validation", {}).get("modality_mode", "text->text")
+
+    # Уникальность id: дубликаты — ошибка до формирования выхода
+    ids = [m.get("id") for m in models if m.get("id")]
+    seen: set[str] = set()
+    duplicates = sorted({i for i in ids if i in seen or seen.add(i)})
+    if duplicates:
+        raise ValueError(f"Дубликаты id в каталоге: {', '.join(duplicates[:10])}")
 
     for m in models:
         arch = m.get("architecture") or {}
@@ -251,6 +285,10 @@ def filter_and_categorize(
             stats["invalid"] += 1
             continue
 
+        non_token = pricing_unit_warning(m)
+        if non_token:
+            stats["non_token_pricing"] += 1
+
         tier = assign_tier(m, cfg)
         entry = {
             "id": m.get("id"),
@@ -266,15 +304,19 @@ def filter_and_categorize(
             "output_modalities": output_modalities(m),
             "supports_vision": supports_vision(m),
             "pricing_rub_per_1m": {
-                "prompt": round(rub_per_1m(pricing.get("prompt", 0.0)), 4),
-                "completion": round(rub_per_1m(pricing.get("completion", 0.0)), 4),
+                "prompt": (round(rub_per_1m(pricing["prompt"]), 4) if not non_token else None),
+                "completion": (round(rub_per_1m(pricing["completion"]), 4) if not non_token else None),
                 "input_cache_read": (
                     round(rub_per_1m(pricing["input_cache_read"]), 4)
-                    if pricing.get("input_cache_read")
+                    if pricing.get("input_cache_read") and not non_token
                     else None
                 ),
             },
-            "cost_per_turn_estimate_rub": calculate_turn_cost(m, cfg),
+            "pricing_unit_warning": non_token,
+            "pricing_units": pricing_units_of(m),
+            "cost_per_turn_estimate_rub": (
+                calculate_turn_cost(m, cfg) if not non_token else None
+            ),
             "tier": tier,
             "tier_label": tiers_cfg.get(tier, {}).get("description", tier),
         }
@@ -427,33 +469,106 @@ def main(argv: Optional[list[str]] = None) -> int:
         default=None,
         help="Путь к сырым данным (по умолчанию из filter_config.json)",
     )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=None,
+        help="Путь к filter_config.json (по умолчанию рядом со скриптом)",
+    )
     args = parser.parse_args(argv)
 
     try:
-        cfg = load_config()
+        cfg = load_config(args.config)
     except FileNotFoundError:
-        sys.stderr.write("Ошибка: не найден filter_config.json\n")
+        sys.stderr.write(f"Ошибка: не найден конфиг {args.config or 'filter_config.json'}\n")
         return 1
 
     raw_path = args.raw or (PROJECT_ROOT / cfg["paths"]["raw_data"])
     try:
         models = load_raw_models(raw_path)
-    except (FileNotFoundError, ValueError) as exc:
+    except FileNotFoundError:
+        sys.stderr.write(f"Ошибка: файл сырых данных не найден: {raw_path}\n")
+        return 2
+    except json.JSONDecodeError as exc:
+        sys.stderr.write(f"Ошибка: файл {raw_path} повреждён (битый JSON): {exc}\n")
+        return 2
+    except ValueError as exc:
         sys.stderr.write(f"Ошибка: {exc}\n")
-        return 1
+        return 2
 
-    result = filter_and_categorize(models, cfg)
+    min_valid = int(cfg.get("validation", {}).get("min_valid_models", 50))
+    if len(models) == 0 or len(models) < min_valid:
+        sys.stderr.write(
+            f"Ошибка: каталог подозрительно мал — получено {len(models)} моделей "
+            f"(минимум {min_valid}). Выходные файлы НЕ перезаписаны.\n"
+        )
+        return 2
+
     out_path = PROJECT_ROOT / cfg["paths"]["filtered"]
-    save_filtered(result, out_path)
+    asr_path = PROJECT_ROOT / cfg["paths"]["asr_models"]
+
+    # Считаем всё ДО каких-либо записей: при провале любого гейта
+    # выходные файлы остаются прежними (атомарность конвейера).
+    try:
+        result = filter_and_categorize(models, cfg)
+    except ValueError as exc:
+        sys.stderr.write(f"Ошибка валидации: {exc}\n")
+        return 2
 
     s = result["stats"]
+
+    # Гейт минимального числа валидных чат-моделей
+    if s["valid"] == 0 or s["valid"] < min_valid:
+        reason = (
+            f"каталог содержит {len(models)} сырых записей, валидных "
+            f"чат-моделей {s['valid']} (минимум {min_valid})"
+        )
+        sys.stderr.write(
+            f"Ошибка: слишком мало валидных чат-моделей — {reason}. "
+            f"Выходные файлы НЕ перезаписаны.\n"
+        )
+        return 2
+
+    # ASR-гейт: минимальное число ASR-моделей с ценой
+    min_asr = int(cfg.get("validation", {}).get("min_valid_asr_models", 3))
+    asr_result = filter_asr_models(models, cfg)
+    asr_ok = asr_result["stats"]["asr"] >= min_asr
+    if not asr_ok:
+        reason = (
+            f"ASR-моделей с ценой {asr_result['stats']['asr']} "
+            f"(минимум {min_asr})"
+        )
+        sys.stderr.write(
+            f"Ошибка: слишком мало ASR-моделей — {reason}. "
+            f"ASR-выходы НЕ перезаписаны.\n"
+        )
+
+    all_ok = asr_ok
+    result["stats"]["gate"] = {
+        "min_valid_models": min_valid,
+        "valid_models": s["valid"],
+        "min_valid_asr_models": min_asr,
+        "asr_models": asr_result["stats"]["asr"],
+        "ok": all_ok,
+        "reason": None if all_ok else (
+            f"ASR-моделей {asr_result['stats']['asr']} < {min_asr}"
+        ),
+    }
+
+    if all_ok:
+        save_filtered(result, out_path)
+        save_asr(asr_result, asr_path)
+    else:
+        return 2
+
     print(f"[filter] Всего моделей в каталоге: {s['total_raw']}")
     print(f"[filter] Валидных чат-моделей: {s['valid']}")
     print(f"[filter]   cheap   (рабочие лошадки):   {s['cheap']}")
     print(f"[filter]   medium  (без reasoning):     {s['medium']}")
     print(f"[filter]   premium (reasoning/ревью):   {s['premium']}")
     print(f"[filter] Исключено: modality={s['excluded_by_modality']}, "
-          f"no_tools={s['excluded_no_tools']}, no_pricing={s['excluded_no_pricing']}")
+          f"no_tools={s['excluded_no_tools']}, no_pricing={s['excluded_no_pricing']}, "
+          f"non_token_pricing={s['non_token_pricing']}")
     ref = result.get("reference_model")
     if ref:
         p = ref["pricing_rub_per_1m"]
@@ -461,12 +576,7 @@ def main(argv: Optional[list[str]] = None) -> int:
               f"completion={p['completion']} ₽/1M, turn≈{ref['cost_per_turn_estimate_rub']} ₽")
     print(f"[filter] Сохранено: {out_path}")
 
-    # ASR-модели (audio -> transcription)
-    asr_result = filter_asr_models(models, cfg)
-    asr_path = PROJECT_ROOT / cfg["paths"]["asr_models"]
-    save_asr(asr_result, asr_path)
-    asr_stats = asr_result["stats"]
-    print(f"[filter] ASR-моделей: {asr_stats['asr']} (без цены за минуту: {asr_stats['no_pricing']})")
+    print(f"[filter] ASR-моделей: {asr_result['stats']['asr']} (без цены за минуту: {asr_result['stats']['no_pricing']})")
     print(f"[filter] Сохранено: {asr_path}")
     return 0
 

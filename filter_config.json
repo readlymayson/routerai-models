@@ -39,7 +39,9 @@
   "validation": {
     "modality_mode": "text_in_text_out",
     "require_tools_param": true,
-    "require_positive_pricing": true
+    "require_positive_pricing": true,
+    "min_valid_models": 50,
+    "min_valid_asr_models": 3
   },
   "tiers": {
     "cheap": {

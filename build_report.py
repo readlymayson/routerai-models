@@ -43,8 +43,8 @@ def load_json(path: Path) -> Any:
         return json.load(f)
 
 
-def load_config() -> dict[str, Any]:
-    return load_json(PROJECT_ROOT / "filter_config.json")
+def load_config(cfg_path: Optional[Path] = None) -> dict[str, Any]:
+    return load_json(cfg_path or (PROJECT_ROOT / "filter_config.json"))
 
 
 def load_filtered(path: Path) -> dict[str, Any]:
@@ -412,12 +412,18 @@ def main(argv: Optional[list[str]] = None) -> int:
         default=None,
         help="Путь к filtered_models.json (по умолчанию из filter_config.json)",
     )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=None,
+        help="Путь к filter_config.json (по умолчанию рядом со скриптом)",
+    )
     args = parser.parse_args(argv)
 
     try:
-        cfg = load_config()
+        cfg = load_config(args.config)
     except FileNotFoundError:
-        sys.stderr.write("Ошибка: не найден filter_config.json\n")
+        sys.stderr.write(f"Ошибка: не найден конфиг {args.config or 'filter_config.json'}\n")
         return 1
 
     paths = cfg["paths"]
@@ -501,14 +507,19 @@ def main(argv: Optional[list[str]] = None) -> int:
         sys.stderr.write(f"Ошибка: шаблон не найден: {template_path}\n")
         return 1
 
-    # Рекомендации (если сгенерированы recommend.py)
+    # Рекомендации (сгенерированы recommend.py).
+    # Битый recommendations.json — жёсткая ошибка, а не тихий {}. Причина
+    # попадает в отчёт, а не маскируется пустым словарём.
     recommendations: dict[str, Any] = {}
     rec_path = PROJECT_ROOT / paths["recommendations"]
     if rec_path.exists():
         try:
             recommendations = load_json(rec_path)
-        except json.JSONDecodeError:
-            recommendations = {}
+        except json.JSONDecodeError as exc:
+            sys.stderr.write(
+                f"[report] Ошибка: {rec_path} повреждён (битый JSON): {exc}\n"
+            )
+            return 1
 
     generate_html_report(filtered, cfg, template_path, report_path, recommendations)
 

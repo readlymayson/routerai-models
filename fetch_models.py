@@ -46,6 +46,7 @@ def fetch_raw_models(
     endpoint: str,
     timeout: float = 30.0,
     user_agent: str = "routerai-models-catalog/1.0",
+    api_key: Optional[str] = None,
 ) -> dict[str, Any]:
     """Выполняет GET-запрос к каталогу моделей.
 
@@ -54,6 +55,7 @@ def fetch_raw_models(
         endpoint: путь эндпоинта (например, /models).
         timeout: таймаут запроса в секундах.
         user_agent: значение заголовка User-Agent.
+        api_key: опциональный Bearer-токен (env ROUTERAI_API_KEY).
 
     Returns:
         Словарь с ответом API (обычно {"data": [...]}).
@@ -64,14 +66,38 @@ def fetch_raw_models(
     """
     url = base_url.rstrip("/") + "/" + endpoint.lstrip("/")
     headers = {"User-Agent": user_agent, "Accept": "application/json"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
     with httpx.Client(timeout=timeout, follow_redirects=True) as client:
         resp = client.get(url, headers=headers)
         resp.raise_for_status()
         return resp.json()
 
 
+def git_revision() -> Optional[str]:
+    """Хеш git-коммита репозитория (или None, если не git)."""
+    try:
+        import subprocess
+
+        out = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            cwd=PROJECT_ROOT,
+            timeout=5,
+        )
+        if out.returncode == 0:
+            return out.stdout.strip()
+    except Exception:
+        pass
+    return None
+
+
 def save_raw_data(payload: dict[str, Any], raw_path: Path, meta_path: Path) -> dict[str, Any]:
     """Сохраняет сырые данные и метаданные выгрузки на диск.
+
+    Оба файла пишутся атомарно (tmp + replace): при сбое на диске
+    существующие файлы остаются прежними.
 
     Args:
         payload: ответ API (словарь).
@@ -83,7 +109,12 @@ def save_raw_data(payload: dict[str, Any], raw_path: Path, meta_path: Path) -> d
     """
     raw_path.parent.mkdir(parents=True, exist_ok=True)
 
-    items = payload.get("data", []) if isinstance(payload, dict) else payload
+    if isinstance(payload, dict):
+        if "data" not in payload:
+            raise ValueError("Ответ API не содержит поле 'data'")
+        items = payload["data"]
+    else:
+        items = payload
     if not isinstance(items, list):
         raise ValueError("Ответ API не содержит список моделей в поле 'data'")
 
@@ -100,11 +131,17 @@ def save_raw_data(payload: dict[str, Any], raw_path: Path, meta_path: Path) -> d
         "total_models": len(items),
         "endpoint": "models",
         "source": "https://routerai.ru/api/v1/models",
+        "api_base_url": "https://routerai.ru/api/v1",
+        "git_revision": git_revision(),
+        "schema_version": 1,
         "raw_file": str(raw_path),
         "schema_note": "pricing.prompt/completion выражены в рублях за 1 токен",
     }
-    with open(meta_path, "w", encoding="utf-8") as f:
+    # meta — атомарно через tmp + replace (как и raw)
+    tmp_meta = meta_path.with_suffix(meta_path.suffix + ".tmp")
+    with open(tmp_meta, "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
+    tmp_meta.replace(meta_path)
 
     return meta
 
@@ -134,14 +171,18 @@ def main(argv: Optional[list[str]] = None) -> int:
     paths_cfg = config.get("paths", {})
     base_url = os.environ.get("ROUTERAI_API_URL", api_cfg.get("base_url", "https://routerai.ru/api/v1"))
     timeout = float(os.environ.get("ROUTERAI_TIMEOUT", api_cfg.get("timeout_seconds", 30)))
+    api_key = os.environ.get("ROUTERAI_API_KEY") or None
 
     print(f"[fetch] Загрузка каталога: {base_url.rstrip('/')}/{api_cfg.get('models_endpoint', 'models').lstrip('/')}")
+    if api_key:
+        print("[fetch] Авторизация: Bearer-токен из ROUTERAI_API_KEY")
     try:
         payload = fetch_raw_models(
             base_url=base_url,
             endpoint=api_cfg.get("models_endpoint", "/models"),
             timeout=timeout,
             user_agent=api_cfg.get("user_agent", "routerai-models-catalog/1.0"),
+            api_key=api_key,
         )
     except httpx.HTTPStatusError as exc:
         sys.stderr.write(f"[fetch] HTTP-ошибка {exc.response.status_code}: {exc.response.text[:500]}\n")
