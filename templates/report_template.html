@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог моделей routerai.ru — отчёт</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg-card: #171a23;
+    --bg-input: #1e222e;
+    --border: #2a2f3e;
+    --text: #e6e9f0;
+    --text-dim: #9aa3b5;
+    --accent: #5b8cff;
+    --accent-soft: rgba(91, 140, 255, 0.15);
+    --green: #34d399;
+    --amber: #fbbf24;
+    --purple: #a78bfa;
+    --red: #f87171;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 24px 16px 60px;
+  }
+  .container { max-width: 1280px; margin: 0 auto; }
+
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header .sub { color: var(--text-dim); margin-top: 4px; font-size: 0.9rem; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .stat-card .num { font-size: 1.5rem; font-weight: 700; }
+  .stat-card .label { font-size: 0.8rem; color: var(--text-dim); margin-top: 2px; }
+  .stat-card.cheap .num { color: var(--green); }
+  .stat-card.medium .num { color: var(--amber); }
+  .stat-card.premium .num { color: var(--purple); }
+  .stat-card.total .num { color: var(--accent); }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    align-items: center;
+  }
+  .search-box {
+    flex: 1;
+    min-width: 240px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    outline: none;
+  }
+  .search-box:focus { border-color: var(--accent); }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--text); }
+  .chip.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .chip.reasoning.active { background: rgba(167, 139, 250, 0.15); border-color: var(--purple); color: var(--purple); }
+  .chip.structured.active { background: rgba(52, 211, 153, 0.12); border-color: var(--green); color: var(--green); }
+  .count-hint { color: var(--text-dim); font-size: 0.85rem; }
+
+  .tier-section { margin: 28px 0; }
+  .tier-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .tier-header h2 { font-size: 1.15rem; }
+  .tier-header .tier-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .tier-badge.cheap { background: rgba(52, 211, 153, 0.15); color: var(--green); }
+  .tier-badge.medium { background: rgba(251, 191, 36, 0.15); color: var(--amber); }
+  .tier-badge.premium { background: rgba(167, 139, 250, 0.15); color: var(--purple); }
+
+  .top10 { margin: 24px 0; }
+  .top10 h2 { font-size: 1.15rem; margin-bottom: 12px; }
+  .top10-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px;
+  }
+  .top10-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .top10-card .rank {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    min-width: 28px;
+  }
+  .top10-card .name { font-weight: 600; font-size: 0.9rem; word-break: break-all; }
+  .top10-card .price { color: var(--green); font-size: 0.85rem; font-weight: 600; }
+
+  .table-wrap {
+    overflow-x: auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  thead th {
+    text-align: left;
+    padding: 10px 14px;
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+  thead th:hover { color: var(--text); }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42, 47, 62, 0.5);
+    vertical-align: top;
+  }
+  tbody tr:hover { background: rgba(91, 140, 255, 0.04); }
+  .model-id { font-weight: 600; word-break: break-all; }
+  .model-name { color: var(--text-dim); font-size: 0.82rem; max-width: 220px; }
+  .num-cell { white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
+  .price-cheap { color: var(--green); }
+  .price-mid { color: var(--amber); }
+  .price-high { color: var(--red); }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 5px;
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+  .badge.star { background: rgba(251, 191, 36, 0.15); color: var(--amber); }
+  .badge.reasoning { background: rgba(167, 139, 250, 0.15); color: var(--purple); }
+  .badge.structured { background: rgba(52, 211, 153, 0.12); color: var(--green); }
+  .badge.vision { background: rgba(251, 191, 36, 0.12); color: var(--amber); }
+  .badge.ctx { background: rgba(91, 140, 255, 0.12); color: var(--accent); }
+
+  footer { margin-top: 40px; color: var(--text-dim); font-size: 0.8rem; text-align: center; }
+
+  .reference-banner {
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.1), rgba(91, 140, 255, 0.08));
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin: 20px 0;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+  }
+  .reference-banner .ref-label { color: var(--amber); font-weight: 700; }
+  .reference-banner code { background: var(--bg-input); padding: 2px 8px; border-radius: 5px; }
+
+  .recommendations { margin: 24px 0; }
+  .recommendations h2 { font-size: 1.15rem; margin-bottom: 12px; }
+  .rec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .rec-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .rec-card .rec-title { font-weight: 600; font-size: 0.92rem; margin-bottom: 2px; }
+  .rec-card .rec-desc { color: var(--text-dim); font-size: 0.78rem; margin-bottom: 10px; }
+  .rec-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem;
+  }
+  .rec-item:first-of-type { border-top: none; }
+  .rec-item .rec-id { font-family: ui-monospace, "SF Mono", Menlo, monospace; word-break: break-all; }
+  .rec-item .rec-score {
+    font-weight: 700;
+    color: var(--green);
+    white-space: nowrap;
+  }
+  .rec-item .rec-cost { color: var(--text-dim); white-space: nowrap; font-size: 0.75rem; }
+  .rec-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    padding: 1px 6px;
+    border-radius: 5px;
+    margin-left: 4px;
+    background: var(--bg-input);
+    color: var(--text-dim);
+  }
+  .rec-badge.config { background: rgba(52, 211, 153, 0.12); color: var(--green); }
+  .rec-badge.clm { background: rgba(91, 140, 255, 0.12); color: var(--accent); }
+  .rec-badge.reasoning { background: rgba(167, 139, 250, 0.12); color: var(--purple); }
+  .rec-badge.novel { background: rgba(251, 191, 36, 0.12); color: var(--amber); }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>⚡ Каталог моделей routerai.ru</h1>
+    <div class="sub">Отчёт сгенерирован {{ generated_at_local }} · Валидных чат-моделей: {{ stats.valid }} из {{ stats.total_raw }} в каталоге API</div>
+  </header>
+
+  <div class="stats-grid">
+    <div class="stat-card total">
+      <div class="num">{{ stats.valid }}</div>
+      <div class="label">валидных чат-моделей</div>
+    </div>
+    <div class="stat-card cheap">
+      <div class="num">{{ stats.cheap }}</div>
+      <div class="label">cheap · &lt;100 ₽/1M</div>
+    </div>
+    <div class="stat-card medium">
+      <div class="num">{{ stats.medium }}</div>
+      <div class="label">medium · без reasoning</div>
+    </div>
+    <div class="stat-card premium">
+      <div class="num">{{ stats.premium }}</div>
+      <div class="label">premium · reasoning</div>
+    </div>
+  </div>
+
+  {% if reference %}
+  <div class="reference-banner">
+    <span class="ref-label">⭐ Эталон</span>
+    <code>{{ reference.id }}</code>
+    <span>prompt {{ reference.prompt_label }} / completion {{ reference.completion_label }}</span>
+    <span>типовой шаг агента ≈ <strong>{{ reference.cost_label }}</strong></span>
+  </div>
+  {% endif %}
+
+  {% if recommendations.categories %}
+  <div class="recommendations">
+    <h2>★ Рекомендации по задачам (fit-to-purpose)</h2>
+    <div class="rec-grid">
+      {% for cat_id, cat in recommendations.categories.items() %}
+      <div class="rec-card">
+        <div class="rec-title">{{ cat.label }}</div>
+        <div class="rec-desc">{{ cat.description }}</div>
+        {% for m in cat.top[:5] %}
+        <div class="rec-item">
+          <span class="rec-id">{{ m.id }}
+            {% if m.in_config %}<span class="rec-badge config">конфиг</span>{% endif %}
+            {% if m.in_clm %}<span class="rec-badge clm">clm</span>{% endif %}
+            {% if m.has_reasoning %}<span class="rec-badge reasoning">🧠</span>{% endif %}
+            {% if m.supports_vision %}<span class="rec-badge vision">👁</span>{% endif %}
+            {% if m.created and model_age_days(m.created) <= 90 %}<span class="rec-badge novel">🆕 {{ model_age_days(m.created) }}дн</span>{% endif %}
+          </span>
+          <span>
+            <span class="rec-score">{{ m.score }}</span>
+            <span class="rec-cost">{{ format_price(m.cost_per_turn_estimate_rub) }}</span>
+          </span>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="controls">
+    <input type="text" id="search" class="search-box" placeholder="Поиск: модель, провайдер, id… (например: deepseek, gpt-4, flash)">
+    <div class="filters">
+      <span class="chip" data-tier="all">Все тиры</span>
+      <span class="chip" data-tier="cheap">Cheap</span>
+      <span class="chip" data-tier="medium">Medium</span>
+      <span class="chip" data-tier="premium">Premium</span>
+      <span class="chip reasoning" data-flag="reasoning">🧠 Reasoning</span>
+      <span class="chip structured" data-flag="structured">🧩 Structured outputs</span>
+      <span class="chip vision" data-flag="vision">👁 Vision</span>
+    </div>
+    <span class="count-hint" id="count-hint"></span>
+  </div>
+
+  {% if top10 %}
+  <div class="top10">
+    <h2>🏆 Топ-10 самых дешёвых вызовов (типовой шаг агента)</h2>
+    <div class="top10-grid">
+      {% for m in top10 %}
+      <div class="top10-card" data-tier="{{ m.tier }}">
+        <span class="rank">#{{ loop.index }}</span>
+        <div>
+          <div class="name">{{ m.id }}</div>
+          <div class="price">{{ m.cost_label }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% for tier in tier_order %}
+  <section class="tier-section" data-tier-section="{{ tier }}">
+    <div class="tier-header">
+      <span class="tier-badge {{ tier }}">{{ tier }}</span>
+      <h2>{{ tier_labels[tier] }}</h2>
+      <span class="count-hint" id="count-{{ tier }}"></span>
+    </div>
+    <div class="table-wrap">
+      <table data-table="{{ tier }}">
+        <thead>
+          <tr>
+            <th data-sort="id">Модель</th>
+            <th data-sort="context">Контекст</th>
+            <th data-sort="prompt" class="num-cell">Prompt ₽/1M</th>
+            <th data-sort="completion" class="num-cell">Completion ₽/1M</th>
+            <th data-sort="cost" class="num-cell">Шаг агента ≈</th>
+            <th>Возможности</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in tiers[tier] %}
+          <tr data-search="{{ (m.id ~ ' ' ~ m.name ~ ' ' ~ m.provider)|lower }}"
+              data-row-tier="{{ m.tier }}"
+              data-reasoning="{{ '1' if m.has_reasoning else '0' }}"
+              data-structured="{{ '1' if m.supports_structured_outputs else '0' }}"
+              data-vision="{{ '1' if m.supports_vision else '0' }}"
+              data-context="{{ m.context_length or 0 }}"
+              data-prompt="{{ m.prompt_rub }}"
+              data-completion="{{ m.completion_rub }}"
+              data-cost="{{ m.cost_per_turn_estimate_rub }}">
+            <td>
+              <div class="model-id">{{ m.id }}
+                {% if reference and m.id == reference.id %}<span class="badge star">⭐ эталон</span>{% endif %}
+              </div>
+              {% if m.name and m.name != m.id %}<div class="model-name">{{ m.name }}</div>{% endif %}
+            </td>
+            <td><span class="badge ctx">{{ m.context_label }}</span></td>
+            <td class="num-cell {{ 'price-cheap' if m.prompt_rub < 100 else 'price-mid' if m.prompt_rub < 1000 else 'price-high' }}">{{ m.prompt_label }}</td>
+            <td class="num-cell {{ 'price-cheap' if m.completion_rub < 100 else 'price-mid' if m.completion_rub < 1000 else 'price-high' }}">{{ m.completion_label }}</td>
+            <td class="num-cell {{ 'price-cheap' if m.cost_per_turn_estimate_rub < 1 else 'price-mid' }}">{{ m.cost_label }}</td>
+            <td>
+              {% if m.has_reasoning %}<span class="badge reasoning">🧠 reasoning</span>{% endif %}
+              {% if m.supports_structured_outputs %}<span class="badge structured">🧩 structured</span>{% endif %}
+              {% if m.supports_vision %}<span class="badge vision">👁 vision</span>{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endfor %}
+
+  <footer>
+    Каталог: {{ stats.valid }} чат-моделей (text на входе + text на выходе + tools) · Параметры вызова:
+    {{ call_params.prompt_tokens }} prompt / {{ call_params.completion_tokens }} completion токенов ·
+    Цены в {{ currency }} за 1M токенов · Источник: routerai.ru API
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var searchInput = document.getElementById("search");
+  var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+  var countHint = document.getElementById("count-hint");
+  var state = { search: "", tier: "all", reasoning: false, structured: false, vision: false };
+  var sortState = {}; // tableKey -> { key, dir }
+
+  function escapeRe(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function rowMatches(row) {
+    var hay = row.getAttribute("data-search") || "";
+    if (state.search && hay.indexOf(state.search) === -1) return false;
+    var t = row.getAttribute("data-row-tier");
+    if (state.tier !== "all" && t !== state.tier) return false;
+    if (state.reasoning && row.getAttribute("data-reasoning") !== "1") return false;
+    if (state.structured && row.getAttribute("data-structured") !== "1") return false;
+    if (state.vision && row.getAttribute("data-vision") !== "1") return false;
+    return true;
+  }
+
+  function update() {
+    var visible = { cheap: 0, medium: 0, premium: 0 };
+    var tables = document.querySelectorAll("table[data-table]");
+    tables.forEach(function (table) {
+      var tier = table.getAttribute("data-table");
+      var rows = table.querySelectorAll("tbody tr");
+      var shown = 0;
+      rows.forEach(function (row) {
+        var ok = rowMatches(row);
+        row.style.display = ok ? "" : "none";
+        if (ok) { shown++; visible[tier]++; }
+      });
+      var hint = document.getElementById("count-" + tier);
+      if (hint) hint.textContent = "показано: " + shown;
+    });
+    var total = visible.cheap + visible.medium + visible.premium;
+    if (countHint) countHint.textContent = "всего показано: " + total;
+  }
+
+  function setChips() {
+    chips.forEach(function (chip) {
+      var tier = chip.getAttribute("data-tier");
+      var flag = chip.getAttribute("data-flag");
+      chip.classList.remove("active");
+      if (tier && state.tier === tier) chip.classList.add("active");
+      if (flag === "reasoning" && state.reasoning) chip.classList.add("active");
+      if (flag === "structured" && state.structured) chip.classList.add("active");
+      if (flag === "vision" && state.vision) chip.classList.add("active");
+    });
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var tier = chip.getAttribute("data-tier");
+      var flag = chip.getAttribute("data-flag");
+      if (tier) {
+        state.tier = (state.tier === tier) ? "all" : tier;
+      }
+      if (flag === "reasoning") state.reasoning = !state.reasoning;
+      if (flag === "structured") state.structured = !state.structured;
+      if (flag === "vision") state.vision = !state.vision;
+      setChips();
+      update();
+    });
+  });
+
+  searchInput.addEventListener("input", function () {
+    state.search = this.value.trim().toLowerCase();
+    update();
+  });
+
+  // Сортировка по заголовкам таблиц
+  function numVal(row, key) {
+    return parseFloat(row.getAttribute("data-" + key)) || 0;
+  }
+
+  document.querySelectorAll("thead th[data-sort]").forEach(function (th) {
+    th.addEventListener("click", function () {
+      var table = th.closest("table");
+      var key = th.getAttribute("data-sort");
+      var prev = sortState[key];
+      var dir;
+      if (!prev) {
+        // первый клик — сортировка по возрастанию
+        dir = 1;
+      } else {
+        dir = prev.dir === 1 ? -1 : 1;
+      }
+      sortState[key] = { dir: dir };
+      var tbody = table.querySelector("tbody");
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll("tr"));
+      rows.sort(function (a, b) {
+        var av, bv;
+        if (key === "id") {
+          av = (a.getAttribute("data-search") || "").toLowerCase();
+          bv = (b.getAttribute("data-search") || "").toLowerCase();
+        } else {
+          av = numVal(a, key);
+          bv = numVal(b, key);
+        }
+        if (av < bv) return -1 * dir;
+        if (av > bv) return 1 * dir;
+        return 0;
+      });
+      rows.forEach(function (row) { tbody.appendChild(row); });
+      update();
+    });
+  });
+
+  setChips();
+  update();
+})();
+</script>
+</body>
+</html>

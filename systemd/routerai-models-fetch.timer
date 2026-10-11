@@ -1,0 +1,12 @@
+[Unit]
+Description=Bi-daily refresh of RouterAI models catalog
+
+[Timer]
+# Каждые 2 дня в 05:30 по локальному времени (1, 3, 5, … дни месяца)
+OnCalendar=*-*-1/2 05:30:00
+# Только если машина не выключена в момент запуска
+Persistent=true
+RandomizedDelaySec=15min
+
+[Install]
+WantedBy=timers.target

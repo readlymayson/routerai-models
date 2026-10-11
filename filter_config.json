@@ -1,0 +1,133 @@
+{
+  "api": {
+    "base_url": "https://routerai.ru/api/v1",
+    "models_endpoint": "/models",
+    "timeout_seconds": 30,
+    "user_agent": "routerai-models-catalog/1.0"
+  },
+  "paths": {
+    "raw_data": "data/routerai_models_raw.json",
+    "meta": "data/meta.json",
+    "filtered": "data/filtered_models.json",
+    "catalog": "data/catalog.json",
+    "config_models": "data/config_models.json",
+    "recommendations": "data/recommendations.json",
+    "asr_models": "data/asr_models.json",
+    "asr_catalog": "data/asr_catalog.json",
+    "clm_import": "imports/chatLanguageModels.json",
+    "report": "reports/models_report.html",
+    "template": "templates/report_template.html"
+  },
+  "asr": {
+    "description": "Модели распознавания речи (audio -> transcription) для ai-core.",
+    "output_modality": "transcription",
+    "max_rub_per_min_cheap": 0.5,
+    "personal_aliases": [
+      "microsoft/mai-transcribe-2",
+      "microsoft/mai-transcribe-1.5",
+      "openai/gpt-4o-transcribe"
+    ],
+    "bulk_aliases": [
+      "qwen/qwen3-asr-0.6b",
+      "qwen/qwen3-asr-1.7b",
+      "nvidia/nemotron-3.5-asr-streaming-multilingual-0.6b",
+      "openai/whisper-large-v3-turbo",
+      "openai/whisper-large-v3"
+    ],
+    "stale_after_hours": 72
+  },
+  "validation": {
+    "modality_mode": "text_in_text_out",
+    "require_tools_param": true,
+    "require_positive_pricing": true
+  },
+  "tiers": {
+    "cheap": {
+      "description": "Рабочие лошадки агентов",
+      "max_prompt_rub_per_1m": 100.0,
+      "max_completion_rub_per_1m": 100.0
+    },
+    "premium": {
+      "description": "Reasoning / ревью / исследования",
+      "min_prompt_rub_per_1m": 100.0,
+      "min_completion_rub_per_1m": 100.0,
+      "require_reasoning": true
+    },
+    "medium": {
+      "description": "Остальные модели без reasoning с ценой >= 100 руб/1M"
+    }
+  },
+  "token_limits": {
+    "default_context_length": 128000,
+    "max_input_tokens": {
+      "cheap": 100000,
+      "medium": 80000,
+      "premium": 64000
+    },
+    "max_output_tokens": {
+      "cheap": 16000,
+      "medium": 8000,
+      "premium": 8000
+    }
+  },
+  "call_params": {
+    "prompt_tokens": 10000,
+    "completion_tokens": 1000,
+    "pricing_unit": "rub_per_1m_tokens",
+    "currency": "RUB"
+  },
+  "reference_model": {
+    "id": "deepseek/deepseek-v4-flash-0423",
+    "label": "Эталон: дешёвая рабочая лошадка"
+  },
+  "scoring": {
+    "base_score": 50,
+    "max_cost_bonus": 30,
+    "max_quality_bonus": 15,
+    "max_novelty_bonus": 8,
+    "novelty_window_days": 90,
+    "novelty_decay_days": 730,
+    "obsolete_patterns": [
+      "gpt-3.5",
+      "gpt-4o",
+      "gpt-4-turbo",
+      "claude-3-",
+      "llama-3.1-8b",
+      "llama-3.1-70b",
+      "qwen-2.5-"
+    ],
+    "obsolete_penalty": 8
+  },
+  "ai_core": {
+    "project_root": "/home/dev/projects/ai-core",
+    "config_path": "config/config.json",
+    "stale_after_hours": 72
+  },
+  "sync": {
+    "clm_source_path": "/home/dev/.vscode-server/data/User/chatLanguageModels.json",
+    "clm_provider_name": "routerai",
+    "clm_api_key": "${input:chat.lm.secret.-77660a4d}",
+    "clm_vendor": "customendpoint",
+    "clm_api_type": "chat-completions",
+    "clm_url": "https://routerai.ru/api/v1",
+    "rewrite_refs": true,
+    "selection": {
+      "total": 15,
+      "quotas": {
+        "cheap": 10,
+        "medium": 2,
+        "premium": 3
+      },
+      "weights": {
+        "default_agent": 1.0,
+        "cheap_workhorse": 1.0,
+        "reviewer": 0.8,
+        "coding": 0.8,
+        "planner": 0.6,
+        "long_context": 0.6,
+        "synthesis": 0.4,
+        "browser_automation": 0.4
+      }
+    }
+  }
+}

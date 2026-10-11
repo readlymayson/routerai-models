@@ -1,0 +1,18 @@
+# Секреты и локальные конфиги
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Генерируемые данные и отчёты
+data/
+reports/
+imports/
+
+# Логи и временные файлы
+*.log
+.tmp/

@@ -1,0 +1,29 @@
+[Unit]
+Description=RouterAI Models Catalog - fetch and analyze
+Documentation=https://github.com/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# Системный unit: запуск от имени пользователя dev
+User=dev
+WorkingDirectory=/home/dev/projects/routerai-models
+ExecStart=/usr/bin/python3 /home/dev/projects/routerai-models/fetch_models.py
+ExecStart=/usr/bin/python3 /home/dev/projects/routerai-models/filter_models.py
+ExecStart=/usr/bin/python3 /home/dev/projects/routerai-models/build_report.py
+ExecStart=/usr/bin/python3 /home/dev/projects/routerai-models/recommend.py
+# Актуализация конфигов (ai-core config.json + импорт clm).
+# ВНИМАНИЕ: sync_configs.py меняет ai-core/config/config.json (git покрывает).
+# Без --apply-clm источник VS Code chatLanguageModels.json НЕ трогается.
+# Секция asr (personal/bulk модели распознавания речи) обновляется здесь же
+# из data/asr_catalog.json (генерируется build_report.py из asr_models.json).
+ExecStart=/usr/bin/python3 /home/dev/projects/routerai-models/sync_configs.py --apply
+# Жёсткий таймаут на случай зависания сети
+TimeoutStartSec=180
+# Журналирование в systemd journal
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
