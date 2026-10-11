@@ -52,9 +52,11 @@ def load_catalog(path: Path) -> list[dict[str, Any]]:
 
 
 def load_clm_models(path: Path) -> set[str]:
-    """Загружает imports/chatLanguageModels.json (VS Code формат) и возвращает id моделей.
+    """Загружает imports/chatLanguageModels.json и возвращает id моделей.
 
-    Формат: список провайдеров [{name, vendor, models: [...]}].
+    Поддерживает оба формата:
+      - список провайдеров [{name, vendor, models: [...]}]
+      - плоский массив моделей [{id, name, ...}]
     Если файл отсутствует — возвращает пустое множество.
     """
     try:
@@ -64,8 +66,12 @@ def load_clm_models(path: Path) -> set[str]:
     ids: set[str] = set()
     if isinstance(data, list):
         for prov in data:
-            if isinstance(prov, dict):
-                ids |= {m.get("id") for m in prov.get("models", [])}
+            if isinstance(prov, dict) and "models" in prov:
+                # формат провайдеров [{... "models": [...]}]
+                ids |= {m.get("id") for m in prov["models"]}
+            elif isinstance(prov, dict) and "id" in prov:
+                # плоский массив моделей [{id, ...}]
+                ids.add(prov.get("id"))
     return ids
 
 

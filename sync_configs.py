@@ -773,12 +773,13 @@ def main(argv: Optional[list[str]] = None) -> int:
         clm_import_path.parent.mkdir(parents=True, exist_ok=True)
         tmp = clm_import_path.with_suffix(clm_import_path.suffix + ".tmp")
         with open(tmp, "w", encoding="utf-8") as f:
-            json.dump([clm_provider], f, ensure_ascii=False, indent=2)
+            # Только массив моделей, без обёртки провайдера
+            json.dump(clm_provider["models"], f, ensure_ascii=False, indent=2)
         tmp.replace(clm_import_path)
-        print(f"[sync] Импорт clm: {clm_import_path} ({len(clm_provider['models'])} моделей)")
+        print(f"[sync] Импорт clm: {clm_import_path} ({len(clm_provider['models'])} моделей, без обёртки)")
     else:
         print(f"[dry-run] Импорт clm: {clm_import_path} будет содержать "
-              f"{len(clm_provider['models'])} моделей")
+              f"{len(clm_provider['models'])} моделей (массив без обёртки)")
 
     # 2. Обновление ai-core config.json
     config_log: dict[str, Any] = {"models": {}, "refs": []}
