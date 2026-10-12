@@ -78,6 +78,16 @@
     "pricing_unit": "rub_per_1m_tokens",
     "currency": "RUB"
   },
+  "endpoints": {
+    "scope": [
+      "selected",
+      "reference",
+      "asr"
+    ],
+    "timeout_seconds": 30,
+    "stale_after_hours": 24,
+    "min_endpoints_per_model": 1
+  },
   "reference_model": {
     "id": null,
     "approved_ids": [],

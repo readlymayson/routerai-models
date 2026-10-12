@@ -32,7 +32,12 @@ STEPS: list[tuple[str, str, list[str]]] = [
     ("filter_models", "Валидация и тиринг", []),
     ("build_report", "Каталог + конфиг + HTML/MD-отчёт", []),
     ("recommend", "Рекомендации fit-to-purpose", []),
+    ("fetch_endpoints", "Endpoint-каталог и route-цены", []),
 ]
+
+# Шаги конвейера, требующие сетевого доступа (индексы в STEPS).
+# --no-fetch пропускает все NETWORK_STEPS, а не только шаг 0.
+NETWORK_STEPS = {0, 4}
 
 
 def run_step(name: str, label: str, extra: list[str]) -> bool:
@@ -55,11 +60,12 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     steps: list[tuple[str, str, list[str]]] = []
-    if not args.no_fetch:
-        steps.append(STEPS[0])
-    else:
-        print("[run_all] --no-fetch: выгрузка пропущена (используются существующие данные)")
-    steps.extend(STEPS[1:])
+    for idx, step in enumerate(STEPS):
+        if idx in NETWORK_STEPS and args.no_fetch:
+            name, label, _ = step
+            print(f"[run_all] --no-fetch: пропускаем сетевой шаг '{name}'")
+            continue
+        steps.append(step)
 
     failures: list[str] = []
     for name, label, extra in steps:
