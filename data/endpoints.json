@@ -2485,7 +2485,7 @@
       "tag": "alibaba",
       "provider_name": "Alibaba",
       "name": "Alibaba | deepseek/deepseek-v4.1-flash",
-      "status": 0,
+      "status": -2,
       "quantization": "unknown",
       "countries": [
         "sg",
@@ -3414,9 +3414,9 @@
         "tool_choice"
       ],
       "pricing": {
-        "prompt": 2.030922816e-06,
-        "completion": 2.64902976e-06,
-        "input_cache_read": 1.32451488e-06
+        "prompt": 1.8278305344e-06,
+        "completion": 2.384126784e-06,
+        "input_cache_read": 1.192063392e-06
       },
       "pricing_units": {
         "prompt": "token",
@@ -3424,9 +3424,9 @@
         "input_cache_read": "token"
       },
       "variable_pricings": [],
-      "rub_per_1m_prompt": 2.030923,
-      "rub_per_1m_completion": 2.64903,
-      "rub_per_1m_input_cache_read": 1.324515,
+      "rub_per_1m_prompt": 1.827831,
+      "rub_per_1m_completion": 2.384127,
+      "rub_per_1m_input_cache_read": 1.192063,
       "rub_per_1m_image_output": null,
       "supports_tools": true
     },
@@ -4336,9 +4336,9 @@
         "tool_choice"
       ],
       "pricing": {
-        "prompt": 4.4150496e-06,
+        "prompt": 3.8631684e-06,
         "completion": 1.43489112e-05,
-        "input_cache_read": 2.42827728e-06
+        "input_cache_read": 1.87639608e-06
       },
       "pricing_units": {
         "prompt": "token",
@@ -4346,9 +4346,9 @@
         "input_cache_read": "token"
       },
       "variable_pricings": [],
-      "rub_per_1m_prompt": 4.41505,
+      "rub_per_1m_prompt": 3.863168,
       "rub_per_1m_completion": 14.348911,
-      "rub_per_1m_input_cache_read": 2.428277,
+      "rub_per_1m_input_cache_read": 1.876396,
       "rub_per_1m_image_output": null,
       "supports_tools": true
     },
@@ -5242,7 +5242,7 @@
       "tag": "google-vertex",
       "provider_name": "Google Vertex",
       "name": "Google Vertex | openai/gpt-oss-20b",
-      "status": -2,
+      "status": -5,
       "quantization": "unknown",
       "countries": [
         "us"
@@ -6948,7 +6948,7 @@
       "tag": "atlas-cloud",
       "provider_name": "AtlasCloud",
       "name": "AtlasCloud | z-ai/glm-5.3-flash",
-      "status": 0,
+      "status": -2,
       "quantization": "fp8",
       "countries": [
         "us"
@@ -7093,7 +7093,7 @@
       "tag": "morph",
       "provider_name": "Morph",
       "name": "Morph | z-ai/glm-5.3-flash",
-      "status": -2,
+      "status": 0,
       "quantization": "fp8",
       "countries": [
         "us"
@@ -8464,7 +8464,7 @@
       "tag": "alibaba",
       "provider_name": "Alibaba",
       "name": "Alibaba | deepseek/deepseek-v4.1-flash",
-      "status": 0,
+      "status": -2,
       "quantization": "unknown",
       "countries": [
         "sg",
@@ -9753,7 +9753,7 @@
       "tag": "atlas-cloud",
       "provider_name": "AtlasCloud",
       "name": "AtlasCloud | z-ai/glm-5.3-flash",
-      "status": 0,
+      "status": -2,
       "quantization": "fp8",
       "countries": [
         "us"
@@ -9898,7 +9898,7 @@
       "tag": "morph",
       "provider_name": "Morph",
       "name": "Morph | z-ai/glm-5.3-flash",
-      "status": -2,
+      "status": 0,
       "quantization": "fp8",
       "countries": [
         "us"

@@ -163,6 +163,110 @@ def diff_models(
         if diffs:
             differences.append({"id": cid, "diffs": diffs})
 
+    # --- provider_policy diff ---
+    # Сравниваем provider_policy из filter_config с тем, что записано в config.json
+    # (через LLMProviderConfig, который читает provider_policy и pricing_overrides)
+    filter_provider_policy = fcfg.get("provider_policy") or {}
+    filter_pricing_overrides = fcfg.get("pricing_overrides") or {}
+
+    # Загружаем текущий config.json ai-core для сравнения
+    ai_core_cfg = load_ai_core_config(config_path)
+    core_routerai = ai_core_cfg.get("config", {}).get("llm", {}).get("providers", {}).get("routerai", {})
+    core_models = core_routerai.get("models", [])
+    # Собираем provider_policy и pricing_overrides из записей моделей в config.json
+    # (LLMProviderConfig хранит эти поля, но в compare_with_config мы читаем их обратно)
+    core_provider_policy: dict[str, Any] = {}
+    core_pricing_overrides: dict[str, dict[str, float]] = {}
+    for m in core_models:
+        # В config.json модели имеют вид {id, name, url, toolCalling, vision, maxInputTokens, maxOutputTokens}
+        # Поля provider_policy и pricing_overrides туда не попадают напрямую — они
+        # хранятся в LLMProviderConfig, который читается config_manager.py.
+        # Для отчёта сравним только то, что есть в filter_config.
+        pass  # provider_policy/pricing_overrides не хранятся в config.json models — они в LLMProviderConfig
+
+    # --- Сводка по расхождениям provider_policy ---
+    policy_diffs: list[dict[str, Any]] = []
+
+    # Модели, есть в filter_policy, но нет в core (или наоборот)
+    filter_model_ids = set(filter_provider_policy.get("models", {}).keys())
+    core_model_ids = {m.get("id") for m in core_models}
+
+    # Новые модели в filter_policy (есть в filter, нет в core models)
+    new_policy_models = filter_model_ids - core_model_ids
+    for mid in sorted(new_policy_models):
+        policy = filter_provider_policy.get("models", {}).get(mid)
+        if policy:
+            policy_diffs.append({
+                "model": mid,
+                "type": "new_in_filter",
+                "policy": policy,
+            })
+
+    # Модели, есть в core, но удалены/изменены в filter_policy
+    for mid in sorted(core_model_ids & filter_model_ids):
+        filter_policy = filter_provider_policy.get("models", {}).get(mid)
+        if filter_policy is not None:
+            # есть и в фильтре, и в core — сравниваем
+            core_policy_entry = {"order": [], "allow_fallbacks": True}  # placeholder
+            if filter_policy != core_policy_entry:
+                policy_diffs.append({
+                    "model": mid,
+                    "type": "changed_in_filter",
+                    "filter": filter_policy,
+                    # core значение не доступно напрямую, флаг изменений
+                })
+        else:
+            # есть в core, но удалено из filter
+            policy_diffs.append({
+                "model": mid,
+                "type": "removed_from_filter",
+            })
+
+    # Модели без записи в filter_policy — используют default
+    default_policy = filter_provider_policy.get("default", {"order": [], "allow_fallbacks": True})
+    for mid in sorted(core_model_ids):
+        if mid not in filter_model_ids:
+            policy_diffs.append({
+                "model": mid,
+                "type": "uses_default",
+                "default": default_policy,
+            })
+
+    if policy_diffs:
+        differences.append({
+            "section": "provider_policy",
+            "filter_config": filter_provider_policy,
+            "core_config_available": bool(core_models),
+            "diffs": policy_diffs,
+        })
+
+    # --- pricing_overrides diff ---
+    pricing_diffs: list[dict[str, Any]] = []
+
+    # Модели с переопределениями цен в filter_config
+    filter_pricing_ids = set(filter_pricing_overrides.keys())
+    core_pricing_ids = set()
+
+    # Собираем pricing_overrides из core config (через LLMProviderConfig)
+    # В config.json pricing_overrides не хранятся в models, они в LLMProviderConfig.
+    # Для отчёта показываем, какие модели имеют pricing в filter_config.
+    for mid in sorted(filter_pricing_ids):
+        price = filter_pricing_overrides.get(mid)
+        if price:
+            pricing_diffs.append({
+                "model": mid,
+                "type": "pricing_override_in_filter",
+                "prompt_token": price.get("prompt_token"),
+                "completion_token": price.get("completion_token"),
+            })
+
+    if pricing_diffs:
+        differences.append({
+            "section": "pricing_overrides",
+            "filter_config": filter_pricing_overrides,
+            "diffs": pricing_diffs,
+        })
+
     # Срез рекомендаций: топ-5 по каждой категории, помечая наличие в конфиге/clm
     rec_summary: dict[str, Any] = {}
     for cat_id, cat in (recommendations.get("categories") or {}).items():

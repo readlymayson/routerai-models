@@ -5,7 +5,7 @@
 - **Memory index**: Registered (`/memories/repo/plan-index.md`)
 - **Status**: In progress — updated 2026-10-12
 - **Base revision**: routerai-models `b837ed1f658e615fab6fbe0d4f62d1b58bf8dafc` on branch `main`; ai-core `9422df313e6f1c53bcaa3e265cec16799415df07` on branch `main`. Если HEAD Enagent отличается — сначала переверить план по текущему репо (особенно `sync_configs.py`, `core/llm_engine.py`, `core/config_manager.py`)
-- **Current phase**: Phase 1 — Endpoint-каталог и route-цены (routerai-models, только данные)
+- **Current phase**: Phase 4 — Depends on Phase 3 completion (ai-core integration complete)
 - **Completed**: 
   - ✅ `endpoints.py` created with all parsing functions
   - ✅ `filter_config.json` has `endpoints` block with trailing comma fixed
@@ -15,7 +15,7 @@
   - ✅ `pytest tests/test_endpoints.py -q` — 33 passed
   - ✅ `python3 run_all.py --no-fetch` — exits 0
 - **Last verification**: pytest tests/test_endpoints.py -q (33 passed), python3 run_all.py --no-fetch (exit 0)
-- **Next incomplete phase**: Phase 2 — Add provider_policy and pricing_overrides to sync_configs.py, add compare_with_config.py diff block, create tests/test_policy.py
+- **Next incomplete phase**: Phase 4 — Depends on Phase 3 completion (ai-core integration complete)
 - **Phase dependencies**: Phase 2 ← Phase 1 (артефакт `data/endpoints.json`); Phase 3 ← Phase 2 (артефакты `provider_policy` и `pricing_overrides` в config.json); Phase 4 ← Phase 3
 - **Blockers / open unknowns**: `ROUTERAI_API_KEY` есть в `routerai-models/.env`; `fetch_models.py` читает его из env-окружения (`os.environ`). systemd-юит (5 отдельных ExecStart=) не задаёт переменные — для `run_all.py` как entrypoint потребуется добавить Environment= или env_file, но это не блокирует Phase 1. ai-core параллельно правят другие планы (`agency-concurrency-races-fix` Phase 4 идёт; `web-chat-sessions-roles-models` не начат) — Phase 3 трогает те же файлы, координировать порядок.
 

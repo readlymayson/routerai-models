@@ -70,6 +70,32 @@ DEFAULT_SELECTION_WEIGHTS = {
     "browser_automation": 0.4,
 }
 
+# Политика провайдера: per-model order of preferred providers and fallback control
+# Источник: filter_config.json → provider_policy (если задан, иначе пустой dict)
+# Структура:
+# {
+#   "mode": "per_model",  # "per_model" или "global"
+#   "models": {
+#     "deepseek/deepseek-v4.1-flash": {"order": ["deepseek", "yandex"], "allow_fallbacks": true},
+#     "anthropic/claude-sonnet-4.5": {"order": ["anthropic", "google"]},
+#     ...
+#   },
+#   "default": {"order": [], "allow_fallbacks": true}  # fallback для моделей без записи
+# }
+# Важно: order проверяется только против endpoint'ов конкретной модели из data/endpoints.json.
+# Глобальный order отклонён: разные семейства моделей имеют разных провайдеров.
+PROVIDER_POLICY_DEFAULT = {
+    "mode": "per_model",
+    "models": {},
+    "default": {"order": [], "allow_fallbacks": True},
+}
+
+# Переопределения цен (₽/токен) для конкретных моделей.
+# Формат: { "<full model id>": {prompt_token: float, completion_token: float} }
+# Источник: filter_config.json → pricing_overrides (если задан, иначе пустой dict).
+# Содержит только базовые токенные тарифы; переменные пороги (variable_pricings) НЕ включаются.
+PRICING_OVERRIDES_DEFAULT = {}
+
 
 # --------------------------------------------------------------------------- #
 # Загрузка
