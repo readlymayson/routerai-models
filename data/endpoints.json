@@ -674,6 +674,75 @@
       "supports_tools": true
     },
     {
+      "tag": "alibaba",
+      "provider_name": "Alibaba",
+      "name": "Alibaba | deepseek/deepseek-v4-flash-0731",
+      "status": -2,
+      "quantization": "unknown",
+      "countries": [
+        "sg",
+        "cn"
+      ],
+      "context_length": 1000000,
+      "max_completion_tokens": 393216,
+      "max_prompt_tokens": null,
+      "supported_apis": [
+        "chat",
+        "responses",
+        "embeddings",
+        "messages"
+      ],
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "seed",
+        "presence_penalty",
+        "response_format",
+        "top_k",
+        "frequency_penalty",
+        "stop",
+        "structured_outputs",
+        "tools",
+        "tool_choice"
+      ],
+      "pricing": {
+        "prompt": 2.1368840064e-05,
+        "completion": 6.4106520192e-05,
+        "input_cache_read": 2.1368840064e-06
+      },
+      "pricing_units": {
+        "prompt": "token",
+        "completion": "token",
+        "input_cache_read": "token"
+      },
+      "variable_pricings": [
+        {
+          "type": "time-of-day",
+          "prompt": 4.2737680128e-05,
+          "utc_end": 1400,
+          "utc_start": 0,
+          "completion": 0.000128213040384,
+          "input_cache_read": 4.2737680128e-06
+        },
+        {
+          "type": "time-of-day",
+          "prompt": 2.1368840064e-05,
+          "utc_end": 0,
+          "utc_start": 1400,
+          "completion": 6.4106520192e-05,
+          "input_cache_read": 2.1368840064e-06
+        }
+      ],
+      "rub_per_1m_prompt": 21.36884,
+      "rub_per_1m_completion": 64.10652,
+      "rub_per_1m_input_cache_read": 2.136884,
+      "rub_per_1m_image_output": null,
+      "supports_tools": true
+    },
+    {
       "tag": "inceptron",
       "provider_name": "Inceptron",
       "name": "Inceptron | deepseek/deepseek-v4-flash-0731",
@@ -995,75 +1064,6 @@
       "rub_per_1m_prompt": 37.39547,
       "rub_per_1m_completion": 112.18641,
       "rub_per_1m_input_cache_read": 2.379712,
-      "rub_per_1m_image_output": null,
-      "supports_tools": true
-    },
-    {
-      "tag": "alibaba",
-      "provider_name": "Alibaba",
-      "name": "Alibaba | deepseek/deepseek-v4-flash-0731",
-      "status": 0,
-      "quantization": "unknown",
-      "countries": [
-        "sg",
-        "cn"
-      ],
-      "context_length": 1000000,
-      "max_completion_tokens": 393216,
-      "max_prompt_tokens": null,
-      "supported_apis": [
-        "chat",
-        "responses",
-        "embeddings",
-        "messages"
-      ],
-      "supported_parameters": [
-        "reasoning",
-        "include_reasoning",
-        "max_tokens",
-        "temperature",
-        "top_p",
-        "seed",
-        "presence_penalty",
-        "response_format",
-        "top_k",
-        "frequency_penalty",
-        "stop",
-        "structured_outputs",
-        "tools",
-        "tool_choice"
-      ],
-      "pricing": {
-        "prompt": 4.2737680128e-05,
-        "completion": 0.000128213040384,
-        "input_cache_read": 4.2737680128e-06
-      },
-      "pricing_units": {
-        "prompt": "token",
-        "completion": "token",
-        "input_cache_read": "token"
-      },
-      "variable_pricings": [
-        {
-          "type": "time-of-day",
-          "prompt": 4.2737680128e-05,
-          "utc_end": 1400,
-          "utc_start": 0,
-          "completion": 0.000128213040384,
-          "input_cache_read": 4.2737680128e-06
-        },
-        {
-          "type": "time-of-day",
-          "prompt": 2.1368840064e-05,
-          "utc_end": 0,
-          "utc_start": 1400,
-          "completion": 6.4106520192e-05,
-          "input_cache_read": 2.1368840064e-06
-        }
-      ],
-      "rub_per_1m_prompt": 42.73768,
-      "rub_per_1m_completion": 128.21304,
-      "rub_per_1m_input_cache_read": 4.273768,
       "rub_per_1m_image_output": null,
       "supports_tools": true
     },
@@ -1725,6 +1725,74 @@
       "supports_tools": true
     },
     {
+      "tag": "alibaba",
+      "provider_name": "Alibaba",
+      "name": "Alibaba | deepseek/deepseek-v4.1-flash",
+      "status": 0,
+      "quantization": "unknown",
+      "countries": [
+        "sg",
+        "cn"
+      ],
+      "context_length": 1000000,
+      "max_completion_tokens": 393216,
+      "max_prompt_tokens": null,
+      "supported_apis": [
+        "chat",
+        "responses",
+        "embeddings",
+        "messages"
+      ],
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "seed",
+        "presence_penalty",
+        "response_format",
+        "top_k",
+        "frequency_penalty",
+        "stop",
+        "tools",
+        "tool_choice"
+      ],
+      "pricing": {
+        "prompt": 1.82120796e-05,
+        "completion": 7.28483184e-05,
+        "input_cache_read": 1.82120796e-06
+      },
+      "pricing_units": {
+        "prompt": "token",
+        "completion": "token",
+        "input_cache_read": "token"
+      },
+      "variable_pricings": [
+        {
+          "type": "time-of-day",
+          "prompt": 3.64241592e-05,
+          "utc_end": 1400,
+          "utc_start": 0,
+          "completion": 0.0001456966368,
+          "input_cache_read": 3.64241592e-06
+        },
+        {
+          "type": "time-of-day",
+          "prompt": 1.82120796e-05,
+          "utc_end": 0,
+          "utc_start": 1400,
+          "completion": 7.28483184e-05,
+          "input_cache_read": 1.82120796e-06
+        }
+      ],
+      "rub_per_1m_prompt": 18.21208,
+      "rub_per_1m_completion": 72.848318,
+      "rub_per_1m_input_cache_read": 1.821208,
+      "rub_per_1m_image_output": null,
+      "supports_tools": true
+    },
+    {
       "tag": "digitalocean",
       "provider_name": "DigitalOcean",
       "name": "DigitalOcean | deepseek/deepseek-v4.1-flash",
@@ -2040,7 +2108,7 @@
         "top_logprobs"
       ],
       "pricing": {
-        "prompt": 9.71310912e-06,
+        "prompt": 8.49897048e-06,
         "completion": 0.00012019972536,
         "input_cache_read": 4.128071376e-06
       },
@@ -2050,7 +2118,7 @@
         "input_cache_read": "token"
       },
       "variable_pricings": [],
-      "rub_per_1m_prompt": 9.713109,
+      "rub_per_1m_prompt": 8.49897,
       "rub_per_1m_completion": 120.199725,
       "rub_per_1m_input_cache_read": 4.128071,
       "rub_per_1m_image_output": null,
@@ -2478,74 +2546,6 @@
       "rub_per_1m_prompt": 36.424159,
       "rub_per_1m_completion": 145.696637,
       "rub_per_1m_input_cache_read": 0.849897,
-      "rub_per_1m_image_output": null,
-      "supports_tools": true
-    },
-    {
-      "tag": "alibaba",
-      "provider_name": "Alibaba",
-      "name": "Alibaba | deepseek/deepseek-v4.1-flash",
-      "status": -2,
-      "quantization": "unknown",
-      "countries": [
-        "sg",
-        "cn"
-      ],
-      "context_length": 1000000,
-      "max_completion_tokens": 393216,
-      "max_prompt_tokens": null,
-      "supported_apis": [
-        "chat",
-        "responses",
-        "embeddings",
-        "messages"
-      ],
-      "supported_parameters": [
-        "reasoning",
-        "include_reasoning",
-        "max_tokens",
-        "temperature",
-        "top_p",
-        "seed",
-        "presence_penalty",
-        "response_format",
-        "top_k",
-        "frequency_penalty",
-        "stop",
-        "tools",
-        "tool_choice"
-      ],
-      "pricing": {
-        "prompt": 3.64241592e-05,
-        "completion": 0.0001456966368,
-        "input_cache_read": 3.64241592e-06
-      },
-      "pricing_units": {
-        "prompt": "token",
-        "completion": "token",
-        "input_cache_read": "token"
-      },
-      "variable_pricings": [
-        {
-          "type": "time-of-day",
-          "prompt": 3.64241592e-05,
-          "utc_end": 1400,
-          "utc_start": 0,
-          "completion": 0.0001456966368,
-          "input_cache_read": 3.64241592e-06
-        },
-        {
-          "type": "time-of-day",
-          "prompt": 1.82120796e-05,
-          "utc_end": 0,
-          "utc_start": 1400,
-          "completion": 7.28483184e-05,
-          "input_cache_read": 1.82120796e-06
-        }
-      ],
-      "rub_per_1m_prompt": 36.424159,
-      "rub_per_1m_completion": 145.696637,
-      "rub_per_1m_input_cache_read": 3.642416,
       "rub_per_1m_image_output": null,
       "supports_tools": true
     },
@@ -3048,6 +3048,55 @@
       "tag": "novita",
       "provider_name": "Novita",
       "name": "Novita | inclusionai/ling-3.0-flash-fin",
+      "status": 0,
+      "quantization": "unknown",
+      "countries": [
+        "us"
+      ],
+      "context_length": 262144,
+      "max_completion_tokens": 32768,
+      "max_prompt_tokens": null,
+      "supported_apis": [],
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "seed",
+        "top_k",
+        "repetition_penalty",
+        "tools",
+        "tool_choice",
+        "logprobs",
+        "top_logprobs"
+      ],
+      "pricing": {
+        "prompt": 4.63580208e-06,
+        "completion": 1.3598352768e-05,
+        "input_cache_read": 9.27160416e-07
+      },
+      "pricing_units": {
+        "prompt": "token",
+        "completion": "token",
+        "input_cache_read": "token"
+      },
+      "variable_pricings": [],
+      "rub_per_1m_prompt": 4.635802,
+      "rub_per_1m_completion": 13.598353,
+      "rub_per_1m_input_cache_read": 0.92716,
+      "rub_per_1m_image_output": null,
+      "supports_tools": true
+    }
+  ],
+  "inclusionai/ling-3.0-flash-sante": [
+    {
+      "tag": "novita",
+      "provider_name": "Novita",
+      "name": "Novita | inclusionai/ling-3.0-flash-sante",
       "status": 0,
       "quantization": "unknown",
       "countries": [
@@ -6948,7 +6997,7 @@
       "tag": "atlas-cloud",
       "provider_name": "AtlasCloud",
       "name": "AtlasCloud | z-ai/glm-5.3-flash",
-      "status": -2,
+      "status": -5,
       "quantization": "fp8",
       "countries": [
         "us"
@@ -7093,7 +7142,7 @@
       "tag": "morph",
       "provider_name": "Morph",
       "name": "Morph | z-ai/glm-5.3-flash",
-      "status": 0,
+      "status": -2,
       "quantization": "fp8",
       "countries": [
         "us"
@@ -7704,6 +7753,74 @@
       "supports_tools": true
     },
     {
+      "tag": "alibaba",
+      "provider_name": "Alibaba",
+      "name": "Alibaba | deepseek/deepseek-v4.1-flash",
+      "status": 0,
+      "quantization": "unknown",
+      "countries": [
+        "sg",
+        "cn"
+      ],
+      "context_length": 1000000,
+      "max_completion_tokens": 393216,
+      "max_prompt_tokens": null,
+      "supported_apis": [
+        "chat",
+        "responses",
+        "embeddings",
+        "messages"
+      ],
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "seed",
+        "presence_penalty",
+        "response_format",
+        "top_k",
+        "frequency_penalty",
+        "stop",
+        "tools",
+        "tool_choice"
+      ],
+      "pricing": {
+        "prompt": 1.82120796e-05,
+        "completion": 7.28483184e-05,
+        "input_cache_read": 1.82120796e-06
+      },
+      "pricing_units": {
+        "prompt": "token",
+        "completion": "token",
+        "input_cache_read": "token"
+      },
+      "variable_pricings": [
+        {
+          "type": "time-of-day",
+          "prompt": 3.64241592e-05,
+          "utc_end": 1400,
+          "utc_start": 0,
+          "completion": 0.0001456966368,
+          "input_cache_read": 3.64241592e-06
+        },
+        {
+          "type": "time-of-day",
+          "prompt": 1.82120796e-05,
+          "utc_end": 0,
+          "utc_start": 1400,
+          "completion": 7.28483184e-05,
+          "input_cache_read": 1.82120796e-06
+        }
+      ],
+      "rub_per_1m_prompt": 18.21208,
+      "rub_per_1m_completion": 72.848318,
+      "rub_per_1m_input_cache_read": 1.821208,
+      "rub_per_1m_image_output": null,
+      "supports_tools": true
+    },
+    {
       "tag": "digitalocean",
       "provider_name": "DigitalOcean",
       "name": "DigitalOcean | deepseek/deepseek-v4.1-flash",
@@ -8019,7 +8136,7 @@
         "top_logprobs"
       ],
       "pricing": {
-        "prompt": 9.71310912e-06,
+        "prompt": 8.49897048e-06,
         "completion": 0.00012019972536,
         "input_cache_read": 4.128071376e-06
       },
@@ -8029,7 +8146,7 @@
         "input_cache_read": "token"
       },
       "variable_pricings": [],
-      "rub_per_1m_prompt": 9.713109,
+      "rub_per_1m_prompt": 8.49897,
       "rub_per_1m_completion": 120.199725,
       "rub_per_1m_input_cache_read": 4.128071,
       "rub_per_1m_image_output": null,
@@ -8457,74 +8574,6 @@
       "rub_per_1m_prompt": 36.424159,
       "rub_per_1m_completion": 145.696637,
       "rub_per_1m_input_cache_read": 0.849897,
-      "rub_per_1m_image_output": null,
-      "supports_tools": true
-    },
-    {
-      "tag": "alibaba",
-      "provider_name": "Alibaba",
-      "name": "Alibaba | deepseek/deepseek-v4.1-flash",
-      "status": -2,
-      "quantization": "unknown",
-      "countries": [
-        "sg",
-        "cn"
-      ],
-      "context_length": 1000000,
-      "max_completion_tokens": 393216,
-      "max_prompt_tokens": null,
-      "supported_apis": [
-        "chat",
-        "responses",
-        "embeddings",
-        "messages"
-      ],
-      "supported_parameters": [
-        "reasoning",
-        "include_reasoning",
-        "max_tokens",
-        "temperature",
-        "top_p",
-        "seed",
-        "presence_penalty",
-        "response_format",
-        "top_k",
-        "frequency_penalty",
-        "stop",
-        "tools",
-        "tool_choice"
-      ],
-      "pricing": {
-        "prompt": 3.64241592e-05,
-        "completion": 0.0001456966368,
-        "input_cache_read": 3.64241592e-06
-      },
-      "pricing_units": {
-        "prompt": "token",
-        "completion": "token",
-        "input_cache_read": "token"
-      },
-      "variable_pricings": [
-        {
-          "type": "time-of-day",
-          "prompt": 3.64241592e-05,
-          "utc_end": 1400,
-          "utc_start": 0,
-          "completion": 0.0001456966368,
-          "input_cache_read": 3.64241592e-06
-        },
-        {
-          "type": "time-of-day",
-          "prompt": 1.82120796e-05,
-          "utc_end": 0,
-          "utc_start": 1400,
-          "completion": 7.28483184e-05,
-          "input_cache_read": 1.82120796e-06
-        }
-      ],
-      "rub_per_1m_prompt": 36.424159,
-      "rub_per_1m_completion": 145.696637,
-      "rub_per_1m_input_cache_read": 3.642416,
       "rub_per_1m_image_output": null,
       "supports_tools": true
     },
@@ -9753,7 +9802,7 @@
       "tag": "atlas-cloud",
       "provider_name": "AtlasCloud",
       "name": "AtlasCloud | z-ai/glm-5.3-flash",
-      "status": -2,
+      "status": -5,
       "quantization": "fp8",
       "countries": [
         "us"
@@ -9898,7 +9947,7 @@
       "tag": "morph",
       "provider_name": "Morph",
       "name": "Morph | z-ai/glm-5.3-flash",
-      "status": 0,
+      "status": -2,
       "quantization": "fp8",
       "countries": [
         "us"

@@ -203,7 +203,9 @@ def cost_per_turn(
 def is_token_endpoint(ep: Endpoint) -> bool:
     """True если endpoint подходит для агентских вызовов:
     chat в supported_apis, tools в supported_parameters,
-    достаточные лимиты (context_length > 0, max_prompt_tokens > 0).
+    достаточные лимиты (context_length > 0).
+    max_prompt_tokens может быть None у некоторых провайдеров (например, DeepSeek),
+    в этом случае проверяем только context_length.
     """
     if "chat" not in ep.get("supported_apis", []):
         return False
@@ -211,7 +213,10 @@ def is_token_endpoint(ep: Endpoint) -> bool:
         return False
     if not ep.get("context_length"):
         return False
-    if not ep.get("max_prompt_tokens"):
+    # max_prompt_tokens может быть None у некоторых провайдеров (DeepSeek),
+    # в этом случае все равно считаем endpoint валидным если context_length есть
+    mppt = ep.get("max_prompt_tokens")
+    if mppt is not None and mppt <= 0:
         return False
     return True
 

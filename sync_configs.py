@@ -724,6 +724,101 @@ def print_diff(cfg_path: Path, cfg_before: dict[str, Any], cfg_after: dict[str, 
 
 
 # --------------------------------------------------------------------------- #
+# Генерация provider_policy и pricing_overrides из endpoint data
+# --------------------------------------------------------------------------- #
+def _is_token_endpoint(ep: dict[str, Any]) -> bool:
+    """True если endpoint подходит для агентских вызовов: chat в supported_apis,
+    tools в supported_parameters, есть context_length.
+
+    max_prompt_tokens НЕ обязателен — у некоторых провайдеров (DeepSeek)
+    он может быть None при наличии валидного context_length.
+    """
+    supported_apis = ep.get("supported_apis", [])
+    supported_params = ep.get("supported_parameters", [])
+    if "chat" not in supported_apis:
+        return False
+    if "tools" not in supported_params:
+        return False
+    if not ep.get("context_length"):
+        return False
+    return True
+
+
+def _cost_per_turn(ep: dict[str, Any]) -> Optional[float]:
+    """Стоимость типового вызова (₽) для endpoint'а."""
+    pp = ep.get("rub_per_1m_prompt")
+    pc = ep.get("rub_per_1m_completion")
+    if pp is None or pc is None:
+        return None
+    cost = (10_000 * pp + 1_000 * pc) / 1_000_000.0
+    return round(cost, 6)
+
+
+def _cheapest_token_endpoint(eps: list[dict[str, Any]]) -> Optional[dict[str, Any]]:
+    """Endpoint с минимальной cost_per_turn среди token-endpoint'ов с chat+tools."""
+    token_eps = [ep for ep in eps if _is_token_endpoint(ep)]
+    if not token_eps:
+        return None
+
+    def _cost(ep: dict[str, Any]) -> Optional[float]:
+        return _cost_per_turn(ep)
+
+    return min(token_eps, key=lambda ep: _cost(ep) or float("inf"))
+
+
+def generate_provider_policy_and_pricing(
+    endpoints_data: dict[str, list[dict[str, Any]]],
+) -> tuple[dict[str, Any], dict[str, dict[str, float]]]:
+    """Генерирует provider_policy и pricing_overrides из endpoint данных.
+
+    Возвращает (policy_dict, pricing_dict):
+      - policy: {model_id: {order: [tags...], allow_fallbacks: true}}
+      - pricing: {model_id: {prompt_token: rub/токен, completion_token: rub/токен}}
+
+    Использует tag (не provider_name) и cheapest token endpoint для цен.
+    Не мутирует глобальные константы.
+    """
+    prov_policy: dict[str, dict] = {}
+    pricing_ovr: dict[str, dict[str, float]] = {}
+
+    for model_id, eps in endpoints_data.items():
+        if not eps:
+            continue
+
+        # Собираем провайдеров с минимальными ценами по tag
+        providers_seen: dict[str, float] = {}
+        for ep in eps:
+            tag = ep.get("tag", "")
+            if not tag:
+                continue
+            rub_prompt = ep.get("rub_per_1m_prompt")
+            if rub_prompt is None:
+                continue
+            if tag not in providers_seen or rub_prompt < providers_seen[tag]:
+                providers_seen[tag] = rub_prompt
+
+        sorted_tags = sorted(providers_seen.keys(), key=lambda p: providers_seen[p])
+        prov_policy[model_id] = {
+            "order": sorted_tags,
+            "allow_fallbacks": True,
+        }
+
+        # Цены из cheapest token endpoint (не первого попавшегося)
+        cheapest = _cheapest_token_endpoint(eps)
+        if cheapest:
+            prompt_rub_per_1m = cheapest.get("rub_per_1m_prompt")
+            comp_rub_per_1m = cheapest.get("rub_per_1m_completion")
+            if prompt_rub_per_1m is not None and comp_rub_per_1m is not None:
+                # rub_per_1m уже ₽/1M → делим на 1e6 для ₽/token
+                pricing_ovr[model_id] = {
+                    "prompt_token": round(prompt_rub_per_1m / 1_000_000.0, 8),
+                    "completion_token": round(comp_rub_per_1m / 1_000_000.0, 8),
+                }
+
+    return prov_policy, pricing_ovr
+
+
+# --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
 def main(argv: Optional[list[str]] = None) -> int:
@@ -792,6 +887,10 @@ def main(argv: Optional[list[str]] = None) -> int:
         print("[dry-run] ⚠ Каталог устарел или недоступен — при --apply запись "
               "была бы отменена (дифф ниже показан для справки)")
 
+    # ── Загрузка filter_config для provider_policy/pricing_overrides
+    filter_provider_policy = fcfg.get("provider_policy") or {}
+    filter_pricing_overrides = fcfg.get("pricing_overrides") or {}
+
     # 1. Импорт clm (всегда пишется при --apply)
     clm_provider = build_clm_provider(catalog, sync_cfg, recommendations, ref_id, ref_cfg)
     clm_import_path = PROJECT_ROOT / paths["clm_import"]
@@ -841,6 +940,32 @@ def main(argv: Optional[list[str]] = None) -> int:
 
         print_diff(cfg_path, cfg_before, cfg_after, config_log)
 
+        # 2b. Генерация provider_policy и pricing_overrides из endpoint data
+        # Пишем В cfg_after ДО print_diff и записи — чтобы diff включал эти поля
+        endpoints_path = PROJECT_ROOT / "data" / "endpoints.json"
+        if endpoints_path.exists():
+            try:
+                endpoints_data = load_json(endpoints_path)
+                if isinstance(endpoints_data, dict):
+                    gen_policy, gen_pricing = generate_provider_policy_and_pricing(endpoints_data)
+
+                    # Используем filter_config если задан, иначе генерированные
+                    final_policy = filter_provider_policy or gen_policy
+                    final_pricing = filter_pricing_overrides or gen_pricing
+
+                    # Записываем в cfg_after
+                    routerai_section = cfg_after.get("llm", {}).get("providers", {}).get("routerai", {})
+                    if not routerai_section:
+                        routerai_section = {}
+                        cfg_after.setdefault("llm", {}).setdefault("providers", {})["routerai"] = routerai_section
+                    routerai_section["provider_policy"] = final_policy
+                    routerai_section["pricing_overrides"] = final_pricing
+
+                    print(f"[sync] provider_policy: {len(final_policy)} моделей")
+                    print(f"[sync] pricing_overrides: {len(final_pricing)} моделей")
+            except (json.JSONDecodeError, OSError) as exc:
+                sys.stderr.write(f"[sync] Ошибка чтения endpoints.json: {exc}\n")
+
         if args.apply:
             tmp = cfg_path.with_suffix(cfg_path.suffix + ".tmp")
             with open(tmp, "w", encoding="utf-8") as f:
@@ -864,9 +989,6 @@ def main(argv: Optional[list[str]] = None) -> int:
         print(f"[sync] VS Code clm обновлён: {clm_source}")
     elif args.apply:
         print("[sync] VS Code clm источник НЕ изменён (добавьте --apply-clm)")
-
-    return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

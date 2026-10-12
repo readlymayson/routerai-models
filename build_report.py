@@ -70,10 +70,14 @@ def pretty_alias(model_id: str, name: Optional[str]) -> str:
     return name
 
 
-def normalize_model(entry: dict[str, Any]) -> dict[str, Any]:
+def normalize_model(
+    entry: dict[str, Any],
+    endpoints_data: Optional[dict[str, list[dict[str, Any]]]] = None,
+) -> dict[str, Any]:
     """Преобразует запись filtered_models.json в полный каталог-запись.
 
     Добавляет человекочитаемые поля, форматированные цены, ссылки и т.п.
+    Если передан endpoints_data — добавляет route-поля из Phase 2 плана.
     """
     pricing = entry.get("pricing_rub_per_1m", {})
     prompt_rub = pricing.get("prompt", 0.0)
@@ -82,6 +86,18 @@ def normalize_model(entry: dict[str, Any]) -> dict[str, Any]:
 
     model_id: str = entry.get("id", "")
     provider = model_id.split("/")[0] if "/" in model_id else "unknown"
+
+    # Route-данные из endpoints.json (Phase 2)
+    routes: list[dict[str, Any]] = []
+    cheapest_route_cost: Optional[float] = None
+    route_pricing_basis: Optional[str] = None
+    if endpoints_data:
+        ep_list = endpoints_data.get(model_id, [])
+        cheapest = _cheapest_endpoint(ep_list) if ep_list else None
+        cheapest_route_cost = _cost_per_turn(cheapest) if cheapest else None
+        routes = _route_vs_aggregate(cheapest_route_cost, ep_list) if ep_list else []
+        if cheapest_route_cost is not None:
+            route_pricing_basis = "route_min"
 
     return {
         "id": model_id,
@@ -107,6 +123,10 @@ def normalize_model(entry: dict[str, Any]) -> dict[str, Any]:
         "tier": entry.get("tier"),
         "tier_label": entry.get("tier_label"),
         "created": entry.get("created"),
+        # Phase 2: route-поля из endpoints.json
+        "routes": routes,
+        "cheapest_cost_per_turn_estimate_rub": cheapest_route_cost,
+        "route_pricing_basis": route_pricing_basis,
     }
 
 
@@ -132,9 +152,101 @@ def format_price(value: Optional[float]) -> str:
 # --------------------------------------------------------------------------- #
 # Формат ai-core config
 # --------------------------------------------------------------------------- #
+def _endpoint_rub_per_1m(ep: dict[str, Any]) -> dict[str, Optional[float]]:
+    """Конвертирует pricing endpoint в rub_per_1m (₽ за 1M токенов).
+
+    Только для pricing_units == "token". Для других единиц цена остаётся
+    в исходной и не участвует в токенных сравнениях.
+    """
+    pricing = ep.get("pricing", {})
+    units = ep.get("pricing_units", {})
+    result: dict[str, Optional[float]] = {}
+    for key in ("prompt", "completion", "input_cache_read", "image_output"):
+        unit = units.get(key)
+        price = pricing.get(key)
+        if unit == "token":
+            result[f"rub_per_1m_{key}"] = round(price * 1_000_000.0, 6) if price is not None else None
+        else:
+            result[f"rub_per_1m_{key}"] = price
+    return result
+
+
+def _is_token_endpoint(ep: dict[str, Any]) -> bool:
+    """True если endpoint подходит для агентских вызовов: chat в supported_apis,
+    tools в supported_parameters, есть context_length.
+
+    max_prompt_tokens НЕ обязателен — у некоторых провайдеров (DeepSeek)
+    он может быть None при наличии валидного context_length.
+    """
+    supported_apis = ep.get("supported_apis", [])
+    supported_params = ep.get("supported_parameters", [])
+    if "chat" not in supported_apis:
+        return False
+    if "tools" not in supported_params:
+        return False
+    if not ep.get("context_length"):
+        return False
+    return True
+
+
+def _cheapest_endpoint(eps: list[dict[str, Any]]) -> Optional[dict[str, Any]]:
+    """Endpoint с минимальной cost_per_turn среди token-endpoint'ов с chat+tools."""
+    token_eps = [ep for ep in eps if _is_token_endpoint(ep)]
+    if not token_eps:
+        return None
+
+    def _cost(ep: dict[str, Any]) -> Optional[float]:
+        pp = ep.get("rub_per_1m_prompt")
+        pc = ep.get("rub_per_1m_completion")
+        if pp is None or pc is None:
+            return None
+        # call_params из filter_config: prompt 10000, completion 1000
+        cost = (10_000 * pp + 1_000 * pc) / 1_000_000.0
+        return round(cost, 6)
+
+    return min(token_eps, key=lambda ep: _cost(ep) or float("inf"))
+
+
+def _route_vs_aggregate(
+    aggregate_cost: Optional[float],
+    eps: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Сравнение route-цен с агрегатной ценой.
+
+    Возвращает список {tag, cost_per_turn, delta_percent} для каждого endpoint'а.
+    """
+    routes: list[dict[str, Any]] = []
+    for ep in eps:
+        c = _cost_per_turn(ep)
+        if c is None:
+            continue
+        if aggregate_cost is not None and aggregate_cost > 0:
+            delta = (c - aggregate_cost) / aggregate_cost * 100.0
+        else:
+            delta = 0.0
+        routes.append({
+            "tag": ep.get("tag", ""),
+            "cost_per_turn": c,
+            "delta_percent": round(delta, 2),
+        })
+    routes.sort(key=lambda r: r["cost_per_turn"])
+    return routes
+
+
+def _cost_per_turn(ep: dict[str, Any]) -> Optional[float]:
+    """Стоимость типового вызова (₽) для endpoint'а."""
+    pp = ep.get("rub_per_1m_prompt")
+    pc = ep.get("rub_per_1m_completion")
+    if pp is None or pc is None:
+        return None
+    cost = (10_000 * pp + 1_000 * pc) / 1_000_000.0
+    return round(cost, 6)
+
+
 def build_config_format(
     entries: list[dict[str, Any]],
     base_url: str,
+    endpoints_data: dict[str, list[dict[str, Any]]] | None = None,
 ) -> list[dict[str, Any]]:
     """Формирует список моделей в формате ai-core/config/config.json.
 
@@ -150,6 +262,12 @@ def build_config_format(
         name = pretty_alias(e.get("id", ""), e.get("name")) or e["id"]
         if tier in ("cheap", "medium", "premium"):
             name = f"{name} [{tier}]"
+        # Получаем route-данные для этой модели из endpoints.json
+        ep_list = endpoints_data.get(e["id"], []) if endpoints_data else []
+        cheapest = _cheapest_endpoint(ep_list) if ep_list else None
+        route_cost = _cost_per_turn(cheapest) if cheapest else None
+        routes = _route_vs_aggregate(route_cost, ep_list) if ep_list else []
+
         result.append(
             {
                 "id": e["id"],
@@ -167,6 +285,10 @@ def build_config_format(
                     "cost_per_turn_estimate_rub": e.get("cost_per_turn_estimate_rub"),
                     "modality": e.get("modality"),
                     "supports_vision": bool(e.get("supports_vision")),
+                    # Route-данные из Phase 2 плана
+                    "routes": routes,
+                    "cheapest_cost_per_turn_estimate_rub": route_cost,
+                    "route_pricing_basis": "route_min" if route_cost is not None else None,
                 },
             }
         )
@@ -439,7 +561,16 @@ def main(argv: Optional[list[str]] = None) -> int:
     for t in TIER_ORDER:
         all_entries.extend(filtered["tiers"].get(t, []))
 
-    catalog = [normalize_model(e) for e in all_entries]
+    # Загружаем данные endpoints.json для маршрутизации и цен
+    endpoints_data: dict[str, Any] = {}
+    endpoints_path = PROJECT_ROOT / "data/endpoints.json"
+    if endpoints_path.exists():
+        try:
+            endpoints_data = load_json(endpoints_path)
+        except (json.JSONDecodeError, OSError):
+            pass
+
+    catalog = [normalize_model(e, endpoints_data) for e in all_entries]
     catalog_path = PROJECT_ROOT / paths["catalog"]
     catalog_path.parent.mkdir(parents=True, exist_ok=True)
     with open(catalog_path, "w", encoding="utf-8") as f:
@@ -455,7 +586,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         )
 
     base_url = cfg["api"]["base_url"].rstrip("/") + "/"
-    config_models = build_config_format(all_entries, base_url)
+    config_models = build_config_format(all_entries, base_url, endpoints_data)
     config_path = PROJECT_ROOT / paths["config_models"]
     with open(config_path, "w", encoding="utf-8") as f:
         json.dump(config_models, f, ensure_ascii=False, indent=2)

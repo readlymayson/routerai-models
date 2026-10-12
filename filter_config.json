@@ -88,6 +88,8 @@
     "stale_after_hours": 24,
     "min_endpoints_per_model": 1
   },
+  "provider_policy": {},
+  "pricing_overrides": {},
   "reference_model": {
     "id": null,
     "approved_ids": [],
