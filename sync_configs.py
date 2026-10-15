@@ -286,6 +286,26 @@ def select_top_models(
         result.append(ref)
         seen.add(ref["id"])
 
+    # Phase C+: Required IDs inclusion (после эталона, до gate_blocked и квот).
+    # Модели из required_ids добавляются принудительно, минуя DefaultAgentGate.
+    required_ids = selection.get("required_ids") or []
+    for req_id in required_ids:
+        if req_id in seen:
+            continue  # dedup с ref_id
+        req_model = by_id.get(req_id)
+        if not req_model:
+            raise RuntimeError(
+                f"Required model {req_id} missing from filtered catalog "
+                f"after validation — pipeline inconsistency"
+            )
+        result.append(req_model)
+        seen.add(req_id)
+
+    # Phase C++: Exclusion filter (после required, до gate_blocked и квот).
+    # Исключённые модели удаляются из candidates_by_tier, но не трогают
+    # уже добавленные (ref + required).
+    excluded_ids = set(selection.get("excluded_ids") or [])
+
     # DefaultAgentGate: модели в watchlist, не прошедшие гейт, не могут
     # попасть в топ на роль default-агента (эталон в отборе остаётся —
     # это рабочая лошадка, но не для роли default).
@@ -314,6 +334,15 @@ def select_top_models(
             candidates_by_tier[tier].append(m)
     for tier in candidates_by_tier:
         candidates_by_tier[tier].sort(key=lambda m: (score(m), m["id"]), reverse=True)
+
+    # Phase C++: Exclusion filter — убираем excluded_ids из candidates_by_tier
+    # (ref и required уже добавлены в result, их не трогаем)
+    if excluded_ids:
+        for tier in candidates_by_tier:
+            candidates_by_tier[tier] = [
+                m for m in candidates_by_tier[tier]
+                if m["id"] not in excluded_ids and m["id"] not in seen
+            ]
 
     # Квоты: если квоты не заданы — распределяем пропорционально
     filled = {"cheap": 0, "medium": 0, "premium": 0}
@@ -384,11 +413,11 @@ def select_top_models(
     # Финальная сортировка по релевантности:
     #   1) cheap (рабочие лошадки), 2) premium (качественные), 3) medium
     #   внутри группы — гибридный score desc (эталон — первым в cheap)
-    def relevance_key(m: dict[str, Any]) -> tuple[int, float, int, str]:
+    def relevance_key(m: dict[str, Any]) -> tuple[int, int, float, str]:
         tier = m.get("tier")
         group = {"cheap": 0, "premium": 1, "medium": 2}.get(tier, 3)
         is_ref = 0 if m["id"] == ref_id else 1
-        return (group, -score(m), is_ref, m["id"])
+        return (group, is_ref, -score(m), m["id"])
 
     result.sort(key=relevance_key)
     return result
@@ -819,6 +848,78 @@ def generate_provider_policy_and_pricing(
 
 
 # --------------------------------------------------------------------------- #
+# Валидация конфигурации
+# --------------------------------------------------------------------------- #
+def validate_sync_config(fcfg: dict[str, Any]) -> list[str]:
+    """Проверяет корректность sync.selection конфигурации.
+
+    Returns:
+        Список ошибок (пустой, если конфигурация валидна).
+    """
+    errors: list[str] = []
+    selection = fcfg.get("sync", {}).get("selection", {})
+
+    required_ids = selection.get("required_ids")
+    if required_ids is not None:
+        if not isinstance(required_ids, list):
+            errors.append(f"required_ids: ожидался list, получен {type(required_ids).__name__}")
+        elif not all(isinstance(x, str) for x in required_ids):
+            non_str = [str(x) for x in required_ids if not isinstance(x, str)]
+            errors.append(f"required_ids: все элементы должны быть строками, найдены: {non_str}")
+        elif any(not x for x in required_ids):
+            empty = [i for i, x in enumerate(required_ids) if not x]
+            errors.append(f"required_ids: пустые строки на позициях {empty}")
+        elif len(set(required_ids)) < len(required_ids):
+            dupes = [x for x in required_ids if required_ids.count(x) > 1]
+            errors.append(f"required_ids: обнаружены дубликаты: {sorted(set(dupes))}")
+
+    excluded_ids = selection.get("excluded_ids")
+    if excluded_ids is not None:
+        if not isinstance(excluded_ids, list):
+            errors.append(f"excluded_ids: ожидался list, получен {type(excluded_ids).__name__}")
+        elif not all(isinstance(x, str) for x in excluded_ids):
+            non_str = [str(x) for x in excluded_ids if not isinstance(x, str)]
+            errors.append(f"excluded_ids: все элементы должны быть строками, найдены: {non_str}")
+        elif any(not x for x in excluded_ids):
+            empty = [i for i, x in enumerate(excluded_ids) if not x]
+            errors.append(f"excluded_ids: пустые строки на позициях {empty}")
+
+    # Пересечение required_ids ∩ excluded_ids
+    if required_ids and excluded_ids and isinstance(required_ids, list) and isinstance(excluded_ids, list):
+        intersection = set(required_ids) & set(excluded_ids)
+        if intersection:
+            errors.append(
+                f"Пересечение required_ids и excluded_ids: {sorted(intersection)}. "
+                f"Модель не может быть обязательной и исключённой одновременно."
+            )
+
+    # excluded_ids не содержит reference_model.id
+    ref_id = fcfg.get("reference_model", {}).get("id")
+    if ref_id and excluded_ids and isinstance(excluded_ids, list) and ref_id in excluded_ids:
+        errors.append(f"excluded_ids содержит reference_model.id ({ref_id})")
+
+    # Сумма квот ≤ total (если total > 0)
+    total = selection.get("total", 0)
+    if total is not None:
+        try:
+            total_val = int(total)
+            if total_val < 0:
+                errors.append(f"total: отрицательное значение ({total_val})")
+        except (TypeError, ValueError):
+            errors.append(f"total: нечисловое значение ({total})")
+
+    quotas = selection.get("quotas") or {}
+    if total is not None and isinstance(total, (int, float)) and total > 0:
+        quota_sum = sum(quotas.values()) if isinstance(quotas, dict) else 0
+        if quota_sum > total:
+            errors.append(
+                f"Сумма квот ({quota_sum}) превышает total ({total})"
+            )
+
+    return errors
+
+
+# --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
 def main(argv: Optional[list[str]] = None) -> int:
@@ -838,6 +939,14 @@ def main(argv: Optional[list[str]] = None) -> int:
         fcfg = load_json(PROJECT_ROOT / "filter_config.json")
     except FileNotFoundError:
         sys.stderr.write("Ошибка: не найден filter_config.json\n")
+        return 1
+
+    # Валидация конфигурации до основной логики
+    validation_errors = validate_sync_config(fcfg)
+    if validation_errors:
+        sys.stderr.write("Ошибки валидации конфигурации:\n")
+        for err in validation_errors:
+            sys.stderr.write(f"  - {err}\n")
         return 1
 
     sync_cfg = fcfg.get("sync", {})

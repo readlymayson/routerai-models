@@ -447,3 +447,157 @@ def test_default_gate_allows_approved(tmp_path: Path) -> None:
     selected = sc.select_top_models(catalog, sync_cfg, recommendations, "a/approved", ref_cfg)
     ids = [m["id"] for m in selected]
     assert "a/approved" in ids  # approved — проходит гейт
+
+
+# ---------------------------------------------------------------------------
+# Required / Excluded IDs (Phase 4-5)
+# ---------------------------------------------------------------------------
+
+
+def test_required_ids_included() -> None:
+    """Required IDs включаются в результат перед квотами."""
+    import sync_configs as sc
+
+    catalog = [
+        {"id": "a/ref", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.1},
+        {"id": "b/required", "tier": "medium", "supports_tools": True, "cost_per_turn_estimate_rub": 0.5},
+        {"id": "c/fill", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.2},
+    ]
+    sync_cfg = {"selection": {"total": 3, "quotas": {"cheap": 2, "medium": 2, "premium": 0},
+                              "required_ids": ["b/required"]}}
+    selected = sc.select_top_models(catalog, sync_cfg, None, "a/ref")
+    ids = [m["id"] for m in selected]
+    assert "b/required" in ids
+    # ref на позиции 0
+    assert ids[0] == "a/ref"
+
+
+def test_required_ids_dedup_with_ref() -> None:
+    """required_ids содержит ref_id — дубликатов нет."""
+    import sync_configs as sc
+
+    catalog = [
+        {"id": "a/ref", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.1},
+        {"id": "c/fill", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.2},
+    ]
+    sync_cfg = {"selection": {"total": 2, "quotas": {"cheap": 2},
+                              "required_ids": ["a/ref"]}}
+    selected = sc.select_top_models(catalog, sync_cfg, None, "a/ref")
+    ids = [m["id"] for m in selected]
+    # ref counted once
+    assert ids.count("a/ref") == 1
+    assert len(ids) == 2
+
+
+def test_required_ids_missing_from_catalog_raises() -> None:
+    """required_id отсутствует в by_id → RuntimeError."""
+    import sync_configs as sc
+
+    catalog = [
+        {"id": "a/ref", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.1},
+    ]
+    sync_cfg = {"selection": {"total": 2, "quotas": {"cheap": 2},
+                              "required_ids": ["b/ghost"]}}
+    with pytest.raises(RuntimeError, match="Required model b/ghost missing"):
+        sc.select_top_models(catalog, sync_cfg, None, "a/ref")
+
+
+def test_excluded_ids_filtered_from_quota_fill() -> None:
+    """excluded_ids модель не попадает в quota-fill. Ref и required не трогаются."""
+    import sync_configs as sc
+
+    catalog = [
+        {"id": "a/ref", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.1},
+        {"id": "b/excluded", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.15},
+        {"id": "c/fill", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.2},
+    ]
+    sync_cfg = {"selection": {"total": 2, "quotas": {"cheap": 2},
+                              "excluded_ids": ["b/excluded"]}}
+    selected = sc.select_top_models(catalog, sync_cfg, None, "a/ref")
+    ids = [m["id"] for m in selected]
+    assert "b/excluded" not in ids
+    assert "a/ref" in ids
+    assert "c/fill" in ids
+
+
+def test_total_limit_respected_with_required() -> None:
+    """total=15, required=1 → len(result) ≤ 15."""
+    import sync_configs as sc
+
+    catalog = [
+        {"id": "a/ref", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.1},
+        {"id": "b/required", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.15},
+    ]
+    for i in range(20):
+        catalog.append({"id": f"c/fill-{i}", "tier": "cheap", "supports_tools": True,
+                        "cost_per_turn_estimate_rub": 0.2 + i * 0.01})
+    sync_cfg = {"selection": {"total": 15, "quotas": {"cheap": 15},
+                              "required_ids": ["b/required"]}}
+    selected = sc.select_top_models(catalog, sync_cfg, None, "a/ref")
+    assert len(selected) <= 15
+
+
+def test_required_excluded_intersection_error() -> None:
+    """validate_sync_config с пересечением required ∩ excluded → ошибка."""
+    import sync_configs as sc
+
+    cfg = {
+        "sync": {"selection": {"required_ids": ["a/x"], "excluded_ids": ["a/x"]}},
+    }
+    errs = sc.validate_sync_config(cfg)
+    assert any("Пересечение" in e and "a/x" in e for e in errs)
+
+
+def test_reference_position_0_after_sort() -> None:
+    """После relevance sort эталон на позиции 0."""
+    import sync_configs as sc
+
+    catalog = [
+        {"id": "x/cheaper", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.01},
+        {"id": "a/ref", "tier": "cheap", "supports_tools": True, "cost_per_turn_estimate_rub": 0.1},
+    ]
+    sync_cfg = {"selection": {"total": 2, "quotas": {"cheap": 2}}}
+    selected = sc.select_top_models(catalog, sync_cfg, None, "a/ref")
+    assert selected[0]["id"] == "a/ref"
+
+
+def test_validate_sync_config_type_checks() -> None:
+    """required_ids не список или с int → ошибка."""
+    import sync_configs as sc
+
+    errs1 = sc.validate_sync_config({"sync": {"selection": {"required_ids": "not-a-list"}}})
+    assert any("required_ids" in e and "list" in e for e in errs1)
+
+    errs2 = sc.validate_sync_config({"sync": {"selection": {"required_ids": ["ok", 42]}}})
+    assert any("должны быть строками" in e for e in errs2)
+
+
+def test_validate_sync_config_duplicates_in_required() -> None:
+    """required_ids: ["a", "a"] → ошибка дубликатов."""
+    import sync_configs as sc
+
+    errs = sc.validate_sync_config({"sync": {"selection": {"required_ids": ["a", "a"]}}})
+    assert any("дубликат" in e for e in errs)
+
+
+def test_validate_sync_config_quotas_exceed_total() -> None:
+    """quotas сумма > total → ошибка."""
+    import sync_configs as sc
+
+    errs = sc.validate_sync_config({"sync": {"selection": {"total": 5, "quotas": {"cheap": 3, "medium": 3}}}})
+    assert any("превышает" in e for e in errs)
+
+
+def test_required_ids_filtered_out_diagnostics() -> None:
+    """Required модель не прошла фильтрацию → ValueError с причинами."""
+    import filter_models as fm
+
+    cfg = base_cfg()
+    cfg["sync"] = {"selection": {"required_ids": ["test/no-tools"]}}
+    # модель без tools
+    models = [mk_model(id="test/no-tools", supported_parameters=[])]
+    with pytest.raises(ValueError) as exc:
+        fm.filter_and_categorize(models, cfg, required_ids=["test/no-tools"])
+    msg = str(exc.value)
+    assert "test/no-tools" in msg
+    assert "tools" in msg or "filtered out" in msg

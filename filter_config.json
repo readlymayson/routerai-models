@@ -91,14 +91,15 @@
   "provider_policy": {},
   "pricing_overrides": {},
   "reference_model": {
-    "id": null,
-    "approved_ids": [],
-    "watchlist": [
-      "deepseek/deepseek-v4-flash-0731",
+    "id": "deepseek/deepseek-v4-flash",
+    "approved_ids": [
       "deepseek/deepseek-v4-flash"
     ],
+    "watchlist": [
+      "deepseek/deepseek-v4-flash-0731"
+    ],
     "fallback": "cheapest_cheap_tools_not_watchlisted",
-    "label": "Эталон: временный авто-выбор до прохождения гейта надёжности"
+    "label": "Эталон: DeepSeek V4 Flash"
   },
   "scoring": {
     "base_score": 50,
@@ -137,6 +138,12 @@
     "rewrite_refs": true,
     "selection": {
       "total": 15,
+      "required_ids": [
+        "deepseek/deepseek-v4.1-flash"
+      ],
+      "excluded_ids": [
+        "inclusionai/ling-3.0-flash"
+      ],
       "quotas": {
         "cheap": 10,
         "medium": 2,

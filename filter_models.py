@@ -33,6 +33,9 @@ from typing import Any, Optional
 PROJECT_ROOT = Path(__file__).resolve().parent
 TIER_ORDER = ["cheap", "medium", "premium"]
 
+# Импорт для валидации конфигурации
+from sync_configs import validate_sync_config  # noqa: E402
+
 
 # --------------------------------------------------------------------------- #
 # Загрузка данных
@@ -225,9 +228,40 @@ def calculate_turn_cost(model: dict[str, Any], cfg: dict[str, Any]) -> float:
 # --------------------------------------------------------------------------- #
 # Основной конвейер
 # --------------------------------------------------------------------------- #
+def _diagnose_exclusion(
+    raw: Optional[dict[str, Any]],
+    cfg: dict[str, Any],
+    modality_mode: str,
+) -> list[str]:
+    """Возвращает причины отсева, переиспользуя функции из filter_and_categorize.
+
+    Вызов matches_modality(), проверка "tools" in supported_parameters,
+    проверка цены, pricing_unit_warning().
+    """
+    if raw is None:
+        return ["модель отсутствует в исходном каталоге"]
+    reasons = []
+    if not matches_modality(raw, modality_mode):
+        arch = raw.get("architecture") or {}
+        reasons.append(f"модальность {arch.get('modality')} несовместима с {modality_mode}")
+    require_tools = cfg.get("validation", {}).get("require_tools_param", True)
+    if require_tools and "tools" not in (raw.get("supported_parameters") or []):
+        reasons.append("отсутствует tools в supported_parameters")
+    require_positive = cfg.get("validation", {}).get("require_positive_pricing", True)
+    if require_positive:
+        pricing = raw.get("pricing") or {}
+        p, c = pricing.get("prompt"), pricing.get("completion")
+        if not p or not c or p <= 0 or c <= 0:
+            reasons.append(f"цена не установлена (prompt={p}, completion={c})")
+    if pricing_unit_warning(raw):
+        reasons.append("единицы тарификации не token")
+    return reasons or ["причина не определена (возможно model validation)"]
+
+
 def filter_and_categorize(
     models: list[dict[str, Any]],
     cfg: dict[str, Any],
+    required_ids: Optional[list[str]] = None,
 ) -> dict[str, Any]:
     """Валидирует модели, присваивает тиры и считает стоимость вызова.
 
@@ -353,6 +387,18 @@ def filter_and_categorize(
         entry = dict(tiers_cfg.get(t, {}))
         entry.pop("description", None)
         tier_boundaries[t] = entry
+
+    # Проверка required_ids прошли фильтрацию
+    if required_ids:
+        filtered_ids = {e["id"] for e in valid}
+        for rid in required_ids:
+            if rid not in filtered_ids:
+                raw = next((m for m in models if m.get("id") == rid), None)
+                reasons = _diagnose_exclusion(raw, cfg, modality_mode)
+                raise ValueError(
+                    f"Required model {rid} filtered out: {'; '.join(reasons)}. "
+                    f"Cannot proceed."
+                )
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -494,6 +540,14 @@ def main(argv: Optional[list[str]] = None) -> int:
         sys.stderr.write(f"Ошибка: не найден конфиг {args.config or 'filter_config.json'}\n")
         return 1
 
+    # Валидация конфигурации до основной логики
+    validation_errors = validate_sync_config(cfg)
+    if validation_errors:
+        sys.stderr.write("Ошибки валидации конфигурации:\n")
+        for err in validation_errors:
+            sys.stderr.write(f"  - {err}\n")
+        return 1
+
     raw_path = args.raw or (PROJECT_ROOT / cfg["paths"]["raw_data"])
     try:
         models = load_raw_models(raw_path)
@@ -520,8 +574,9 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     # Считаем всё ДО каких-либо записей: при провале любого гейта
     # выходные файлы остаются прежними (атомарность конвейера).
+    required_ids = cfg.get("sync", {}).get("selection", {}).get("required_ids", [])
     try:
-        result = filter_and_categorize(models, cfg)
+        result = filter_and_categorize(models, cfg, required_ids=required_ids or None)
     except ValueError as exc:
         sys.stderr.write(f"Ошибка валидации: {exc}\n")
         return 2
