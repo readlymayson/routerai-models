@@ -3,11 +3,16 @@
 **Progress State**
 - **Plan file**: `.github/plans/separated-reference-required-selection.plan.md`
 - **Memory index**: Not registered
-- **Status**: Implementation complete
+- **Status**: Implementation complete (дopeализация 2026-10-16: устранены Finding A/B + критический баг gate_blocked)
 - **Base revision**: `af05275be31ef3c6d939a5f02c1db39be99d9ce3` on branch `main`
 - **Current phase**: Phase 6 — Dry run & apply (completed)
-- **Completed**: Phase 1 (config), Phase 2 (validate_sync_config), Phase 3 (required/excluded_ids), Phase 4 (post-filter validation), Phase 5 (regression tests), Phase 6 (dry run & verification)
-- **Last verification**: `python3 -m pytest tests/test_filtering.py tests/test_source.py tests/test_policy.py tests/test_integration_required.py -v` — 50/50 passed. `python3 sync_configs.py` — dry-run shows both DeepSeek IDs included, `ling-3.0-flash` excluded. `effective_reference_id()` returns `(deepseek/deepseek-v4-flash, approved)`. `validate_sync_config()` — OK.
+- **Completed**: Phase 1 (config), Phase 2 (validate_sync_config), Phase 3 (required/excluded_ids), Phase 4 (post-filter validation), Phase 5 (regression tests), Phase 6 (dry run & verification), Дopeализация (см. ниже)
+- **Last verification**: `python3 -m pytest tests/ -q` — 129/129 passed (полный набор, 23.9s). `python3 sync_configs.py` — dry-run: оба DeepSeek ID в выборке, `ling-3.0-flash` исключён, 15 моделей, 10 refs заменены. `effective_reference_id()` → `(deepseek/deepseek-v4-flash, approved)`. `validate_sync_config()` — OK. `gate_blocked` (прод-путь через `main()`): `{deepseek/deepseek-v4.1-flash, deepseek/deepseek-v4-flash-0731}`.
+- **Дopeализация (после коммита 1731493)**:
+  - **Finding A (drift)**: рабочий `filter_config.json` содержал лишний `deepseek/deepseek-v4-flash` в `sync.selection.required_ids` (нарушал Phase 1: «v4-flash НЕ включаем — уже гарантирован как ref_id»). Убран — `required_ids` снова `["deepseek/deepseek-v4.1-flash"]`.
+  - **Finding B (противоречие плана)**: строка Implementation Contract Phase 1 говорила `watchlist → [0731]`, но шаг 1 Phase 1, TL;DR и Decision Record требуют `v4.1-flash` ОСТАЁТСЯ в watchlist (чтобы попасть в gate_blocked). Реализация пошла по букве contract-строки — `v4.1-flash` не был в gate_blocked, п.6 Verification плана не выполнялся. Исправлено: `watchlist = ["deepseek/deepseek-v4.1-flash", "deepseek/deepseek-v4-flash-0731"]`.
+  - **Критический баг gate_blocked (обнаружен при дореализации)**: `main()` передаёт в `select_top_models()` под-словарь `ref_cfg = fcfg.get("reference_model")`, а `is_watchlisted()`/`is_model_approved()` ожидают полный конфиг с ключом `reference_model` → в проде `gate_blocked = set()` (DefaultAgentGate фактически выключен). Баг унаследован от `af05275` (базовой ревизии). Исправлено нормализацией в `select_top_models()`: если в `ref_cfg` нет ключа `reference_model` → `ref_cfg = {"reference_model": ref_cfg}`. Совместимо с обоими форматами вызова (продакшн и тесты). Это минимальная правка в рамках намерения плана (п.6 Verification требует `v4.1-flash` в `gate_blocked`).
+  - Интеграционный тест усилен: проверяет `v4.1-flash` в `gate_blocked`, `v4-flash` вне гейта, watchlist из 2 элементов.
 - **Next incomplete phase**: none (all phases complete)
 - **Phase dependencies**: All satisfied
 - **Blockers / open unknowns**: none

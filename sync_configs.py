@@ -267,6 +267,11 @@ def select_top_models(
     quotas = selection.get("quotas") or {}
     weights = {**DEFAULT_SELECTION_WEIGHTS, **(selection.get("weights") or {})}
     ref_cfg = ref_cfg or {}
+    # ref_cfg может приходить как полный конфиг (с ключом reference_model)
+    # или как под-словарь reference_model (из main()). is_watchlisted /
+    # is_model_approved ожидают полный конфиг — нормализуем к полному виду.
+    if "reference_model" not in ref_cfg:
+        ref_cfg = {"reference_model": ref_cfg}
 
     if total <= 0:
         # Отбор отключён — берём всё как раньше (по тиру и цене)
@@ -306,9 +311,10 @@ def select_top_models(
     # уже добавленные (ref + required).
     excluded_ids = set(selection.get("excluded_ids") or [])
 
-    # DefaultAgentGate: модели в watchlist, не прошедшие гейт, не могут
-    # попасть в топ на роль default-агента (эталон в отборе остаётся —
-    # это рабочая лошадка, но не для роли default).
+    # DefaultAgentGate: модели в watchlist, не прошедшие гейт надёжности
+    # (approved_ids), не могут попасть в топ на роль default-агента.
+    # Это касается и требуемых моделей (required_ids): они попадают в выборку
+    # ДО quota-fill (обход gated()), но не могут стать default_agent.
     gate_blocked: set[str] = {
         m["id"]
         for m in catalog

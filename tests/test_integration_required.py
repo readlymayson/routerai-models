@@ -82,7 +82,7 @@ def _make_config(tmp_path: Path) -> dict[str, Any]:
     cfg["reference_model"] = {
         "id": "deepseek/deepseek-v4-flash",
         "approved_ids": ["deepseek/deepseek-v4-flash"],
-        "watchlist": ["deepseek/deepseek-v4-flash-0731"],
+        "watchlist": ["deepseek/deepseek-v4.1-flash", "deepseek/deepseek-v4-flash-0731"],
         "fallback": "cheapest_cheap_tools_not_watchlisted",
         "label": "Эталон: DeepSeek V4 Flash",
     }
@@ -144,6 +144,17 @@ def test_full_pipeline_required_end_to_end(tmp_path: Path) -> None:
     # но required bypass-ит gated() — она в выборке, но не default_agent
     # (без рекомендаций проверяем только что она присутствует)
     assert "deepseek/deepseek-v4.1-flash" in selected_ids
+
+    # v4.1-flash и 0731 в watchlist и НЕ approved → обе в gate_blocked.
+    # Наличие v4.1-flash в gate_blocked — ключевая семантика плана: он
+    # обязателен в выборке (required), но не одобрен для роли default_agent.
+    gate_blocked = {
+        m["id"]
+        for m in catalog
+        if rel.is_watchlisted(m["id"], cfg) and not rel.is_model_approved(m["id"], cfg)
+    }
+    assert "deepseek/deepseek-v4.1-flash" in gate_blocked  # watchlist + not approved
+    assert "deepseek/deepseek-v4-flash" not in gate_blocked  # approved — вне гейта
 
     # Модели помечены supports_tools
     for m in selected:
