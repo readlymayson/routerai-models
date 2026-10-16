@@ -346,8 +346,15 @@ def build_categories(
     known_in_clm: set[str],
     cfg: Optional[dict[str, Any]] = None,
     top_n: int = 10,
+    excluded_ids: Optional[set[str]] = None,
 ) -> dict[str, Any]:
-    """Считает скоринг по всем категориям и собирает топ-N по каждой."""
+    """Считает скоринг по всем категориям и собирает топ-N по каждой.
+
+    excluded_ids — модели, исключённые из выбора (sync.selection.excluded_ids):
+    они не участвуют ни в одном рейтинге. Синхронизировано с select_top_models()
+    в sync_configs.py (excluded модели не попадают в топ-N ни в одну роль).
+    """
+    excluded_ids = excluded_ids or set()
     result: dict[str, Any] = {}
 
     for cat_id, cat_def in CATEGORY_DEFS.items():
@@ -356,6 +363,8 @@ def build_categories(
 
         scored: list[dict[str, Any]] = []
         for m in catalog:
+            if m.get("id") in excluded_ids:
+                continue
             if m.get("tier") not in allowed_tiers:
                 continue
             if (m.get("context_length") or 0) < min_ctx:
@@ -458,7 +467,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 1
 
     categories = build_categories(
-        catalog, scoring, reference, known_in_config, known_in_clm, fcfg, args.top_n
+        catalog, scoring, reference, known_in_config, known_in_clm, fcfg, args.top_n,
+        excluded_ids=set((fcfg.get("sync") or {}).get("selection", {}).get("excluded_ids") or []),
     )
 
     out = {

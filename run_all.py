@@ -32,7 +32,7 @@ STEPS: list[tuple[str, str, list[str]]] = [
     ("filter_models", "Валидация и тиринг", []),
     ("build_report", "Каталог + конфиг + HTML/MD-отчёт", []),
     ("recommend", "Рекомендации fit-to-purpose", []),
-    ("fetch_endpoints", "Endpoint-каталог и route-цены", []),
+    ("endpoints", "Endpoint-каталог и route-цены", []),
 ]
 
 # Шаги конвейера, требующие сетевого доступа (индексы в STEPS).

@@ -601,3 +601,77 @@ def test_required_ids_filtered_out_diagnostics() -> None:
     msg = str(exc.value)
     assert "test/no-tools" in msg
     assert "tools" in msg or "filtered out" in msg
+
+
+# ---------------------------------------------------------------------------
+# Рекомендации: excluded_ids не участвуют в рейтингах
+# ---------------------------------------------------------------------------
+
+
+def test_recommend_excluded_ids_excluded_from_categories() -> None:
+    """excluded_ids модель не попадает в топ ни одной категории рекомендаций."""
+    import recommend as rec
+
+    scoring = base_cfg()["scoring"]
+    catalog = [
+        {
+            "id": f"t/{i}",
+            "name": f"Model {i}",
+            "tier": "cheap",
+            "context_length": 600_000,
+            "cost_per_turn_estimate_rub": 0.05,
+            "supports_tools": True,
+            "supports_structured_outputs": True,
+            "has_reasoning": False,
+            "created": 1_730_000_000,
+        }
+        for i in range(6)
+    ]
+    # Дешёвая модель с reasoning — без исключения заняла бы топ во всех cheap-категориях
+    catalog.append({
+        "id": "test/ling", "name": "Ling",
+        "tier": "cheap", "context_length": 600_000,
+        "cost_per_turn_estimate_rub": 0.01,
+        "supports_tools": True, "supports_structured_outputs": True,
+        "has_reasoning": True, "created": 1_780_000_000,
+    })
+    reference = {"id": "t/0", "cost_per_turn_estimate_rub": 0.05, "context_length": 600_000}
+
+    cats = rec.build_categories(
+        catalog, scoring, reference, set(), set(), cfg={}, top_n=10,
+        excluded_ids={"test/ling"},
+    )
+    for cat_id, cat in cats.items():
+        top_ids = {m["id"] for m in cat["top"]}
+        assert "test/ling" not in top_ids, f"excluded в категории {cat_id}"
+        # total уменьшился на 1 (исключённая не считается)
+        assert cat["total"] == 6, f"total категории {cat_id}: {cat['total']}"
+
+
+def test_recommend_without_excluded_includes_model() -> None:
+    """Без excluded_ids модель присутствует в рейтингах (регрессия параметра)."""
+    import recommend as rec
+
+    scoring = base_cfg()["scoring"]
+    catalog = [
+        {
+            "id": f"t/{i}", "name": f"Model {i}",
+            "tier": "cheap", "context_length": 200_000,
+            "cost_per_turn_estimate_rub": 0.05,
+            "supports_tools": True, "supports_structured_outputs": True,
+            "has_reasoning": False, "created": 1_730_000_000,
+        }
+        for i in range(6)
+    ]
+    catalog.append({
+        "id": "test/cheap", "name": "Cheap",
+        "tier": "cheap", "context_length": 200_000,
+        "cost_per_turn_estimate_rub": 0.01,
+        "supports_tools": True, "supports_structured_outputs": True,
+        "has_reasoning": True, "created": 1_780_000_000,
+    })
+    reference = {"id": "t/0", "cost_per_turn_estimate_rub": 0.05, "context_length": 200_000}
+
+    cats = rec.build_categories(catalog, scoring, reference, set(), set(), cfg={}, top_n=10)
+    # без excluded модель участвует хотя бы в одной категории
+    assert any("test/cheap" in {m["id"] for m in cat["top"]} for cat in cats.values())
